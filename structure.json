@@ -1,0 +1,879 @@
+{
+  "app": "Japanese Trainer",
+  "version": 1,
+
+  "lesson": {
+    "id": "lesson-introductions-001",
+    "title": "Introductions at School",
+    "description": "A short first-meeting conversation between a teacher, a new student, and a classmate. Covers greetings, self-introduction, and follow-up questions.",
+    "level": "Beginner"
+  },
+
+  "sentences": [
+    {
+      "id": "sentence-001",
+      "expression": "先生、",
+      "reading": "せんせい、",
+      "romaji": "Sensei,",
+      "meaning": "Teacher,",
+
+      "audio": "sentence-001.mp3",
+
+      "chunks": [
+        { "text": "先生、", "meaning": "Teacher, (polite address)" }
+      ],
+
+      "connectedReading": "せんせい、",
+
+      "tokens": [
+        { "text": "先生", "vocabularyId": "v-sensei" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-sensei",
+          "text": "先生",
+          "reading": "せんせい",
+          "romaji": "sensei",
+          "meaning": "teacher (polite address)",
+          "partOfSpeech": "noun"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g001",
+          "title": "先生、",
+          "explanation": "Addressing someone by their title followed by a comma is a polite way to get their attention.",
+          "pattern": "[title] + 、"
+        }
+      ],
+
+      "kana": [
+        { "character": "せ", "reading": "se", "romaji": "se", "script": "hiragana" },
+        { "character": "ん", "reading": "n",  "romaji": "n",  "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-002",
+      "expression": "こちらは学校の友達のジェニーです。",
+      "reading": "こちらはがっこうのともだちのジェニーです。",
+      "romaji": "Kochira wa gakkou no tomodachi no Jenii desu.",
+      "meaning": "This is my school friend Jenny.",
+
+      "audio": "sentence-002.mp3",
+
+      "chunks": [
+        { "text": "こちらは",   "meaning": "This is" },
+        { "text": "学校の",     "meaning": "of school / school's" },
+        { "text": "友達の",     "meaning": "of my friend / friend's" },
+        { "text": "ジェニーです", "meaning": "is Jenny" }
+      ],
+
+      "connectedReading": "こちらわ がっこうの ともだちの ジェニーです。",
+
+      "tokens": [
+        { "text": "こちら",   "vocabularyId": "v-kocchi" },
+        { "text": "は",       "vocabularyId": "v-wa" },
+        { "text": "学校",     "vocabularyId": "v-gakkou" },
+        { "text": "の",       "vocabularyId": "v-no" },
+        { "text": "友達",     "vocabularyId": "v-tomodachi" },
+        { "text": "の",       "vocabularyId": "v-no" },
+        { "text": "ジェニー", "vocabularyId": "v-jenny" },
+        { "text": "です",     "vocabularyId": "v-desu" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-kocchi",
+          "text": "こちら",
+          "reading": "こちら",
+          "romaji": "kochira",
+          "meaning": "this person; this way (polite)",
+          "partOfSpeech": "pronoun"
+        },
+        {
+          "id": "v-wa",
+          "text": "は",
+          "reading": "は",
+          "romaji": "wa",
+          "meaning": "topic marker (pronounced 'wa')",
+          "partOfSpeech": "particle"
+        },
+        {
+          "id": "v-gakkou",
+          "text": "学校",
+          "reading": "がっこう",
+          "romaji": "gakkou",
+          "meaning": "school",
+          "partOfSpeech": "noun"
+        },
+        {
+          "id": "v-no",
+          "text": "の",
+          "reading": "の",
+          "romaji": "no",
+          "meaning": "possessive / linking particle",
+          "partOfSpeech": "particle"
+        },
+        {
+          "id": "v-tomodachi",
+          "text": "友達",
+          "reading": "ともだち",
+          "romaji": "tomodachi",
+          "meaning": "friend",
+          "partOfSpeech": "noun"
+        },
+        {
+          "id": "v-jenny",
+          "text": "ジェニー",
+          "reading": "ジェニー",
+          "romaji": "Jenii",
+          "meaning": "Jenny (given name)",
+          "partOfSpeech": "proper noun"
+        },
+        {
+          "id": "v-desu",
+          "text": "です",
+          "reading": "です",
+          "romaji": "desu",
+          "meaning": "to be (polite copula)",
+          "partOfSpeech": "copula"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g002",
+          "title": "こちらは〜です",
+          "explanation": "A polite introduction pattern for presenting a person to someone else.",
+          "pattern": "こちらは + [name / noun] + です"
+        },
+        {
+          "id": "g003",
+          "title": "の (possessive)",
+          "explanation": "の links two nouns. AのB means 'B of A' or 'A's B'.",
+          "pattern": "[noun] + の + [noun]"
+        }
+      ],
+
+      "kana": [
+        { "character": "が", "reading": "ga",   "romaji": "ga",   "script": "hiragana" },
+        { "character": "っ", "reading": "tsu",  "romaji": "(sokuon)", "script": "hiragana" },
+        { "character": "こ", "reading": "ko",   "romaji": "ko",   "script": "hiragana" },
+        { "character": "う", "reading": "u",    "romaji": "u",    "script": "hiragana" },
+        { "character": "と", "reading": "to",   "romaji": "to",   "script": "hiragana" },
+        { "character": "も", "reading": "mo",   "romaji": "mo",   "script": "hiragana" },
+        { "character": "だ", "reading": "da",   "romaji": "da",   "script": "hiragana" },
+        { "character": "ち", "reading": "chi",  "romaji": "chi",  "script": "hiragana" },
+        { "character": "で", "reading": "de",   "romaji": "de",   "script": "hiragana" },
+        { "character": "す", "reading": "su",   "romaji": "su",   "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-003",
+      "expression": "初めまして。",
+      "reading": "はじめまして。",
+      "romaji": "Hajimemashite.",
+      "meaning": "Nice to meet you.",
+
+      "audio": "sentence-003.mp3",
+
+      "chunks": [
+        { "text": "初めまして。", "meaning": "Nice to meet you. (first-meeting greeting)" }
+      ],
+
+      "connectedReading": "はじめまして。",
+
+      "tokens": [
+        { "text": "初めまして", "vocabularyId": "v-hajimemashite" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-hajimemashite",
+          "text": "初めまして",
+          "reading": "はじめまして",
+          "romaji": "hajimemashite",
+          "meaning": "nice to meet you (said at a first meeting)",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g004",
+          "title": "初めまして",
+          "explanation": "A fixed set phrase used only the first time you meet someone. It literally comes from '初め (beginning)' and means roughly 'for the first time'.",
+          "pattern": "初めまして。"
+        }
+      ],
+
+      "kana": [
+        { "character": "は", "reading": "ha",  "romaji": "ha",  "script": "hiragana" },
+        { "character": "じ", "reading": "ji",  "romaji": "ji",  "script": "hiragana" },
+        { "character": "め", "reading": "me",  "romaji": "me",  "script": "hiragana" },
+        { "character": "ま", "reading": "ma",  "romaji": "ma",  "script": "hiragana" },
+        { "character": "し", "reading": "shi", "romaji": "shi", "script": "hiragana" },
+        { "character": "て", "reading": "te",  "romaji": "te",  "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-004",
+      "expression": "ジェニーです。",
+      "reading": "ジェニーです。",
+      "romaji": "Jenii desu.",
+      "meaning": "I'm Jenny.",
+
+      "audio": "sentence-004.mp3",
+
+      "chunks": [
+        { "text": "ジェニー", "meaning": "Jenny" },
+        { "text": "です",     "meaning": "am / is (polite)" }
+      ],
+
+      "connectedReading": "ジェニーです。",
+
+      "tokens": [
+        { "text": "ジェニー", "vocabularyId": "v-jenny" },
+        { "text": "です",     "vocabularyId": "v-desu" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-jenny",
+          "text": "ジェニー",
+          "reading": "ジェニー",
+          "romaji": "Jenii",
+          "meaning": "Jenny (given name)",
+          "partOfSpeech": "proper noun"
+        },
+        {
+          "id": "v-desu",
+          "text": "です",
+          "reading": "です",
+          "romaji": "desu",
+          "meaning": "to be (polite copula)",
+          "partOfSpeech": "copula"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g005",
+          "title": "[name] + です",
+          "explanation": "The simplest polite self-introduction. State your name followed by です.",
+          "pattern": "[name] + です"
+        }
+      ],
+
+      "kana": [
+        { "character": "で", "reading": "de", "romaji": "de", "script": "hiragana" },
+        { "character": "す", "reading": "su", "romaji": "su", "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-005",
+      "expression": "どうぞよろしくお願いします。",
+      "reading": "どうぞよろしくおねがいします。",
+      "romaji": "Douzo yoroshiku onegaishimasu.",
+      "meaning": "Pleased to meet you. (polite set phrase)",
+
+      "audio": "sentence-005.mp3",
+
+      "chunks": [
+        { "text": "どうぞ",       "meaning": "please; go ahead" },
+        { "text": "よろしく",     "meaning": "please treat me well" },
+        { "text": "お願いします", "meaning": "please (polite request)" }
+      ],
+
+      "connectedReading": "どーぞ よろしく おねがいします。",
+
+      "tokens": [
+        { "text": "どうぞ",       "vocabularyId": "v-douzo" },
+        { "text": "よろしく",     "vocabularyId": "v-yoroshiku" },
+        { "text": "お願いします", "vocabularyId": "v-onegaishimasu" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-douzo",
+          "text": "どうぞ",
+          "reading": "どうぞ",
+          "romaji": "douzo",
+          "meaning": "please; go ahead; by all means",
+          "partOfSpeech": "adverb"
+        },
+        {
+          "id": "v-yoroshiku",
+          "text": "よろしく",
+          "reading": "よろしく",
+          "romaji": "yoroshiku",
+          "meaning": "please treat me well; please be good to me",
+          "partOfSpeech": "adverb"
+        },
+        {
+          "id": "v-onegaishimasu",
+          "text": "お願いします",
+          "reading": "おねがいします",
+          "romaji": "onegaishimasu",
+          "meaning": "please (polite request)",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g006",
+          "title": "どうぞよろしくお願いします",
+          "explanation": "The full polite set phrase said at the end of a self-introduction. Used when meeting someone for the first time or starting a new relationship.",
+          "pattern": "どうぞ + よろしく + お願いします"
+        }
+      ],
+
+      "kana": [
+        { "character": "ど", "reading": "do", "romaji": "do", "script": "hiragana" },
+        { "character": "う", "reading": "u",  "romaji": "u",  "script": "hiragana" },
+        { "character": "ぞ", "reading": "zo", "romaji": "zo", "script": "hiragana" },
+        { "character": "よ", "reading": "yo", "romaji": "yo", "script": "hiragana" },
+        { "character": "ろ", "reading": "ro", "romaji": "ro", "script": "hiragana" },
+        { "character": "し", "reading": "shi","romaji": "shi","script": "hiragana" },
+        { "character": "く", "reading": "ku", "romaji": "ku", "script": "hiragana" },
+        { "character": "お", "reading": "o",  "romaji": "o",  "script": "hiragana" },
+        { "character": "ね", "reading": "ne", "romaji": "ne", "script": "hiragana" },
+        { "character": "が", "reading": "ga", "romaji": "ga", "script": "hiragana" },
+        { "character": "い", "reading": "i",  "romaji": "i",  "script": "hiragana" },
+        { "character": "ま", "reading": "ma", "romaji": "ma", "script": "hiragana" },
+        { "character": "す", "reading": "su", "romaji": "su", "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-006",
+      "expression": "初めまして。",
+      "reading": "はじめまして。",
+      "romaji": "Hajimemashite.",
+      "meaning": "Nice to meet you.",
+
+      "audio": "sentence-006.mp3",
+
+      "chunks": [
+        { "text": "初めまして。", "meaning": "Nice to meet you." }
+      ],
+
+      "connectedReading": "はじめまして。",
+
+      "tokens": [
+        { "text": "初めまして", "vocabularyId": "v-hajimemashite" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-hajimemashite",
+          "text": "初めまして",
+          "reading": "はじめまして",
+          "romaji": "hajimemashite",
+          "meaning": "nice to meet you (said at a first meeting)",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g004",
+          "title": "初めまして",
+          "explanation": "A fixed set phrase used only at a first meeting.",
+          "pattern": "初めまして。"
+        }
+      ],
+
+      "kana": [
+        { "character": "は", "reading": "ha",  "romaji": "ha",  "script": "hiragana" },
+        { "character": "じ", "reading": "ji",  "romaji": "ji",  "script": "hiragana" },
+        { "character": "め", "reading": "me",  "romaji": "me",  "script": "hiragana" },
+        { "character": "ま", "reading": "ma",  "romaji": "ma",  "script": "hiragana" },
+        { "character": "し", "reading": "shi", "romaji": "shi", "script": "hiragana" },
+        { "character": "て", "reading": "te",  "romaji": "te",  "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-007",
+      "expression": "渡辺です。",
+      "reading": "わたなべです。",
+      "romaji": "Watanabe desu.",
+      "meaning": "I'm Watanabe.",
+
+      "audio": "sentence-007.mp3",
+
+      "chunks": [
+        { "text": "渡辺", "meaning": "Watanabe (surname)" },
+        { "text": "です", "meaning": "am / is (polite)" }
+      ],
+
+      "connectedReading": "わたなべです。",
+
+      "tokens": [
+        { "text": "渡辺", "vocabularyId": "v-watanabe" },
+        { "text": "です", "vocabularyId": "v-desu" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-watanabe",
+          "text": "渡辺",
+          "reading": "わたなべ",
+          "romaji": "Watanabe",
+          "meaning": "Watanabe (Japanese surname)",
+          "partOfSpeech": "proper noun"
+        },
+        {
+          "id": "v-desu",
+          "text": "です",
+          "reading": "です",
+          "romaji": "desu",
+          "meaning": "to be (polite copula)",
+          "partOfSpeech": "copula"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g005",
+          "title": "[name] + です",
+          "explanation": "The simplest polite self-introduction: state your name followed by です.",
+          "pattern": "[name] + です"
+        }
+      ],
+
+      "kana": [
+        { "character": "わ", "reading": "wa", "romaji": "wa", "script": "hiragana" },
+        { "character": "た", "reading": "ta", "romaji": "ta", "script": "hiragana" },
+        { "character": "な", "reading": "na", "romaji": "na", "script": "hiragana" },
+        { "character": "べ", "reading": "be", "romaji": "be", "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-008",
+      "expression": "よろしくお願いします。",
+      "reading": "よろしくおねがいします。",
+      "romaji": "Yoroshiku onegaishimasu.",
+      "meaning": "Nice to meet you. (shorter polite form)",
+
+      "audio": "sentence-008.mp3",
+
+      "chunks": [
+        { "text": "よろしく",     "meaning": "please treat me well" },
+        { "text": "お願いします", "meaning": "please (polite request)" }
+      ],
+
+      "connectedReading": "よろしく おねがいします。",
+
+      "tokens": [
+        { "text": "よろしく",     "vocabularyId": "v-yoroshiku" },
+        { "text": "お願いします", "vocabularyId": "v-onegaishimasu" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-yoroshiku",
+          "text": "よろしく",
+          "reading": "よろしく",
+          "romaji": "yoroshiku",
+          "meaning": "please treat me well; please be good to me",
+          "partOfSpeech": "adverb"
+        },
+        {
+          "id": "v-onegaishimasu",
+          "text": "お願いします",
+          "reading": "おねがいします",
+          "romaji": "onegaishimasu",
+          "meaning": "please (polite request)",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g007",
+          "title": "よろしくお願いします",
+          "explanation": "A slightly shorter form of どうぞよろしくお願いします. Still polite; very common when meeting someone.",
+          "pattern": "よろしく + お願いします"
+        }
+      ],
+
+      "kana": [
+        { "character": "よ", "reading": "yo",  "romaji": "yo",  "script": "hiragana" },
+        { "character": "ろ", "reading": "ro",  "romaji": "ro",  "script": "hiragana" },
+        { "character": "し", "reading": "shi", "romaji": "shi", "script": "hiragana" },
+        { "character": "く", "reading": "ku",  "romaji": "ku",  "script": "hiragana" },
+        { "character": "お", "reading": "o",   "romaji": "o",   "script": "hiragana" },
+        { "character": "ね", "reading": "ne",  "romaji": "ne",  "script": "hiragana" },
+        { "character": "が", "reading": "ga",  "romaji": "ga",  "script": "hiragana" },
+        { "character": "い", "reading": "i",   "romaji": "i",   "script": "hiragana" },
+        { "character": "ま", "reading": "ma",  "romaji": "ma",  "script": "hiragana" },
+        { "character": "す", "reading": "su",  "romaji": "su",  "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-009",
+      "expression": "学生ですか。",
+      "reading": "がくせいですか。",
+      "romaji": "Gakusei desu ka.",
+      "meaning": "Are you a student?",
+
+      "audio": "sentence-009.mp3",
+
+      "chunks": [
+        { "text": "学生",     "meaning": "student" },
+        { "text": "ですか。", "meaning": "are (you)? (polite question)" }
+      ],
+
+      "connectedReading": "がくせーですか。",
+
+      "tokens": [
+        { "text": "学生",   "vocabularyId": "v-gakusei" },
+        { "text": "ですか", "vocabularyId": "v-desu-ka" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-gakusei",
+          "text": "学生",
+          "reading": "がくせい",
+          "romaji": "gakusei",
+          "meaning": "student",
+          "partOfSpeech": "noun"
+        },
+        {
+          "id": "v-desu-ka",
+          "text": "ですか",
+          "reading": "ですか",
+          "romaji": "desu ka",
+          "meaning": "is it? / are you? (polite question)",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g008",
+          "title": "〜ですか",
+          "explanation": "Add か at the end of a polite sentence ending in です to turn it into a yes/no question. No question mark is required in Japanese, though it is often written.",
+          "pattern": "[noun] + ですか"
+        }
+      ],
+
+      "kana": [
+        { "character": "が", "reading": "ga", "romaji": "ga", "script": "hiragana" },
+        { "character": "く", "reading": "ku", "romaji": "ku", "script": "hiragana" },
+        { "character": "せ", "reading": "se", "romaji": "se", "script": "hiragana" },
+        { "character": "い", "reading": "i",  "romaji": "i",  "script": "hiragana" },
+        { "character": "で", "reading": "de", "romaji": "de", "script": "hiragana" },
+        { "character": "す", "reading": "su", "romaji": "su", "script": "hiragana" },
+        { "character": "か", "reading": "ka", "romaji": "ka", "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-010",
+      "expression": "すみません。わかりません。",
+      "reading": "すみません。わかりません。",
+      "romaji": "Sumimasen. Wakarimasen.",
+      "meaning": "Sorry. I don't understand.",
+
+      "audio": "sentence-010.mp3",
+
+      "chunks": [
+        { "text": "すみません。",   "meaning": "Sorry. / Excuse me." },
+        { "text": "わかりません。", "meaning": "I don't understand." }
+      ],
+
+      "connectedReading": "すみません。 わかりません。",
+
+      "tokens": [
+        { "text": "すみません",   "vocabularyId": "v-sumimasen" },
+        { "text": "わかりません", "vocabularyId": "v-wakarimasen" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-sumimasen",
+          "text": "すみません",
+          "reading": "すみません",
+          "romaji": "sumimasen",
+          "meaning": "sorry; excuse me",
+          "partOfSpeech": "expression"
+        },
+        {
+          "id": "v-wakarimasen",
+          "text": "わかりません",
+          "reading": "わかりません",
+          "romaji": "wakarimasen",
+          "meaning": "don't understand; don't know",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g009",
+          "title": "〜ません (polite negative)",
+          "explanation": "The polite negative form of a verb ends in 〜ません. わかります (understand) → わかりません (don't understand).",
+          "pattern": "[verb stem] + ません"
+        }
+      ],
+
+      "kana": [
+        { "character": "す", "reading": "su", "romaji": "su", "script": "hiragana" },
+        { "character": "み", "reading": "mi", "romaji": "mi", "script": "hiragana" },
+        { "character": "ま", "reading": "ma", "romaji": "ma", "script": "hiragana" },
+        { "character": "せ", "reading": "se", "romaji": "se", "script": "hiragana" },
+        { "character": "ん", "reading": "n",  "romaji": "n",  "script": "hiragana" },
+        { "character": "わ", "reading": "wa", "romaji": "wa", "script": "hiragana" },
+        { "character": "か", "reading": "ka", "romaji": "ka", "script": "hiragana" },
+        { "character": "り", "reading": "ri", "romaji": "ri", "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-011",
+      "expression": "もう一度お願いします。",
+      "reading": "もういちどおねがいします。",
+      "romaji": "Mou ichido onegaishimasu.",
+      "meaning": "One more time, please.",
+
+      "audio": "sentence-011.mp3",
+
+      "chunks": [
+        { "text": "もう一度",     "meaning": "one more time" },
+        { "text": "お願いします", "meaning": "please (polite request)" }
+      ],
+
+      "connectedReading": "もーいちど おねがいします。",
+
+      "tokens": [
+        { "text": "もう一度",     "vocabularyId": "v-mou-ichido" },
+        { "text": "お願いします", "vocabularyId": "v-onegaishimasu" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-mou-ichido",
+          "text": "もう一度",
+          "reading": "もういちど",
+          "romaji": "mou ichido",
+          "meaning": "one more time; once again",
+          "partOfSpeech": "expression"
+        },
+        {
+          "id": "v-onegaishimasu",
+          "text": "お願いします",
+          "reading": "おねがいします",
+          "romaji": "onegaishimasu",
+          "meaning": "please (polite request)",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g010",
+          "title": "もう一度 + お願いします",
+          "explanation": "A very common classroom phrase. もう一度 means 'one more time', and お願いします makes the request polite.",
+          "pattern": "もう一度 + [request]"
+        }
+      ],
+
+      "kana": [
+        { "character": "も", "reading": "mo", "romaji": "mo", "script": "hiragana" },
+        { "character": "う", "reading": "u",  "romaji": "u",  "script": "hiragana" },
+        { "character": "い", "reading": "i",  "romaji": "i",  "script": "hiragana" },
+        { "character": "ち", "reading": "chi","romaji": "chi","script": "hiragana" },
+        { "character": "ど", "reading": "do", "romaji": "do", "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-012",
+      "expression": "ゆっくりお願いします。",
+      "reading": "ゆっくりおねがいします。",
+      "romaji": "Yukkuri onegaishimasu.",
+      "meaning": "Slowly, please.",
+
+      "audio": "sentence-012.mp3",
+
+      "chunks": [
+        { "text": "ゆっくり",     "meaning": "slowly" },
+        { "text": "お願いします", "meaning": "please (polite request)" }
+      ],
+
+      "connectedReading": "ゆっくり おねがいします。",
+
+      "tokens": [
+        { "text": "ゆっくり",     "vocabularyId": "v-yukkuri" },
+        { "text": "お願いします", "vocabularyId": "v-onegaishimasu" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-yukkuri",
+          "text": "ゆっくり",
+          "reading": "ゆっくり",
+          "romaji": "yukkuri",
+          "meaning": "slowly; at ease",
+          "partOfSpeech": "adverb"
+        },
+        {
+          "id": "v-onegaishimasu",
+          "text": "お願いします",
+          "reading": "おねがいします",
+          "romaji": "onegaishimasu",
+          "meaning": "please (polite request)",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g011",
+          "title": "ゆっくり + お願いします",
+          "explanation": "A polite way to ask someone to speak more slowly. ゆっくり is an adverb describing the manner of an action.",
+          "pattern": "ゆっくり + お願いします"
+        }
+      ],
+
+      "kana": [
+        { "character": "ゆ", "reading": "yu", "romaji": "yu", "script": "hiragana" },
+        { "character": "っ", "reading": "tsu","romaji": "(sokuon)", "script": "hiragana" },
+        { "character": "く", "reading": "ku", "romaji": "ku", "script": "hiragana" },
+        { "character": "り", "reading": "ri", "romaji": "ri", "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-013",
+      "expression": "学生ですか。",
+      "reading": "がくせいですか。",
+      "romaji": "Gakusei desu ka.",
+      "meaning": "Are you a student?",
+
+      "audio": "sentence-013.mp3",
+
+      "chunks": [
+        { "text": "学生",     "meaning": "student" },
+        { "text": "ですか。", "meaning": "are (you)? (polite question)" }
+      ],
+
+      "connectedReading": "がくせーですか。",
+
+      "tokens": [
+        { "text": "学生",   "vocabularyId": "v-gakusei" },
+        { "text": "ですか", "vocabularyId": "v-desu-ka" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-gakusei",
+          "text": "学生",
+          "reading": "がくせい",
+          "romaji": "gakusei",
+          "meaning": "student",
+          "partOfSpeech": "noun"
+        },
+        {
+          "id": "v-desu-ka",
+          "text": "ですか",
+          "reading": "ですか",
+          "romaji": "desu ka",
+          "meaning": "is it? / are you? (polite question)",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g008",
+          "title": "〜ですか",
+          "explanation": "Add か at the end of a polite です sentence to form a yes/no question.",
+          "pattern": "[noun] + ですか"
+        }
+      ],
+
+      "kana": [
+        { "character": "が", "reading": "ga", "romaji": "ga", "script": "hiragana" },
+        { "character": "く", "reading": "ku", "romaji": "ku", "script": "hiragana" },
+        { "character": "せ", "reading": "se", "romaji": "se", "script": "hiragana" },
+        { "character": "い", "reading": "i",  "romaji": "i",  "script": "hiragana" },
+        { "character": "で", "reading": "de", "romaji": "de", "script": "hiragana" },
+        { "character": "す", "reading": "su", "romaji": "su", "script": "hiragana" },
+        { "character": "か", "reading": "ka", "romaji": "ka", "script": "hiragana" }
+      ]
+    },
+
+    {
+      "id": "sentence-014",
+      "expression": "はい、そうです。",
+      "reading": "はい、そうです。",
+      "romaji": "Hai, sou desu.",
+      "meaning": "Yes, that's right.",
+
+      "audio": "sentence-014.mp3",
+
+      "chunks": [
+        { "text": "はい、",     "meaning": "Yes," },
+        { "text": "そうです。", "meaning": "that's right. / it is so." }
+      ],
+
+      "connectedReading": "はい、 そーです。",
+
+      "tokens": [
+        { "text": "はい",     "vocabularyId": "v-hai" },
+        { "text": "そうです", "vocabularyId": "v-sou-desu" }
+      ],
+
+      "vocabulary": [
+        {
+          "id": "v-hai",
+          "text": "はい",
+          "reading": "はい",
+          "romaji": "hai",
+          "meaning": "yes",
+          "partOfSpeech": "interjection"
+        },
+        {
+          "id": "v-sou-desu",
+          "text": "そうです",
+          "reading": "そうです",
+          "romaji": "sou desu",
+          "meaning": "that's right; it is so",
+          "partOfSpeech": "expression"
+        }
+      ],
+
+      "grammar": [
+        {
+          "id": "g012",
+          "title": "はい、そうです",
+          "explanation": "The standard way to confirm a yes/no question. はい = yes, そうです = that is so / that's right.",
+          "pattern": "はい、 + そうです。"
+        }
+      ],
+
+      "kana": [
+        { "character": "は", "reading": "ha", "romaji": "ha", "script": "hiragana" },
+        { "character": "い", "reading": "i",  "romaji": "i",  "script": "hiragana" },
+        { "character": "そ", "reading": "so", "romaji": "so", "script": "hiragana" },
+        { "character": "う", "reading": "u",  "romaji": "u",  "script": "hiragana" },
+        { "character": "で", "reading": "de", "romaji": "de", "script": "hiragana" },
+        { "character": "す", "reading": "su", "romaji": "su", "script": "hiragana" }
+      ]
+    }
+  ]
+}
