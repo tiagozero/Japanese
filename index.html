@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Japanese Trainer</title>
 <style>
-/* ============================================================
-   THEME VARIABLES — Light (default)
-   ============================================================ */
 :root{
   --bg:#f5f1e8;
   --card:#fffdf8;
@@ -39,17 +36,21 @@
   --highlight-bg:rgba(74,139,92,.28);
   --highlight-ring:rgba(74,139,92,.45);
   --token-dash:rgba(176,106,44,.4);
+  --code-bg:#2b2620;
+  --code-ink:#f5efe2;
+  --code-key:#ffd08a;
+  --code-string:#c8e6a0;
+  --code-number:#f0a8c0;
+  --code-null:#c0a0e0;
+  --code-punct:#8a8070;
   --msg-error-bg:#fbeceb; --msg-error-br:#e8c7c3; --msg-error-tx:#8a2f24;
   --msg-warn-bg:#fbf3df;  --msg-warn-br:#ecd9a5;  --msg-warn-tx:#6b5114;
   --msg-ok-bg:#eaf4ec;    --msg-ok-br:#c8ddcc;    --msg-ok-tx:#2f5c3d;
   --kana-ring:rgba(214,163,58,.3);
+  --overlay-bg:rgba(30,20,10,.55);
   --radius:16px;
   --radius-sm:12px;
 }
-
-/* ============================================================
-   THEME VARIABLES — Dark
-   ============================================================ */
 html[data-theme="dark"]{
   color-scheme: dark;
   --bg:#141414;
@@ -82,15 +83,19 @@ html[data-theme="dark"]{
   --highlight-bg:rgba(74,222,128,.25);
   --highlight-ring:rgba(74,222,128,.45);
   --token-dash:rgba(232,163,74,.4);
+  --code-bg:#0e0e0e;
+  --code-ink:#e8e8e8;
+  --code-key:#e8a34a;
+  --code-string:#a8e0a0;
+  --code-number:#f0a8c0;
+  --code-null:#c0a0e0;
+  --code-punct:#6a6a6a;
   --msg-error-bg:#2a1818; --msg-error-br:#4a2828; --msg-error-tx:#ffb0b0;
   --msg-warn-bg:#2a2418;  --msg-warn-br:#4a4028;  --msg-warn-tx:#ffe0a0;
   --msg-ok-bg:#182a1d;    --msg-ok-br:#284a30;    --msg-ok-tx:#a8f0b8;
   --kana-ring:rgba(196,122,44,.35);
+  --overlay-bg:rgba(0,0,0,.7);
 }
-
-/* ============================================================
-   Base
-   ============================================================ */
 *{box-sizing:border-box}
 html,body{margin:0}
 html{-webkit-text-size-adjust:100%}
@@ -107,10 +112,8 @@ h1,h2,h3,h4{margin:0 0 .35rem;line-height:1.25}
 .hidden{display:none !important}
 ruby{ruby-position:over}
 rt{font-size:.5em;letter-spacing:0}
+code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace}
 
-/* ============================================================
-   Buttons
-   ============================================================ */
 .btn{
   display:inline-flex;align-items:center;gap:.35rem;
   background:var(--btn-bg);color:var(--btn-text);
@@ -122,24 +125,15 @@ rt{font-size:.5em;letter-spacing:0}
 .btn:active{transform:translateY(1px)}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
-.btn.primary{
-  background:var(--accent);border-color:var(--accent);
-  color:var(--btn-primary-text);font-weight:700;
-}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--btn-primary-text);font-weight:700}
 .btn.primary:hover{background:var(--btn-primary-hover)}
 .btn.danger{color:var(--err);border-color:var(--btn-border)}
 .btn.danger:hover{background:var(--btn-hover)}
 .btn.small{padding:.3rem .55rem;font-size:.82rem}
-.btn.toggle[aria-pressed="true"]{
-  background:var(--accent-soft);border-color:var(--accent-warm);
-  color:var(--accent);font-weight:700;
-}
+.btn.toggle[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-warm);color:var(--accent);font-weight:700}
 .btn.toggle[aria-pressed="true"]::before{content:"● ";}
 .btn.toggle[aria-pressed="false"]::before{content:"○ ";}
 
-/* ============================================================
-   Header
-   ============================================================ */
 .app-header{
   position:sticky;top:0;z-index:50;
   background:var(--header-bg);backdrop-filter:blur(8px);
@@ -156,24 +150,14 @@ rt{font-size:.5em;letter-spacing:0}
 .home-link:hover{background:var(--btn-hover)}
 .home-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .brand{font-weight:700;color:var(--ink-soft)}
-.header-lesson{
-  color:var(--muted);font-size:.9rem;overflow:hidden;text-overflow:ellipsis;
-  white-space:nowrap;max-width:36ch;
-}
+.header-lesson{color:var(--muted);font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:36ch}
 .header-actions{margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.btn.theme-toggle{padding:.42rem .6rem;min-width:2.4rem;justify-content:center;font-size:1rem;line-height:1}
 
-/* Theme toggle — icon-only, fixed width so it doesn't shift on swap */
-.btn.theme-toggle{
-  padding:.42rem .6rem;min-width:2.4rem;justify-content:center;
-  font-size:1rem;line-height:1;
-}
-
-/* ============================================================
-   Main + Library
-   ============================================================ */
 .app-main{max-width:1600px;margin:0 auto;padding:1rem 1rem 4rem}
 .library-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
 .library-head h1{font-size:1.35rem;color:var(--ink-soft)}
+.library-head .actions{display:flex;gap:.5rem;flex-wrap:wrap}
 .lesson-list{display:flex;flex-direction:column;gap:.85rem;max-width:900px;margin:0 auto}
 .lesson-card{
   background:var(--card);border-radius:var(--radius);padding:1.15rem 1.25rem;
@@ -191,12 +175,8 @@ rt{font-size:.5em;letter-spacing:0}
   text-align:center;color:var(--muted);box-shadow:var(--shadow-soft);
   max-width:900px;margin:0 auto;
 }
-
 .messages{margin-bottom:1rem;max-width:900px;margin-left:auto;margin-right:auto}
-.msg{
-  border-radius:var(--radius-sm);padding:.85rem 1rem;margin-bottom:.6rem;
-  font-size:.92rem;background:var(--card);
-}
+.msg{border-radius:var(--radius-sm);padding:.85rem 1rem;margin-bottom:.6rem;font-size:.92rem;background:var(--card)}
 .msg.error{background:var(--msg-error-bg);border:1px solid var(--msg-error-br);color:var(--msg-error-tx)}
 .msg.warn {background:var(--msg-warn-bg); border:1px solid var(--msg-warn-br); color:var(--msg-warn-tx)}
 .msg.ok   {background:var(--msg-ok-bg);   border:1px solid var(--msg-ok-br);   color:var(--msg-ok-tx)}
@@ -210,9 +190,6 @@ rt{font-size:.5em;letter-spacing:0}
 .preview-list{margin:.5rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.9rem}
 .preview-actions{display:flex;gap:.5rem;margin-top:.9rem;flex-wrap:wrap}
 
-/* ============================================================
-   Lesson toolbar
-   ============================================================ */
 .lesson-toolbar{
   display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;
   background:var(--card);border-radius:var(--radius-sm);
@@ -224,54 +201,35 @@ rt{font-size:.5em;letter-spacing:0}
 }
 .lesson-toolbar .spacer{margin-left:auto}
 
-/* ============================================================
-   Grid
-   ============================================================ */
 .grid4{display:grid;gap:.9rem;align-items:start;grid-template-columns:minmax(0,1fr)}
 .grid4[data-vocab="hidden"]   .col-2{display:none}
 .grid4[data-grammar="hidden"] .col-3{display:none}
 .grid4[data-kana="hidden"]    .col-4{display:none}
-
 @media (min-width:760px) and (max-width:1299px){
   .grid4{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
-  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="hidden"]{
-    grid-template-columns:minmax(0,1fr);
-  }
+  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="hidden"]{grid-template-columns:minmax(0,1fr)}
   .grid4 .col-3, .grid4 .col-4{grid-column:1 / -1}
   .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="hidden"] .col-3{grid-column:auto}
   .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="shown"] .col-4{grid-column:auto}
   .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="shown"]  .col-3{grid-column:auto}
 }
 @media (min-width:1300px){
-  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="hidden"]{
-    grid-template-columns:minmax(0,1fr);
-  }
+  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="hidden"]{grid-template-columns:minmax(0,1fr)}
   .grid4[data-vocab="shown"][data-grammar="hidden"][data-kana="hidden"],
   .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="hidden"],
-  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="shown"]{
-    grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);
-  }
+  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="shown"]{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
   .grid4[data-vocab="shown"][data-grammar="shown"][data-kana="hidden"],
   .grid4[data-vocab="shown"][data-grammar="hidden"][data-kana="shown"],
-  .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="shown"]{
-    grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);
-  }
+  .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="shown"]{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr)}
   .grid4[data-vocab="shown"][data-grammar="shown"][data-kana="shown"]{
     grid-template-columns:minmax(0,1.55fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);
   }
   .grid4 .col-2, .grid4 .col-3, .grid4 .col-4{grid-column:auto}
 }
-
 .col{min-width:0;display:flex;flex-direction:column;gap:.85rem}
-.col-head{
-  font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;
-  color:var(--muted);font-weight:700;padding:0 .15rem .1rem;
-}
+.col-head{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;padding:0 .15rem .1rem}
 .card{background:var(--card);border-radius:var(--radius);padding:1rem 1.1rem;box-shadow:var(--shadow)}
 
-/* ============================================================
-   Sentence
-   ============================================================ */
 .sentence-nav{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.5rem}
 .counter{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;font-size:.95rem}
 .counter strong{color:var(--accent)}
@@ -302,9 +260,6 @@ rt{font-size:.5em;letter-spacing:0}
 .meaning{font-size:1rem;color:var(--ink-soft);margin:0}
 .aids-controls{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem;justify-content:center}
 
-/* ============================================================
-   Player
-   ============================================================ */
 .player{background:var(--card-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.85rem}
 .player-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
 .player-row:last-child{margin-bottom:0}
@@ -328,15 +283,8 @@ rt{font-size:.5em;letter-spacing:0}
   font-size:.75rem;color:var(--muted);
   overflow:hidden;text-overflow:ellipsis;max-width:20ch;white-space:nowrap;
 }
-
-/* ============================================================
-   Chunks / Connected / Progress
-   ============================================================ */
 .chunks{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-top:.5rem}
-.chunk{
-  background:var(--card-alt);border:1px solid var(--border);
-  border-radius:var(--radius-sm);padding:.45rem .7rem;text-align:center;min-width:0;
-}
+.chunk{background:var(--card-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.45rem .7rem;text-align:center;min-width:0}
 .chunk .ct{font-size:1rem;font-weight:600;display:block}
 .chunk .cm{font-size:.74rem;color:var(--muted);margin-top:.1rem;display:block}
 .connected{
@@ -346,9 +294,6 @@ rt{font-size:.5em;letter-spacing:0}
 .complete{display:flex;justify-content:center;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.7rem}
 .progress{text-align:center;color:var(--muted);font-size:.85rem;margin:.4rem 0 0}
 
-/* ============================================================
-   Vocabulary & Grammar Units
-   ============================================================ */
 .unit-list{display:flex;flex-direction:column;gap:.4rem}
 .unit{
   text-align:left;background:var(--card-alt);border:1px solid var(--border);
@@ -363,9 +308,6 @@ rt{font-size:.5em;letter-spacing:0}
 .unit .u-p{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.15rem}
 .unit.grammar{border-left:3px solid var(--accent-warm)}
 
-/* ============================================================
-   Grammar Notes
-   ============================================================ */
 .grammar-item{
   border-left:3px solid var(--accent-warm);
   padding-left:.7rem;padding-top:.15rem;padding-bottom:.15rem;margin-bottom:.85rem;
@@ -378,17 +320,8 @@ rt{font-size:.5em;letter-spacing:0}
   background:var(--accent-soft);display:inline-block;padding:.15rem .5rem;border-radius:6px;margin-top:.25rem;
 }
 
-/* ============================================================
-   Kana panel
-   ============================================================ */
-.kana-panel{
-  background:var(--card);border-radius:var(--radius);
-  padding:1.1rem 1.1rem 1.15rem;box-shadow:var(--shadow);
-}
-.kana-title{
-  color:var(--accent);font-size:.95rem;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;margin:0 0 .3rem;
-}
+.kana-panel{background:var(--card);border-radius:var(--radius);padding:1.1rem 1.1rem 1.15rem;box-shadow:var(--shadow)}
+.kana-title{color:var(--accent);font-size:.95rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin:0 0 .3rem}
 .kana-subtitle{color:var(--muted);font-size:.8rem;margin:0 0 .85rem;line-height:1.45}
 .kana-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(72px, 1fr));gap:.5rem}
 .kana-divider{grid-column:1 / -1;height:1px;background:var(--border);margin:.2rem 0 .05rem}
@@ -412,8 +345,86 @@ rt{font-size:.5em;letter-spacing:0}
 .kana-cell.in-sentence .kc-example{color:var(--ink-soft)}
 
 /* ============================================================
-   Popup + Toast
+   JSON demo modal
    ============================================================ */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--overlay-bg);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.2rem;
+  animation:fadeIn .15s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal{
+  background:var(--card);border-radius:var(--radius);
+  box-shadow:0 24px 60px rgba(0,0,0,.35);
+  width:100%;max-width:880px;max-height:min(90vh, 780px);
+  display:flex;flex-direction:column;overflow:hidden;
+  animation:slideUp .18s ease;
+  border:1px solid var(--border);
+}
+.modal-head{
+  display:flex;align-items:center;gap:.8rem;
+  padding:.9rem 1.15rem;
+  border-bottom:1px solid var(--border);
+  flex-wrap:wrap;
+}
+.modal-head h2{font-size:1.05rem;color:var(--ink-soft);margin:0}
+.modal-head .spacer{margin-left:auto}
+.modal-head .close-btn{
+  background:transparent;border:1px solid var(--btn-border);
+  width:2rem;height:2rem;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--muted);font-size:1rem;line-height:1;
+}
+.modal-head .close-btn:hover{background:var(--btn-hover);color:var(--ink)}
+.modal-head .close-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.modal-body{
+  flex:1;overflow-y:auto;
+  padding:1rem 1.15rem 1.2rem;
+}
+.modal-intro{
+  font-size:.88rem;color:var(--muted);
+  margin:0 0 .9rem;line-height:1.55;
+}
+.modal-intro code{
+  background:var(--card-alt);border:1px solid var(--border);
+  padding:.05rem .35rem;border-radius:5px;font-size:.82em;color:var(--accent);
+}
+.json-block{
+  background:var(--code-bg);color:var(--code-ink);
+  border-radius:var(--radius-sm);
+  padding:1rem 1.1rem;
+  overflow-x:auto;
+  font-size:.82rem;line-height:1.65;
+  margin:0;
+  white-space:pre;
+  tab-size:2;
+  border:1px solid var(--border);
+}
+.json-block .k{color:var(--code-key)}      /* keys */
+.json-block .s{color:var(--code-string)}    /* strings */
+.json-block .n{color:var(--code-number)}    /* numbers */
+.json-block .z{color:var(--code-null)}      /* null */
+.json-block .p{color:var(--code-punct)}     /* punctuation */
+
+.modal-note{
+  background:var(--card-alt);border-left:3px solid var(--accent-warm);
+  padding:.7rem .9rem;border-radius:8px;margin-top:1rem;
+  font-size:.85rem;color:var(--ink-soft);
+}
+.modal-note strong{color:var(--accent)}
+.modal-note ul{margin:.4rem 0 0 1.1rem;padding:0}
+.modal-note li{margin:.2rem 0}
+.modal-foot{
+  display:flex;gap:.5rem;flex-wrap:wrap;
+  padding:.9rem 1.15rem;
+  border-top:1px solid var(--border);
+  background:var(--card-alt);
+}
+.modal-foot .spacer{margin-left:auto}
+
 #vocabPopup{
   position:absolute;z-index:200;max-width:300px;
   background:var(--popup-bg);border:1px solid var(--accent);
@@ -426,7 +437,7 @@ rt{font-size:.5em;letter-spacing:0}
 .toast{
   position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%);
   background:var(--toast-bg);border:1px solid var(--border);border-radius:12px;
-  padding:.65rem 1.05rem;z-index:500;max-width:90vw;
+  padding:.65rem 1.05rem;z-index:1500;max-width:90vw;
   box-shadow:0 12px 40px rgba(0,0,0,.35);font-size:.9rem;color:var(--ink-soft);
 }
 .toast.error{border-color:var(--err);color:var(--err);background:var(--msg-error-bg)}
@@ -440,6 +451,9 @@ rt{font-size:.5em;letter-spacing:0}
   .sentence{font-size:1.4rem;line-height:2.4}
   .header-lesson{max-width:100%;order:5;flex-basis:100%}
   .kana-grid{grid-template-columns:repeat(auto-fill, minmax(64px, 1fr))}
+  .modal{max-height:95vh}
+  .modal-body{padding:.85rem}
+  .json-block{font-size:.75rem;padding:.75rem .85rem}
 }
 </style>
 </head>
@@ -447,6 +461,7 @@ rt{font-size:.5em;letter-spacing:0}
 
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 <div id="vocabPopup" hidden></div>
+<div id="modalHost"></div>
 <audio id="audioEl" preload="metadata"></audio>
 
 <header class="app-header">
@@ -466,7 +481,8 @@ rt{font-size:.5em;letter-spacing:0}
   <section id="libraryView">
     <div class="library-head">
       <h1>Your Lessons</h1>
-      <div>
+      <div class="actions">
+        <button id="btnJsonFormat" class="btn" type="button">View JSON Format</button>
         <button id="btnUpload" class="btn primary" type="button">Upload Lesson JSON</button>
         <input type="file" id="fileInput" accept=".json,application/json" hidden>
       </div>
@@ -591,6 +607,228 @@ const state = {
 };
 let repeatsLeft = 0;
 let countNextPlay = false;
+
+/* ============================================================
+   JSON template + demo
+   ============================================================ */
+const JSON_TEMPLATE = {
+  app: "Japanese Trainer",
+  version: 1,
+  lesson: {
+    id: "lesson-001",
+    title: "Basic Japanese Greetings",
+    description: "Introduction to basic Japanese greetings.",
+    level: "Beginner"
+  },
+  sentences: [
+    {
+      id: "sentence-001",
+      expression: "おはようございます。",
+      reading: "おはようございます。",
+      romaji: "Ohayou gozaimasu.",
+      meaning: "Good morning.",
+      audio: "sentence-001.mp3",
+      chunks: [
+        { text: "おはよう", meaning: "Good morning" },
+        { text: "ございます", meaning: "Polite expression" }
+      ],
+      connectedReading: "おはようございます。",
+      tokens: [
+        { text: "おはようございます", vocabularyId: "v001" }
+      ],
+      vocabulary: [
+        {
+          id: "v001",
+          text: "おはようございます",
+          reading: "おはようございます",
+          romaji: "ohayou gozaimasu",
+          meaning: "Good morning",
+          partOfSpeech: "expression"
+        }
+      ],
+      grammar: [
+        {
+          id: "g001",
+          title: "ございます",
+          explanation: "A polite expression used in greetings.",
+          pattern: "おはよう + ございます"
+        }
+      ],
+      kana: [
+        { character: "お", reading: "o", romaji: "o", script: "hiragana" },
+        { character: "は", reading: "ha", romaji: "ha", script: "hiragana" }
+      ]
+    },
+    {
+      id: "sentence-002",
+      expression: "失礼ですが、安西先生ですか。",
+      reading: "しつれいですが、あんざいせんせいですか。",
+      romaji: "Shitsurei desu ga, Anzai sensei desu ka.",
+      meaning: "Excuse me, are you Professor Anzai?",
+      audio: "sentence-002.mp3",
+      chunks: [
+        { text: "失礼ですが", meaning: "Excuse me, but" },
+        { text: "安西先生", meaning: "Professor Anzai" },
+        { text: "ですか", meaning: "is it? (polite question)" }
+      ],
+      connectedReading: "しつれいですが、あんざいせんせいですか。",
+      tokens: [
+        { text: "失礼", vocabularyId: "v002" },
+        { text: "ですが", vocabularyId: "v003" },
+        { text: "、", vocabularyId: null },
+        { text: "安西先生", vocabularyId: "v004" },
+        { text: "ですか", vocabularyId: "v005" }
+      ],
+      vocabulary: [
+        { id: "v002", text: "失礼", reading: "しつれい", romaji: "shitsurei", meaning: "excuse me; rudeness", partOfSpeech: "noun" },
+        { id: "v003", text: "ですが", reading: "ですが", romaji: "desu ga", meaning: "but / although", partOfSpeech: "conjunction" },
+        { id: "v004", text: "安西先生", reading: "あんざいせんせい", romaji: "anzai sensei", meaning: "Professor Anzai", partOfSpeech: "proper noun" },
+        { id: "v005", text: "ですか", reading: "ですか", romaji: "desu ka", meaning: "is it? (polite question)", partOfSpeech: "expression" }
+      ],
+      grammar: [
+        {
+          id: "g002",
+          title: "ですが",
+          explanation: "A polite connective used to soften a statement or introduce contrast.",
+          pattern: "A + ですが + B"
+        }
+      ],
+      kana: [
+        { character: "し", reading: "shi", romaji: "shi", script: "hiragana" },
+        { character: "つ", reading: "tsu", romaji: "tsu", script: "hiragana" },
+        { character: "れ", reading: "re", romaji: "re", script: "hiragana" },
+        { character: "い", reading: "i", romaji: "i", script: "hiragana" }
+      ]
+    }
+  ]
+};
+
+/* ---- Small JSON syntax highlighter (only used for display) ---- */
+function highlightJSON(value){
+  const json = JSON.stringify(value, null, 2);
+  return json
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/("(?:\\u[a-fA-F0-9]{4}|\\[^u]|[^\\"])*")(\s*:)?/g, function(match, str, colon){
+      if(colon){
+        return '<span class="k">' + str + "</span>" + colon.replace(":", '<span class="p">:</span>');
+      }
+      return '<span class="s">' + str + "</span>";
+    })
+    .replace(/\b(true|false|null)\b/g, function(match){
+      return '<span class="z">' + match + "</span>";
+    })
+    .replace(/(:\s*)(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g, function(_, pre, num){
+      return pre + '<span class="n">' + num + "</span>";
+    });
+}
+
+/* ============================================================
+   Modal
+   ============================================================ */
+function openModal(html, opts){
+  const host = $("#modalHost");
+  const backdrop = document.createElement("div");
+  backdrop.className = "modal-backdrop";
+  backdrop.innerHTML = html;
+  host.appendChild(backdrop);
+
+  function close(){
+    backdrop.remove();
+    document.removeEventListener("keydown", onKey);
+    document.body.style.overflow = "";
+  }
+  function onKey(e){
+    if(e.key === "Escape") close();
+  }
+  document.addEventListener("keydown", onKey);
+  document.body.style.overflow = "hidden";
+
+  backdrop.addEventListener("click", function(e){
+    if(e.target === backdrop) close();
+  });
+  backdrop.querySelectorAll("[data-modal-close]").forEach(b => {
+    b.addEventListener("click", close);
+  });
+  return { el: backdrop, close: close };
+}
+
+function showJsonFormatModal(){
+  const json = JSON_TEMPLATE;
+  const highlighted = highlightJSON(json);
+
+  const html =
+    '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="jsonModalTitle">' +
+      '<div class="modal-head">' +
+        '<h2 id="jsonModalTitle">Lesson JSON format</h2>' +
+        '<span class="spacer"></span>' +
+        '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="modal-body">' +
+        '<p class="modal-intro">' +
+          "Every lesson is a single JSON file. The app reads it as-is — the HTML never changes. " +
+          "Required fields are marked below. Optional fields (like <code>tokens</code>, " +
+          "<code>chunks</code>, <code>connectedReading</code>, <code>grammar</code>, " +
+          "<code>kana</code>, and <code>audio</code>) can be omitted safely." +
+        '</p>' +
+        '<pre class="json-block"><code>' + highlighted + '</code></pre>' +
+        '<div class="modal-note">' +
+          '<strong>Field notes</strong>' +
+          '<ul>' +
+            '<li><code>lesson.id</code> — unique per lesson. Importing the same id replaces it.</li>' +
+            '<li><code>sentences[].id</code> — stable per sentence, used to store audio and progress.</li>' +
+            '<li><code>tokens[]</code> — connects portions of <code>expression</code> to <code>vocabulary[].id</code> so words become clickable.</li>' +
+            '<li><code>audio</code> — a filename reference. The user can upload a real MP3 per sentence, which then takes priority.</li>' +
+            '<li><code>kana[].script</code> — either <code>"hiragana"</code> or <code>"katakana"</code>.</li>' +
+          '</ul>' +
+        '</div>' +
+      '</div>' +
+      '<div class="modal-foot">' +
+        '<button class="btn" type="button" id="btnCopyJson">Copy JSON</button>' +
+        '<button class="btn" type="button" id="btnDownloadTemplate">Download template</button>' +
+        '<span class="spacer"></span>' +
+        '<button class="btn primary" type="button" data-modal-close>Close</button>' +
+      '</div>' +
+    '</div>';
+
+  const modal = openModal(html);
+
+  $("#btnCopyJson", modal.el).addEventListener("click", async () => {
+    const text = JSON.stringify(json, null, 2);
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast("JSON copied to clipboard.", "ok");
+    }catch(err){
+      /* Fallback: temporary textarea */
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try{
+        document.execCommand("copy");
+        showToast("JSON copied to clipboard.", "ok");
+      }catch(e2){
+        showToast("Copy failed — select the text manually.", "error");
+      }
+      ta.remove();
+    }
+  });
+
+  $("#btnDownloadTemplate", modal.el).addEventListener("click", () => {
+    const text = JSON.stringify(json, null, 2);
+    const blob = new Blob([text], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "lesson-template.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+    showToast("Template downloaded.", "ok");
+  });
+}
 
 /* ============================================================
    Theme
@@ -882,7 +1120,7 @@ async function refreshLibrary(){
   const list = $("#lessonList");
   list.innerHTML = "";
   if(!lessons.length){
-    list.innerHTML = '<div class="empty">No lessons yet. Click <strong>Upload Lesson JSON</strong> to import your first lesson.</div>';
+    list.innerHTML = '<div class="empty">No lessons yet. Click <strong>Upload Lesson JSON</strong> to import your first lesson, or <strong>View JSON Format</strong> to see the expected structure.</div>';
     return;
   }
   lessons.forEach(l => {
@@ -1051,7 +1289,6 @@ function buildKanaInventory(lessonData){
         example: k.reading || ""
       });
     });
-
     (sentence.vocabulary || []).forEach(v => {
       if(!v) return;
       const text = v.text || "";
@@ -1069,7 +1306,6 @@ function buildKanaInventory(lessonData){
         }
       });
     });
-
     collectKanaFromText(sentence.expression).forEach(ch => {
       if(!map.has(ch)){
         map.set(ch, {
@@ -1079,7 +1315,6 @@ function buildKanaInventory(lessonData){
       }
     });
   });
-
   const items = Array.from(map.values());
   const hira = items.filter(x => x.script === "HIRAGANA");
   const kata = items.filter(x => x.script === "KATAKANA");
@@ -1089,14 +1324,12 @@ function buildKanaInventory(lessonData){
 function kanaGridHTML(sentence){
   const inventory = state.kanaInventory || [];
   if(!inventory.length) return '<p class="muted">No kana found in this lesson.</p>';
-
   const present = collectKanaFromText(sentence.expression);
   (sentence.vocabulary || []).forEach(v => {
     if(!v) return;
     collectKanaFromText(v.text).forEach(ch => present.add(ch));
     collectKanaFromText(v.reading).forEach(ch => present.add(ch));
   });
-
   let html = '<div class="kana-grid" role="list">';
   let lastScript = null;
   inventory.forEach(k => {
@@ -1147,7 +1380,6 @@ function buildTokenList(sentence){
     if(cursor < expr.length) tokens.push({ text: expr.slice(cursor), plain: true });
     return tokens;
   }
-
   let i = 0, buf = "";
   while(i < expr.length){
     let best = null;
@@ -1189,9 +1421,6 @@ function sentenceHTML(sentence){
   return html;
 }
 
-/* ============================================================
-   HTML builders
-   ============================================================ */
 function chunksHTML(sentence){
   const chunks = Array.isArray(sentence.chunks) ? sentence.chunks : [];
   if(!chunks.length) return '<p class="muted">No chunks provided for this sentence.</p>';
@@ -1273,9 +1502,6 @@ function playerHTML(){
   "</div>";
 }
 
-/* ============================================================
-   Lesson render
-   ============================================================ */
 function renderLesson(){
   if(!state.lesson) return;
   const sentence = currentSentence();
@@ -1419,7 +1645,6 @@ async function loadSentenceAudio(){
   if(state.db){
     try{ record = await idbGet("audio", [state.lesson.id, sentence.id]); }catch(e){}
   }
-
   let hasUploaded = false;
   if(record && record.blob){
     state.audioURL = URL.createObjectURL(record.blob);
@@ -1434,12 +1659,10 @@ async function loadSentenceAudio(){
   }else{
     setPlayerStatus("No audio for this sentence yet. Use “Upload MP3” to add one.");
   }
-
   const up = document.querySelector('[data-action="upload-audio"]');
   if(up) up.textContent = hasUploaded ? "Replace MP3" : "Upload MP3";
   const rm = document.querySelector('[data-action="remove-audio"]');
   if(rm) rm.hidden = !hasUploaded;
-
   audioEl.volume = state.settings.volume;
   audioEl.playbackRate = state.settings.speed;
   updatePlayButton();
@@ -1498,7 +1721,6 @@ async function actionPlayPause(){
     audioEl.pause();
   }
 }
-
 function actionToggleComplete(){
   const s = currentSentence();
   if(!s || !state.progress) return;
@@ -1519,7 +1741,6 @@ function actionToggleComplete(){
   if(prog) prog.textContent = done + " / " + total + " completed — " + pct + "%";
   refreshLibrary();
 }
-
 function actionHighlightVocab(vocabId){
   const nodes = $$(".jp-unit" + attr("data-vocab-id", vocabId));
   if(!nodes.length){ showToast("Word not found in this sentence.", ""); return; }
@@ -1529,7 +1750,6 @@ function actionHighlightVocab(vocabId){
   });
   try{ nodes[0].scrollIntoView({ block: "center", behavior: "smooth" }); }catch(e){}
 }
-
 async function handleAudioUpload(file){
   const s = currentSentence();
   if(!s || !state.lesson) return;
@@ -1550,7 +1770,6 @@ async function handleAudioUpload(file){
   setPlayerStatus("Audio saved for this sentence.");
   await loadSentenceAudio();
 }
-
 async function removeAudio(){
   const s = currentSentence();
   if(!s || !state.lesson) return;
@@ -1559,7 +1778,6 @@ async function removeAudio(){
   setPlayerStatus("Uploaded audio removed.");
   await loadSentenceAudio();
 }
-
 function downloadCSV(){
   if(!state.lesson) return;
   const rows = [["Expression","Reading","Meaning"]];
@@ -1573,7 +1791,6 @@ function downloadCSV(){
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
-
 async function resetProgress(){
   if(!state.lesson) return;
   if(!window.confirm('Reset all learning progress for "' + state.lesson.title + '"?\n\nThe lesson and its uploaded audio will be kept.')) return;
@@ -1597,6 +1814,7 @@ function wireEvents(){
 
   $("#homeLink").addEventListener("click", e => { e.preventDefault(); goHome(); });
   $("#btnTheme").addEventListener("click", toggleTheme);
+  $("#btnJsonFormat").addEventListener("click", showJsonFormatModal);
 
   $("#btnUpload").addEventListener("click", () => $("#fileInput").click());
   $("#fileInput").addEventListener("change", e => {
