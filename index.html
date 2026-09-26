@@ -6,95 +6,44 @@
 <title>Japanese Trainer</title>
 <style>
 :root{
-  --bg:#f5f1e8;
-  --card:#fffdf8;
-  --card-alt:#fbf6ea;
-  --border:#efe4cb;
-  --border-soft:#efe8d6;
-  --ink:#2a2620;
-  --ink-soft:#4a3f2a;
-  --muted:#8a7f68;
-  --accent:#b06a2c;
-  --accent-warm:#d6a33a;
-  --accent-soft:#fbe9d0;
-  --accent-soft-strong:#fde8c8;
-  --ok:#4a8b5c;
-  --err:#c25a4a;
-  --btn-bg:#fffdf8;
-  --btn-text:#5b4b2e;
-  --btn-border:#e0d7c2;
-  --btn-hover:#efe8d6;
-  --btn-primary-text:#fff;
-  --btn-primary-hover:#9a5a22;
-  --shadow:0 6px 24px rgba(60,40,10,.08);
-  --shadow-soft:0 4px 16px rgba(60,40,10,.07);
-  --popup-bg:#fffdf8;
-  --toast-bg:#fffdf8;
-  --header-bg:rgba(245,241,232,.94);
-  --hover-bg:#f7efdd;
-  --bar-bg:#efe8d6;
-  --highlight-bg:rgba(74,139,92,.28);
-  --highlight-ring:rgba(74,139,92,.45);
+  --bg:#f5f1e8;--card:#fffdf8;--card-alt:#fbf6ea;--border:#efe4cb;--border-soft:#efe8d6;
+  --ink:#2a2620;--ink-soft:#4a3f2a;--muted:#8a7f68;--accent:#b06a2c;--accent-warm:#d6a33a;
+  --accent-soft:#fbe9d0;--accent-soft-strong:#fde8c8;--ok:#4a8b5c;--err:#c25a4a;
+  --btn-bg:#fffdf8;--btn-text:#5b4b2e;--btn-border:#e0d7c2;--btn-hover:#efe8d6;
+  --btn-primary-text:#fff;--btn-primary-hover:#9a5a22;
+  --shadow:0 6px 24px rgba(60,40,10,.08);--shadow-soft:0 4px 16px rgba(60,40,10,.07);
+  --popup-bg:#fffdf8;--toast-bg:#fffdf8;--header-bg:rgba(245,241,232,.94);
+  --hover-bg:#f7efdd;--bar-bg:#efe8d6;
+  --highlight-bg:rgba(74,139,92,.28);--highlight-ring:rgba(74,139,92,.45);
   --token-dash:rgba(176,106,44,.4);
-  --code-bg:#2b2620;
-  --code-ink:#f5efe2;
-  --code-key:#ffd08a;
-  --code-string:#c8e6a0;
-  --code-number:#f0a8c0;
-  --code-null:#c0a0e0;
-  --code-punct:#8a8070;
-  --msg-error-bg:#fbeceb; --msg-error-br:#e8c7c3; --msg-error-tx:#8a2f24;
-  --msg-warn-bg:#fbf3df;  --msg-warn-br:#ecd9a5;  --msg-warn-tx:#6b5114;
-  --msg-ok-bg:#eaf4ec;    --msg-ok-br:#c8ddcc;    --msg-ok-tx:#2f5c3d;
-  --kana-ring:rgba(214,163,58,.3);
-  --overlay-bg:rgba(30,20,10,.55);
-  --radius:16px;
-  --radius-sm:12px;
+  --code-bg:#2b2620;--code-ink:#f5efe2;--code-key:#ffd08a;--code-string:#c8e6a0;
+  --code-number:#f0a8c0;--code-null:#c0a0e0;--code-punct:#8a8070;
+  --kbd-bg:#efe8d6;--kbd-border:#e0d7c2;--kbd-ink:#5b4b2e;
+  --msg-error-bg:#fbeceb;--msg-error-br:#e8c7c3;--msg-error-tx:#8a2f24;
+  --msg-warn-bg:#fbf3df;--msg-warn-br:#ecd9a5;--msg-warn-tx:#6b5114;
+  --msg-ok-bg:#eaf4ec;--msg-ok-br:#c8ddcc;--msg-ok-tx:#2f5c3d;
+  --kana-ring:rgba(214,163,58,.3);--overlay-bg:rgba(30,20,10,.55);
+  --radius:16px;--radius-sm:12px;
 }
 html[data-theme="dark"]{
-  color-scheme: dark;
-  --bg:#141414;
-  --card:#1a1a1a;
-  --card-alt:#1f1f1f;
-  --border:#2a2a2a;
-  --border-soft:#232323;
-  --ink:#e8e8e8;
-  --ink-soft:#f0f0f0;
-  --muted:#8a8a8a;
-  --accent:#e8a34a;
-  --accent-warm:#c47a2c;
-  --accent-soft:#2a2218;
-  --accent-soft-strong:#332a1d;
-  --ok:#4ade80;
-  --err:#f87171;
-  --btn-bg:#1f1f1f;
-  --btn-text:#d0d0d0;
-  --btn-border:#2f2f2f;
-  --btn-hover:#2a2a2a;
-  --btn-primary-text:#141414;
-  --btn-primary-hover:#f0b562;
-  --shadow:0 6px 24px rgba(0,0,0,.45);
-  --shadow-soft:0 4px 16px rgba(0,0,0,.35);
-  --popup-bg:#232323;
-  --toast-bg:#232323;
-  --header-bg:rgba(20,20,20,.94);
-  --hover-bg:#252525;
-  --bar-bg:#2a2a2a;
-  --highlight-bg:rgba(74,222,128,.25);
-  --highlight-ring:rgba(74,222,128,.45);
+  color-scheme:dark;
+  --bg:#141414;--card:#1a1a1a;--card-alt:#1f1f1f;--border:#2a2a2a;--border-soft:#232323;
+  --ink:#e8e8e8;--ink-soft:#f0f0f0;--muted:#8a8a8a;--accent:#e8a34a;--accent-warm:#c47a2c;
+  --accent-soft:#2a2218;--accent-soft-strong:#332a1d;--ok:#4ade80;--err:#f87171;
+  --btn-bg:#1f1f1f;--btn-text:#d0d0d0;--btn-border:#2f2f2f;--btn-hover:#2a2a2a;
+  --btn-primary-text:#141414;--btn-primary-hover:#f0b562;
+  --shadow:0 6px 24px rgba(0,0,0,.45);--shadow-soft:0 4px 16px rgba(0,0,0,.35);
+  --popup-bg:#232323;--toast-bg:#232323;--header-bg:rgba(20,20,20,.94);
+  --hover-bg:#252525;--bar-bg:#2a2a2a;
+  --highlight-bg:rgba(74,222,128,.25);--highlight-ring:rgba(74,222,128,.45);
   --token-dash:rgba(232,163,74,.4);
-  --code-bg:#0e0e0e;
-  --code-ink:#e8e8e8;
-  --code-key:#e8a34a;
-  --code-string:#a8e0a0;
-  --code-number:#f0a8c0;
-  --code-null:#c0a0e0;
-  --code-punct:#6a6a6a;
-  --msg-error-bg:#2a1818; --msg-error-br:#4a2828; --msg-error-tx:#ffb0b0;
-  --msg-warn-bg:#2a2418;  --msg-warn-br:#4a4028;  --msg-warn-tx:#ffe0a0;
-  --msg-ok-bg:#182a1d;    --msg-ok-br:#284a30;    --msg-ok-tx:#a8f0b8;
-  --kana-ring:rgba(196,122,44,.35);
-  --overlay-bg:rgba(0,0,0,.7);
+  --code-bg:#0e0e0e;--code-ink:#e8e8e8;--code-key:#e8a34a;--code-string:#a8e0a0;
+  --code-number:#f0a8c0;--code-null:#c0a0e0;--code-punct:#6a6a6a;
+  --kbd-bg:#232323;--kbd-border:#2f2f2f;--kbd-ink:#d0d0d0;
+  --msg-error-bg:#2a1818;--msg-error-br:#4a2828;--msg-error-tx:#ffb0b0;
+  --msg-warn-bg:#2a2418;--msg-warn-br:#4a4028;--msg-warn-tx:#ffe0a0;
+  --msg-ok-bg:#182a1d;--msg-ok-br:#284a30;--msg-ok-tx:#a8f0b8;
+  --kana-ring:rgba(196,122,44,.35);--overlay-bg:rgba(0,0,0,.7);
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -102,14 +51,13 @@ html{-webkit-text-size-adjust:100%}
 body{
   background:var(--bg);color:var(--ink);
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  line-height:1.6;min-height:100vh;
-  transition:background-color .2s,color .2s;
+  line-height:1.6;min-height:100vh;transition:background-color .2s,color .2s;
 }
 button,input,select,textarea{font:inherit;color:inherit}
 h1,h2,h3,h4{margin:0 0 .35rem;line-height:1.25}
 .jp{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo","Noto Sans JP",system-ui,sans-serif}
 .muted{color:var(--muted)}
-.hidden, [hidden]{display:none !important}
+.hidden,[hidden]{display:none !important}
 ruby{ruby-position:over}
 rt{font-size:.5em;letter-spacing:0}
 code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace}
@@ -152,7 +100,7 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .brand{font-weight:700;color:var(--ink-soft)}
 .header-lesson{color:var(--muted);font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:36ch}
 .header-actions{margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
-.btn.theme-toggle{padding:.42rem .6rem;min-width:2.4rem;justify-content:center;font-size:1rem;line-height:1}
+.btn.icon-btn{padding:.42rem .6rem;min-width:2.4rem;justify-content:center;font-size:1rem;line-height:1}
 
 .app-main{max-width:1600px;margin:0 auto;padding:1rem 1rem 4rem}
 
@@ -160,92 +108,51 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .library-head h1{font-size:1.35rem;color:var(--ink-soft)}
 .library-head .actions{display:flex;gap:.5rem;flex-wrap:wrap}
 
-/* ============================================================
-   Courses — responsive grid of clickable cards
-   ============================================================ */
-.course-list{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
-  gap:1rem;
-  align-items:start;
-}
-@media (max-width:420px){
-  .course-list{grid-template-columns:1fr}
-}
+.course-list{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:1rem;align-items:start}
+@media (max-width:420px){.course-list{grid-template-columns:1fr}}
 
 .course-card{
   background:var(--card);border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  display:flex;flex-direction:column;
-  overflow:hidden;
-  transition:box-shadow .2s,transform .15s;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;
+  overflow:hidden;transition:box-shadow .2s,transform .15s;
   border:1px solid transparent;
 }
-.course-card:hover{
-  box-shadow:0 10px 34px rgba(60,40,10,.14);
-  transform:translateY(-1px);
-}
+.course-card:hover{box-shadow:0 10px 34px rgba(60,40,10,.14);transform:translateY(-1px)}
 .course-card.orphan{border:1px dashed var(--border)}
-
 .course-card-head{
-  padding:1.15rem 1.25rem .9rem;
-  cursor:pointer;
-  display:flex;
-  gap:.75rem;
-  align-items:flex-start;
-  user-select:none;
-  transition:background .15s;
-  border:0;background:transparent;color:inherit;text-align:left;width:100%;
-  font-family:inherit;
+  padding:1.15rem 1.25rem .9rem;cursor:pointer;
+  display:flex;gap:.75rem;align-items:flex-start;user-select:none;
+  transition:background .15s;border:0;background:transparent;color:inherit;
+  text-align:left;width:100%;font-family:inherit;
 }
 .course-card-head:hover{background:var(--hover-bg)}
 .course-card-head:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-
 .course-head-main{flex:1 1 auto;min-width:0}
 .course-head-main h3{font-size:1.1rem;color:var(--ink-soft);margin-bottom:.15rem}
 .course-head-main .desc{color:var(--muted);font-size:.85rem;margin:.1rem 0 .35rem;line-height:1.45}
 .course-head-main .meta{color:var(--muted);font-size:.78rem;margin:.15rem 0}
-
 .course-open-hint{
-  flex:0 0 auto;
-  display:flex;align-items:center;gap:.35rem;
-  color:var(--accent);font-size:.78rem;font-weight:700;
-  letter-spacing:.04em;
-  padding:.35rem .6rem;
-  border-radius:99px;
-  background:var(--accent-soft);
-  white-space:nowrap;
+  flex:0 0 auto;display:flex;align-items:center;gap:.35rem;
+  color:var(--accent);font-size:.78rem;font-weight:700;letter-spacing:.04em;
+  padding:.35rem .6rem;border-radius:99px;background:var(--accent-soft);white-space:nowrap;
 }
-.course-card.orphan .course-open-hint{
-  color:var(--muted);background:var(--card-alt);
-}
-.course-card-head:hover .course-open-hint{
-  background:var(--accent-warm);color:#fff;
-}
-.course-card.orphan .course-card-head:hover .course-open-hint{
-  background:var(--muted);color:#fff;
-}
-
-.course-actions{
-  padding:0 1.25rem 1.15rem;
-  display:flex;gap:.4rem;flex-wrap:wrap;
-}
-
+.course-card.orphan .course-open-hint{color:var(--muted);background:var(--card-alt)}
+.course-card-head:hover .course-open-hint{background:var(--accent-warm);color:#fff}
+.course-card.orphan .course-card-head:hover .course-open-hint{background:var(--muted);color:#fff}
+.course-actions{padding:0 1.25rem 1.15rem;display:flex;gap:.4rem;flex-wrap:wrap}
 .bar{height:8px;border-radius:99px;background:var(--bar-bg);overflow:hidden;margin:.5rem 0}
 .bar-fill{height:100%;background:linear-gradient(90deg,var(--accent-warm),var(--ok));width:0}
-
 .empty{
   background:var(--card);border-radius:var(--radius);padding:2.2rem 1.2rem;
-  text-align:center;color:var(--muted);box-shadow:var(--shadow-soft);
-  grid-column:1 / -1;
+  text-align:center;color:var(--muted);box-shadow:var(--shadow-soft);grid-column:1 / -1;
 }
 .empty strong{color:var(--accent)}
 
 .messages{margin-bottom:1rem;max-width:900px;margin-left:auto;margin-right:auto}
 .msg{border-radius:var(--radius-sm);padding:.85rem 1rem;margin-bottom:.6rem;font-size:.92rem;background:var(--card)}
 .msg.error{background:var(--msg-error-bg);border:1px solid var(--msg-error-br);color:var(--msg-error-tx)}
-.msg.warn {background:var(--msg-warn-bg); border:1px solid var(--msg-warn-br); color:var(--msg-warn-tx)}
-.msg.ok   {background:var(--msg-ok-bg);   border:1px solid var(--msg-ok-br);   color:var(--msg-ok-tx)}
+.msg.warn{background:var(--msg-warn-bg);border:1px solid var(--msg-warn-br);color:var(--msg-warn-tx)}
+.msg.ok{background:var(--msg-ok-bg);border:1px solid var(--msg-ok-br);color:var(--msg-ok-tx)}
 .msg ul{margin:.4rem 0 0 1.1rem;padding:0}
 .msg li{margin:.15rem 0}
 .preview{
@@ -255,7 +162,6 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 }
 .preview-list{margin:.5rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.9rem}
 .preview-actions{display:flex;gap:.5rem;margin-top:.9rem;flex-wrap:wrap}
-
 .course-picker{
   display:flex;gap:.5rem;align-items:flex-end;flex-wrap:wrap;
   margin:1rem 0 .6rem;padding-top:.9rem;border-top:1px solid var(--border);
@@ -266,15 +172,11 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
   color:var(--muted);font-weight:700;
 }
 .course-picker select{
-  background:var(--btn-bg);border:1px solid var(--border);
-  border-radius:10px;padding:.5rem .7rem;color:var(--ink);
-  font-size:.9rem;width:100%;
+  background:var(--btn-bg);border:1px solid var(--border);border-radius:10px;
+  padding:.5rem .7rem;color:var(--ink);font-size:.9rem;width:100%;
 }
 .course-picker select:focus{outline:2px solid var(--accent);outline-offset:1px}
 
-/* ============================================================
-   Lesson view
-   ============================================================ */
 .lesson-toolbar{
   display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;
   background:var(--card);border-radius:var(--radius-sm);
@@ -287,16 +189,16 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .lesson-toolbar .spacer{margin-left:auto}
 
 .grid4{display:grid;gap:.9rem;align-items:start;grid-template-columns:minmax(0,1fr)}
-.grid4[data-vocab="hidden"]   .col-2{display:none}
+.grid4[data-vocab="hidden"] .col-2{display:none}
 .grid4[data-grammar="hidden"] .col-3{display:none}
-.grid4[data-kana="hidden"]    .col-4{display:none}
+.grid4[data-kana="hidden"] .col-4{display:none}
 @media (min-width:760px) and (max-width:1299px){
   .grid4{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
   .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="hidden"]{grid-template-columns:minmax(0,1fr)}
   .grid4 .col-3, .grid4 .col-4{grid-column:1 / -1}
   .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="hidden"] .col-3{grid-column:auto}
   .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="shown"] .col-4{grid-column:auto}
-  .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="shown"]  .col-3{grid-column:auto}
+  .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="shown"] .col-3{grid-column:auto}
 }
 @media (min-width:1300px){
   .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="hidden"]{grid-template-columns:minmax(0,1fr)}
@@ -336,16 +238,26 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .sentence .jp-unit.highlight{background:var(--highlight-bg);box-shadow:0 0 0 2px var(--highlight-ring)}
 .romaji{text-align:center;color:var(--muted);margin:.4rem 0 0;font-style:italic;letter-spacing:.03em;font-size:.92rem}
 
-.display-controls{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:.7rem}
+.display-controls{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:.9rem}
+
+/* ============================================================
+   SPACING FIX: gap between player and meaning
+   ============================================================ */
+.player{
+  background:var(--card-alt);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:.85rem;
+  margin-bottom:1rem;                /* <- space below player */
+}
 .meaning-block{
   background:var(--card-alt);border:1px solid var(--border);
-  border-radius:var(--radius-sm);padding:.7rem .85rem;margin-bottom:.7rem;
+  border-radius:var(--radius-sm);padding:.75rem .9rem;
+  margin-top:.4rem;                  /* <- extra breathing room */
+  margin-bottom:1rem;                /* <- space before aids */
 }
-.meaning-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin-bottom:.2rem}
+.meaning-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin-bottom:.25rem}
 .meaning{font-size:1rem;color:var(--ink-soft);margin:0}
 .aids-controls{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem;justify-content:center}
 
-.player{background:var(--card-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.85rem}
 .player-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
 .player-row:last-child{margin-bottom:0}
 .player-seek{display:flex;align-items:center;gap:.5rem;width:100%}
@@ -362,7 +274,7 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 #audioEl{display:none}
 .player-upload{
   display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;
-  margin-top:.55rem;border-top:1px dashed var(--border);padding-top:.55rem;
+  margin-top:.7rem;border-top:1px dashed var(--border);padding-top:.7rem;
 }
 .player-upload .fname{
   font-size:.75rem;color:var(--muted);
@@ -374,10 +286,10 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .chunk .cm{font-size:.74rem;color:var(--muted);margin-top:.1rem;display:block}
 .connected{
   background:var(--card-alt);border:1px solid var(--border);border-radius:var(--radius-sm);
-  padding:.6rem;text-align:center;font-size:1.05rem;margin-top:.5rem;
+  padding:.6rem;text-align:center;font-size:1.05rem;margin-top:.6rem;
 }
-.complete{display:flex;justify-content:center;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.7rem}
-.progress{text-align:center;color:var(--muted);font-size:.85rem;margin:.4rem 0 0}
+.complete{display:flex;justify-content:center;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.9rem}
+.progress{text-align:center;color:var(--muted);font-size:.85rem;margin:.55rem 0 0}
 
 .unit-list{display:flex;flex-direction:column;gap:.4rem}
 .unit{
@@ -393,10 +305,7 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .unit .u-p{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.15rem}
 .unit.grammar{border-left:3px solid var(--accent-warm)}
 
-.grammar-item{
-  border-left:3px solid var(--accent-warm);
-  padding-left:.7rem;padding-top:.15rem;padding-bottom:.15rem;margin-bottom:.85rem;
-}
+.grammar-item{border-left:3px solid var(--accent-warm);padding-left:.7rem;padding-top:.15rem;padding-bottom:.15rem;margin-bottom:.85rem}
 .grammar-item:last-child{margin-bottom:0}
 .grammar-item h4{font-size:.98rem;margin:0 0 .2rem;color:var(--ink-soft)}
 .grammar-item p{margin:.15rem 0;font-size:.88rem;color:var(--ink-soft)}
@@ -412,17 +321,13 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .kana-divider{grid-column:1 / -1;height:1px;background:var(--border);margin:.2rem 0 .05rem}
 .kana-cell{
   background:var(--card-alt);border:1px solid var(--border);border-radius:10px;
-  padding:.65rem .3rem .55rem;
-  display:flex;flex-direction:column;align-items:center;text-align:center;
-  gap:.1rem;min-width:0;transition:background .18s,border-color .18s,box-shadow .18s;
+  padding:.65rem .3rem .55rem;display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:.1rem;min-width:0;transition:background .18s,border-color .18s,box-shadow .18s;
 }
 .kana-cell .kc-char{font-size:1.5rem;line-height:1.1;color:var(--ink-soft);font-weight:500;margin-bottom:.05rem}
 .kana-cell .kc-romaji{font-size:.7rem;color:var(--muted);letter-spacing:.02em}
 .kana-cell .kc-script{font-size:.55rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-top:.1rem}
-.kana-cell .kc-example{
-  font-size:.76rem;color:var(--muted);margin-top:.2rem;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
-}
+.kana-cell .kc-example{font-size:.76rem;color:var(--muted);margin-top:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .kana-cell.in-sentence{background:var(--accent-soft-strong);border-color:var(--accent-warm);box-shadow:0 0 0 1px var(--kana-ring)}
 .kana-cell.in-sentence .kc-char{color:var(--accent);font-weight:700}
 .kana-cell.in-sentence .kc-romaji{color:var(--accent)}
@@ -430,11 +335,10 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .kana-cell.in-sentence .kc-example{color:var(--ink-soft)}
 
 /* ============================================================
-   Modal
+   Modals
    ============================================================ */
 .modal-backdrop{
-  position:fixed;inset:0;z-index:1000;
-  background:var(--overlay-bg);
+  position:fixed;inset:0;z-index:1000;background:var(--overlay-bg);
   display:flex;align-items:center;justify-content:center;
   padding:1.2rem;animation:fadeIn .15s ease;
 }
@@ -455,22 +359,17 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 }
 .modal-head-main{flex:1 1 auto;min-width:0}
 .modal-head h2{font-size:1.1rem;color:var(--ink-soft);margin:0 0 .15rem}
-.modal-head .sub{
-  color:var(--muted);font-size:.85rem;margin:0;
-  display:flex;gap:.6rem;flex-wrap:wrap;
-}
+.modal-head .sub{color:var(--muted);font-size:.85rem;margin:0;display:flex;gap:.6rem;flex-wrap:wrap}
 .modal-head .sub .dot{opacity:.5}
 .modal-head .spacer{margin-left:auto}
 .modal-head .close-btn{
   background:transparent;border:1px solid var(--btn-border);
   width:2rem;height:2rem;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--muted);font-size:1rem;line-height:1;
-  flex:0 0 auto;
+  cursor:pointer;color:var(--muted);font-size:1rem;line-height:1;flex:0 0 auto;
 }
 .modal-head .close-btn:hover{background:var(--btn-hover);color:var(--ink)}
 .modal-head .close-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
 .modal-body{flex:1;overflow-y:auto;padding:1rem 1.15rem 1.1rem}
 .modal-intro{font-size:.88rem;color:var(--muted);margin:0 0 .9rem;line-height:1.55}
 .modal-intro code{
@@ -478,9 +377,8 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
   padding:.05rem .35rem;border-radius:5px;font-size:.82em;color:var(--accent);
 }
 .json-block{
-  background:var(--code-bg);color:var(--code-ink);
-  border-radius:var(--radius-sm);padding:1rem 1.1rem;
-  overflow-x:auto;font-size:.82rem;line-height:1.65;margin:0;
+  background:var(--code-bg);color:var(--code-ink);border-radius:var(--radius-sm);
+  padding:1rem 1.1rem;overflow-x:auto;font-size:.82rem;line-height:1.65;margin:0;
   white-space:pre;tab-size:2;border:1px solid var(--border);
 }
 .json-block .k{color:var(--code-key)}
@@ -498,15 +396,49 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .modal-note li{margin:.2rem 0}
 .modal-foot{
   display:flex;gap:.5rem;flex-wrap:wrap;
-  padding:.9rem 1.15rem;border-top:1px solid var(--border);
-  background:var(--card-alt);
+  padding:.9rem 1.15rem;border-top:1px solid var(--border);background:var(--card-alt);
 }
 .modal-foot .spacer{margin-left:auto}
 
-/* ---- Lesson list inside the course modal ---- */
-.lesson-list-modal{
-  display:flex;flex-direction:column;gap:.6rem;
+/* Settings modal */
+.settings-section{margin-bottom:1.4rem}
+.settings-section:last-child{margin-bottom:0}
+.settings-section h3{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--muted);font-weight:800;margin-bottom:.6rem;
 }
+.settings-row{
+  display:flex;gap:.6rem;align-items:center;justify-content:space-between;
+  padding:.6rem .2rem;flex-wrap:wrap;
+}
+.settings-row .label{font-weight:600;color:var(--ink-soft)}
+.settings-row .hint{font-size:.82rem;color:var(--muted);margin:.15rem 0 0;line-height:1.45}
+.settings-row-actions{display:flex;gap:.4rem;flex-wrap:wrap}
+.segmented{display:inline-flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--btn-bg)}
+.segmented button{
+  background:transparent;border:0;padding:.4rem .85rem;cursor:pointer;
+  color:var(--muted);font-weight:600;font-size:.85rem;
+}
+.segmented button:hover{background:var(--btn-hover)}
+.segmented button.active{background:var(--accent);color:var(--btn-primary-text)}
+
+/* Keyboard shortcut list */
+.shortcut-table{
+  display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;
+  font-size:.88rem;align-items:center;
+}
+.shortcut-table kbd{
+  background:var(--kbd-bg);border:1px solid var(--kbd-border);
+  border-bottom-width:2px;border-radius:6px;padding:.15rem .5rem;
+  font-size:.78rem;color:var(--kbd-ink);font-weight:700;
+  display:inline-block;min-width:1.5em;text-align:center;
+  font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+.shortcut-table .kcell{display:flex;gap:.3rem;flex-wrap:wrap;align-items:center}
+.shortcut-table .dcell{color:var(--ink-soft)}
+
+/* Lesson list inside the course modal */
+.lesson-list-modal{display:flex;flex-direction:column;gap:.6rem}
 .lesson-card{
   background:var(--card-alt);border:1px solid var(--border);
   border-radius:var(--radius-sm);padding:.85rem 1rem;
@@ -518,32 +450,23 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .lesson-card .meta{color:var(--muted);font-size:.78rem;margin:.15rem 0}
 .lesson-card .bar{height:6px;margin:.4rem 0}
 .lesson-card-actions{display:flex;gap:.4rem;flex-wrap:wrap;align-items:flex-start}
-
 .lesson-count-badge{
   display:inline-flex;align-items:center;justify-content:center;
   min-width:1.4rem;height:1.4rem;padding:0 .35rem;
   border-radius:99px;background:var(--accent-soft);color:var(--accent);
-  font-size:.72rem;font-weight:800;letter-spacing:.02em;
-  margin-left:.35rem;
+  font-size:.72rem;font-weight:800;letter-spacing:.02em;margin-left:.35rem;
 }
 
-/* ---- Pagination ---- */
 .modal-pagination{
   display:flex;align-items:center;justify-content:center;gap:.5rem;
-  padding:.75rem 1.15rem;
-  border-top:1px solid var(--border);
-  background:var(--card);
-  flex-wrap:wrap;
+  padding:.75rem 1.15rem;border-top:1px solid var(--border);
+  background:var(--card);flex-wrap:wrap;
 }
 .modal-pagination .page-info{
-  font-size:.85rem;color:var(--muted);
-  font-variant-numeric:tabular-nums;
-  margin:0 .35rem;
+  font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums;margin:0 .35rem;
 }
 .modal-pagination .page-info strong{color:var(--ink-soft)}
-.modal-pagination .page-nums{
-  display:flex;gap:.25rem;flex-wrap:wrap;
-}
+.modal-pagination .page-nums{display:flex;gap:.25rem;flex-wrap:wrap}
 .modal-pagination .page-num{
   min-width:2rem;height:2rem;padding:0 .5rem;
   background:transparent;border:1px solid var(--border);border-radius:8px;
@@ -553,22 +476,13 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
   transition:background .15s,border-color .15s,color .15s;
 }
 .modal-pagination .page-num:hover{background:var(--hover-bg);color:var(--ink)}
-.modal-pagination .page-num.active{
-  background:var(--accent);border-color:var(--accent);
-  color:var(--btn-primary-text);
-}
+.modal-pagination .page-num.active{background:var(--accent);border-color:var(--accent);color:var(--btn-primary-text)}
 .modal-pagination .page-num:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.modal-pagination .ellipsis{
-  color:var(--muted);padding:0 .15rem;user-select:none;
-}
-@media (max-width:520px){
-  .modal-pagination .page-nums{display:none}
-}
+.modal-pagination .ellipsis{color:var(--muted);padding:0 .15rem;user-select:none}
+@media (max-width:520px){.modal-pagination .page-nums{display:none}}
 
-/* ---- Empty state inside modal ---- */
 .modal-empty{
-  text-align:center;color:var(--muted);
-  padding:2.5rem 1rem;
+  text-align:center;color:var(--muted);padding:2.5rem 1rem;
   background:var(--card-alt);border-radius:var(--radius-sm);
   border:1px dashed var(--border);
 }
@@ -584,14 +498,11 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .form-field textarea,
 .form-field select{
   background:var(--btn-bg);border:1px solid var(--border);border-radius:10px;
-  padding:.55rem .75rem;color:var(--ink);font-size:.95rem;
-  width:100%;font-family:inherit;
+  padding:.55rem .75rem;color:var(--ink);font-size:.95rem;width:100%;font-family:inherit;
 }
 .form-field input:focus,
 .form-field textarea:focus,
-.form-field select:focus{
-  outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent);
-}
+.form-field select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
 .form-field textarea{resize:vertical;min-height:70px}
 .form-error{
   background:var(--msg-error-bg);border:1px solid var(--msg-error-br);
@@ -643,7 +554,8 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
     <span class="brand">Japanese Trainer</span>
     <span id="headerLessonTitle" class="header-lesson"></span>
     <div class="header-actions">
-      <button id="btnTheme" class="btn theme-toggle" type="button" aria-label="Switch to dark mode">🌙</button>
+      <button id="btnSettings" class="btn icon-btn" type="button" aria-label="Settings" title="Settings (,)">⚙</button>
+      <button id="btnTheme" class="btn icon-btn" type="button" aria-label="Switch to dark mode" title="Toggle theme (T)">🌙</button>
       <button id="btnCsv" class="btn" type="button" hidden>Download CSV</button>
       <button id="btnReset" class="btn danger" type="button" hidden>Reset Progress</button>
     </div>
@@ -679,6 +591,7 @@ const LS_POS      = "jt.positions.v1";
 
 const LESSONS_PER_PAGE = 10;
 const ORPHAN_ID = "__uncategorized__";
+const EXPORT_VERSION = 1;
 
 const $  = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
@@ -711,6 +624,18 @@ function hasKanji(str){
 function uid(prefix){
   return (prefix || "id") + "-" + Date.now().toString(36) + "-" +
          Math.random().toString(36).slice(2, 8);
+}
+function formatBytes(n){
+  if(!n && n !== 0) return "—";
+  if(n < 1024) return n + " B";
+  if(n < 1024*1024) return (n/1024).toFixed(1) + " KB";
+  if(n < 1024*1024*1024) return (n/1024/1024).toFixed(2) + " MB";
+  return (n/1024/1024/1024).toFixed(2) + " GB";
+}
+function isTypingTarget(el){
+  if(!el) return false;
+  const t = el.tagName;
+  return t === "INPUT" || t === "TEXTAREA" || t === "SELECT" || el.isContentEditable;
 }
 
 function makeRuby(text, reading){
@@ -782,13 +707,13 @@ const state = {
     theme: "light"
   },
   progress: null,
+  progressCache: [],
   audioURL: null,
   pending: null,
   pendingCourseId: null,
   reveals: { chunks: false, connected: false },
   kanaInventory: [],
-  /* Currently open course modal, if any */
-  courseModal: null /* { courseId, page, handle } */
+  courseModal: null
 };
 let repeatsLeft = 0;
 let countNextPlay = false;
@@ -913,7 +838,7 @@ function openModal(html, opts){
   return { el: backdrop, close };
 }
 
-/* ---------------- JSON format modal ---------------- */
+/* ---------- JSON format modal ---------- */
 function showJsonFormatModal(){
   const json = JSON_TEMPLATE;
   const highlighted = highlightJSON(json);
@@ -976,7 +901,563 @@ function showJsonFormatModal(){
   });
 }
 
-/* ---------------- Course create / edit modal ---------------- */
+/* ---------- Settings modal ---------- */
+function showSettingsModal(){
+  const shortcuts = [
+    { keys: ["Space"],         desc: "Play / Pause audio" },
+    { keys: ["←"],             desc: "Previous sentence" },
+    { keys: ["→"],             desc: "Next sentence" },
+    { keys: ["F"],             desc: "Toggle Furigana" },
+    { keys: ["R"],             desc: "Toggle Romaji" },
+    { keys: ["C"],             desc: "Toggle Chunks" },
+    { keys: ["V"],             desc: "Toggle Connected Reading" },
+    { keys: ["1"],             desc: "Toggle Vocabulary & Grammar panel" },
+    { keys: ["2"],             desc: "Toggle Grammar Notes panel" },
+    { keys: ["3"],             desc: "Toggle Kana Information panel" },
+    { keys: ["M"],             desc: "Mark sentence complete / undo" },
+    { keys: ["T"],             desc: "Toggle light / dark theme" },
+    { keys: ["H"],             desc: "Go to Home (lesson library)" },
+    { keys: [","],             desc: "Open settings" },
+    { keys: ["?"],             desc: "Show this shortcut list" },
+    { keys: ["Esc"],           desc: "Close modal / dismiss popup" }
+  ];
+
+  const shortcutsHTML = shortcuts.map(s =>
+    '<div class="kcell">' + s.keys.map(k => "<kbd>" + esc(k) + "</kbd>").join("") + "</div>" +
+    '<div class="dcell">' + esc(s.desc) + "</div>"
+  ).join("");
+
+  const html =
+    '<div class="modal modal-medium" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">' +
+      '<div class="modal-head">' +
+        '<div class="modal-head-main">' +
+          '<h2 id="settingsTitle">Settings</h2>' +
+          '<p class="sub"><span>Preferences, data backup, and keyboard shortcuts</span></p>' +
+        '</div>' +
+        '<span class="spacer"></span>' +
+        '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="modal-body">' +
+
+        /* Appearance */
+        '<section class="settings-section">' +
+          '<h3>Appearance</h3>' +
+          '<div class="settings-row">' +
+            '<div>' +
+              '<div class="label">Theme</div>' +
+              '<p class="hint">Choose between the warm light theme and a dark theme.</p>' +
+            '</div>' +
+            '<div class="segmented" id="themeSegmented">' +
+              '<button type="button" data-theme-choice="light">Light</button>' +
+              '<button type="button" data-theme-choice="dark">Dark</button>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+
+        /* Data */
+        '<section class="settings-section">' +
+          '<h3>Data</h3>' +
+          '<div class="settings-row">' +
+            '<div style="flex:1 1 100%">' +
+              '<div class="label">Backup &amp; transfer</div>' +
+              '<p class="hint">' +
+                "Export everything — courses, lessons, progress, and uploaded audio — " +
+                "into a single JSON file. Import it later on this device or another." +
+              '</p>' +
+            '</div>' +
+            '<div class="settings-row-actions" style="margin-top:.4rem">' +
+              '<button class="btn primary" type="button" id="btnExportData">Export data</button>' +
+              '<button class="btn" type="button" id="btnImportData">Import data</button>' +
+            '</div>' +
+            '<p class="hint" id="exportStats" style="flex:1 1 100%;margin-top:.6rem"></p>' +
+          '</div>' +
+        '</section>' +
+
+        /* Shortcuts */
+        '<section class="settings-section">' +
+          '<h3>Keyboard shortcuts</h3>' +
+          '<p class="hint" style="margin-bottom:.6rem">' +
+            "Shortcuts work when you are not typing in a text field." +
+          '</p>' +
+          '<div class="shortcut-table">' + shortcutsHTML + '</div>' +
+        '</section>' +
+
+      '</div>' +
+      '<div class="modal-foot">' +
+        '<span class="spacer"></span>' +
+        '<button class="btn primary" type="button" data-modal-close>Close</button>' +
+      '</div>' +
+    '</div>';
+
+  const modal = openModal(html);
+
+  /* Theme segmented control */
+  function updateThemeSegmented(){
+    modal.el.querySelectorAll("[data-theme-choice]").forEach(b => {
+      b.classList.toggle("active", b.dataset.themeChoice === state.settings.theme);
+    });
+  }
+  updateThemeSegmented();
+  modal.el.querySelectorAll("[data-theme-choice]").forEach(b => {
+    b.addEventListener("click", () => {
+      state.settings.theme = b.dataset.themeChoice === "dark" ? "dark" : "light";
+      saveSettings();
+      applyTheme();
+      updateThemeSegmented();
+    });
+  });
+
+  /* Export */
+  $("#btnExportData", modal.el).addEventListener("click", () => exportAllData());
+
+  /* Import */
+  $("#btnImportData", modal.el).addEventListener("click", () => {
+    const inp = document.createElement("input");
+    inp.type = "file"; inp.accept = ".json,application/json";
+    inp.addEventListener("change", ev => {
+      const f = ev.target.files && ev.target.files[0];
+      if(f) handleImportBundle(f, modal);
+    });
+    inp.click();
+  });
+
+  /* Show live counts / size estimate */
+  refreshExportStats($("#exportStats", modal.el));
+}
+
+async function refreshExportStats(el){
+  if(!el) return;
+  try{
+    const [courses, lessons, progs, audios] = await Promise.all([
+      idbAll("courses"), idbAll("lessons"), idbAll("progress"), idbAll("audio")
+    ]);
+    const audioBytes = audios.reduce((s, a) => s + (a.blob && a.blob.size ? a.blob.size : 0), 0);
+    el.innerHTML =
+      "<strong>" + courses.length + "</strong> course" + (courses.length === 1 ? "" : "s") +
+      " • <strong>" + lessons.length + "</strong> lesson" + (lessons.length === 1 ? "" : "s") +
+      " • <strong>" + audios.length + "</strong> audio file" + (audios.length === 1 ? "" : "s") +
+      (audioBytes ? " (" + formatBytes(audioBytes) + ")" : "");
+  }catch(e){
+    el.textContent = "Unable to read stored data.";
+  }
+}
+
+/* ============================================================
+   Export / import all data
+   ============================================================ */
+function blobToBase64(blob){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const s = String(reader.result || "");
+      const comma = s.indexOf(",");
+      resolve(comma >= 0 ? s.slice(comma + 1) : "");
+    };
+    reader.onerror = () => reject(reader.error || new Error("Read failed"));
+    reader.readAsDataURL(blob);
+  });
+}
+function base64ToBlob(base64, mime){
+  const bin = atob(base64);
+  const len = bin.length;
+  const bytes = new Uint8Array(len);
+  for(let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+  return new Blob([bytes], { type: mime || "audio/mpeg" });
+}
+
+async function exportAllData(){
+  try{
+    const [courses, lessons, progs, audios] = await Promise.all([
+      idbAll("courses"), idbAll("lessons"), idbAll("progress"), idbAll("audio")
+    ]);
+
+    /* Encode audio blobs to base64 */
+    const audioOut = [];
+    for(const a of audios){
+      if(!a || !a.blob) continue;
+      let data = "";
+      try{ data = await blobToBase64(a.blob); }catch(e){ continue; }
+      audioOut.push({
+        lessonId: a.lessonId,
+        sentenceId: a.sentenceId,
+        filename: a.filename || "",
+        mime: a.mime || a.blob.type || "audio/mpeg",
+        data: data
+      });
+    }
+
+    const bundle = {
+      app: "Japanese Trainer",
+      exportVersion: EXPORT_VERSION,
+      exportedAt: Date.now(),
+      courses: courses,
+      lessons: lessons,
+      progress: progs,
+      audio: audioOut
+    };
+
+    const text = JSON.stringify(bundle);
+    const blob = new Blob([text], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-");
+    a.href = url;
+    a.download = "japanese-trainer-backup-" + stamp + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+
+    showToast("Export started (" + formatBytes(blob.size) + ").", "ok");
+  }catch(err){
+    showToast("Export failed: " + err.message, "error");
+  }
+}
+
+async function handleImportBundle(file, parentModal){
+  let bundle = null;
+  try{
+    const text = await file.text();
+    bundle = JSON.parse(text);
+  }catch(err){
+    showToast("Invalid file — not valid JSON.", "error");
+    return;
+  }
+
+  if(!bundle || bundle.app !== "Japanese Trainer" || bundle.exportVersion === undefined){
+    showToast("This file does not look like a Japanese Trainer backup.", "error");
+    return;
+  }
+  const v = Number(bundle.exportVersion);
+  if(!isFinite(v) || v < 1){
+    showToast("Unsupported export version.", "error");
+    return;
+  }
+
+  const counts = {
+    courses: Array.isArray(bundle.courses) ? bundle.courses.length : 0,
+    lessons: Array.isArray(bundle.lessons) ? bundle.lessons.length : 0,
+    progress: Array.isArray(bundle.progress) ? bundle.progress.length : 0,
+    audio: Array.isArray(bundle.audio) ? bundle.audio.length : 0
+  };
+
+  showImportConfirmModal(bundle, counts, parentModal);
+}
+
+function showImportConfirmModal(bundle, counts, parentModal){
+  const html =
+    '<div class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="importTitle">' +
+      '<div class="modal-head">' +
+        '<div class="modal-head-main"><h2 id="importTitle">Import backup</h2></div>' +
+        '<span class="spacer"></span>' +
+        '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="modal-body">' +
+        '<p>This backup contains:</p>' +
+        '<ul class="modal-intro" style="margin:.4rem 0 .9rem 1.2rem">' +
+          '<li><strong>' + counts.courses + "</strong> course" + (counts.courses === 1 ? "" : "s") + "</li>" +
+          '<li><strong>' + counts.lessons + "</strong> lesson" + (counts.lessons === 1 ? "" : "s") + "</li>" +
+          '<li><strong>' + counts.progress + "</strong> progress record" + (counts.progress === 1 ? "" : "s") + "</li>" +
+          '<li><strong>' + counts.audio + "</strong> audio file" + (counts.audio === 1 ? "" : "s") + "</li>" +
+        '</ul>' +
+        '<p>Choose how to apply it:</p>' +
+        '<div class="modal-note">' +
+          '<strong>Merge</strong> — keep existing data. Items with the same id are overwritten.<br>' +
+          '<strong>Replace all</strong> — delete everything currently stored, then import.<br>' +
+        '</div>' +
+      '</div>' +
+      '<div class="modal-foot">' +
+        '<button class="btn" type="button" data-modal-close>Cancel</button>' +
+        '<span class="spacer"></span>' +
+        '<button class="btn" type="button" id="btnImportMerge">Merge</button>' +
+        '<button class="btn danger" type="button" id="btnImportReplace">Replace all</button>' +
+      '</div>' +
+    '</div>';
+  const modal = openModal(html);
+
+  $("#btnImportMerge", modal.el).addEventListener("click", async () => {
+    modal.close();
+    await applyImport(bundle, false);
+  });
+  $("#btnImportReplace", modal.el).addEventListener("click", async () => {
+    modal.close();
+    await applyImport(bundle, true);
+  });
+}
+
+async function applyImport(bundle, replaceAll){
+  if(!state.db){ showToast("Storage unavailable.", "error"); return; }
+
+  try{
+    /* ----- Clear stores if replaceAll ----- */
+    if(replaceAll){
+      await clearStore("courses");
+      await clearStore("lessons");
+      await clearStore("progress");
+      await clearStore("audio");
+    }
+
+    /* ----- Courses ----- */
+    if(Array.isArray(bundle.courses)){
+      for(const c of bundle.courses){
+        if(c && c.id) await idbPut("courses", c);
+      }
+    }
+
+    /* ----- Lessons ----- */
+    if(Array.isArray(bundle.lessons)){
+      for(const l of bundle.lessons){
+        if(l && l.id) await idbPut("lessons", l);
+      }
+    }
+
+    /* ----- Progress ----- */
+    if(Array.isArray(bundle.progress)){
+      for(const p of bundle.progress){
+        if(p && p.lessonId) await idbPut("progress", p);
+      }
+    }
+
+    /* ----- Audio (base64 → Blob) ----- */
+    if(Array.isArray(bundle.audio)){
+      for(const a of bundle.audio){
+        if(!a || !a.lessonId || !a.sentenceId || !a.data) continue;
+        let blob;
+        try{ blob = base64ToBlob(a.data, a.mime); }
+        catch(e){ continue; }
+        await idbPut("audio", {
+          lessonId: a.lessonId,
+          sentenceId: a.sentenceId,
+          filename: a.filename || "uploaded.mp3",
+          mime: a.mime || "audio/mpeg",
+          blob: blob,
+          updatedAt: Date.now()
+        });
+      }
+    }
+
+    /* ----- Refresh UI ----- */
+    await refreshLibrary();
+
+    if(state.lesson){
+      /* If the currently open lesson still exists, reload its progress */
+      let rec = null;
+      try{ rec = await idbGet("lessons", state.lesson.id); }catch(e){}
+      if(rec && rec.data && rec.data.sentences){
+        state.lesson = rec;
+        let prog = null;
+        try{ prog = await idbGet("progress", rec.id); }catch(e){}
+        if(!prog || typeof prog !== "object") prog = defaultProgress(rec.id);
+        prog.completed = prog.completed || {};
+        prog.reading = prog.reading || {};
+        prog.listening = prog.listening || {};
+        state.progress = prog;
+        if(state.index >= rec.data.sentences.length) state.index = 0;
+        state.kanaInventory = buildKanaInventory(rec.data);
+        renderLesson();
+      }else{
+        goHome();
+      }
+    }
+
+    if(state.courseModal) renderCourseLessonsModal();
+
+    showToast("Import complete.", "ok");
+  }catch(err){
+    showToast("Import failed: " + err.message, "error");
+  }
+}
+
+function clearStore(storeName){
+  return new Promise((resolve, reject) => {
+    if(!state.db){ resolve(); return; }
+    let tx;
+    try{ tx = state.db.transaction(storeName, "readwrite"); }catch(e){ reject(e); return; }
+    const store = tx.objectStore(storeName);
+    const req = store.clear();
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error || new Error("Clear failed"));
+    tx.onabort = () => reject(tx.error || new Error("Clear aborted"));
+  });
+}
+
+/* ---------- Course modal (from previous version) ---------- */
+function openCourseLessonsModal(courseId, page){
+  const course = getCourseById(courseId);
+  if(!course) return;
+
+  const lessons = getLessonsForCourse(courseId);
+  const totalPages = Math.max(1, Math.ceil(lessons.length / LESSONS_PER_PAGE));
+  page = Math.max(1, Math.min(page || 1, totalPages));
+
+  const html =
+    '<div class="modal modal-medium" role="dialog" aria-modal="true" aria-labelledby="courseLessonsTitle">' +
+      '<div class="modal-head">' +
+        '<div class="modal-head-main">' +
+          '<h2 id="courseLessonsTitle"></h2>' +
+          '<p class="sub" id="courseLessonsSub"></p>' +
+        '</div>' +
+        '<span class="spacer"></span>' +
+        '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="modal-body" id="courseLessonsBody"></div>' +
+      '<div class="modal-pagination" id="courseLessonsPagination"></div>' +
+      '<div class="modal-foot" id="courseLessonsFoot"></div>' +
+    '</div>';
+
+  const modal = openModal(html);
+
+  const cm = { courseId: courseId, page: page, handle: modal };
+  state.courseModal = cm;
+
+  const originalClose = modal.close;
+  modal.close = function(){
+    state.courseModal = null;
+    originalClose();
+  };
+  modal.el.querySelectorAll("[data-modal-close]").forEach(b => {
+    const clone = b.cloneNode(true);
+    b.parentNode.replaceChild(clone, b);
+    clone.addEventListener("click", () => modal.close());
+  });
+  modal.el.addEventListener("click", e => {
+    if(e.target === modal.el) modal.close();
+  });
+  document.addEventListener("keydown", function esc2(e){
+    if(e.key === "Escape" && state.courseModal === cm){
+      document.removeEventListener("keydown", esc2);
+      modal.close();
+    }
+  });
+
+  renderCourseLessonsModal();
+}
+
+function getCourseById(courseId){
+  if(courseId === ORPHAN_ID){
+    return { id: ORPHAN_ID, title: "Uncategorized", description: "Lessons not assigned to any course.", level: "—", orphan: true };
+  }
+  return state.courses.find(c => c.id === courseId) || null;
+}
+
+function getLessonsForCourse(courseId){
+  if(courseId === ORPHAN_ID){
+    const ids = new Set(state.courses.map(c => c.id));
+    return state.lessons.filter(l => !l.courseId || !ids.has(l.courseId));
+  }
+  return state.lessons.filter(l => l.courseId === courseId);
+}
+
+function renderCourseLessonsModal(){
+  const cm = state.courseModal;
+  if(!cm) return;
+  const course = getCourseById(cm.courseId);
+  if(!course){ cm.handle.close(); return; }
+
+  const lessons = getLessonsForCourse(cm.courseId);
+  const totalSentences = lessons.reduce((sum, l) => sum + lessonSentenceCount(l), 0);
+  const progMap = {};
+  (state.progressCache || []).forEach(p => { progMap[p.lessonId] = p; });
+  let doneSentences = 0;
+  lessons.forEach(l => { doneSentences += completedInLesson(progMap[l.id]); });
+  const pct = totalSentences ? Math.round(doneSentences / totalSentences * 100) : 0;
+
+  const titleEl = $("#courseLessonsTitle", cm.handle.el);
+  const subEl   = $("#courseLessonsSub",   cm.handle.el);
+  titleEl.textContent = course.title;
+  subEl.innerHTML =
+    "<span>" + esc(course.level || "—") + "</span>" +
+    '<span class="dot">•</span>' +
+    "<span>" + lessons.length + " lesson" + (lessons.length === 1 ? "" : "s") + "</span>" +
+    '<span class="dot">•</span>' +
+    "<span>" + totalSentences + " sentences</span>" +
+    '<span class="dot">•</span>' +
+    "<span>Progress " + doneSentences + " / " + totalSentences + " (" + pct + "%)</span>";
+
+  const body = $("#courseLessonsBody", cm.handle.el);
+  if(!lessons.length){
+    body.innerHTML =
+      '<div class="modal-empty">' +
+        "<p><strong>No lessons yet.</strong></p>" +
+        "<p>Use <strong>Import Lesson</strong> below to add one to this course.</p>" +
+      "</div>";
+  }else{
+    const totalPages = Math.max(1, Math.ceil(lessons.length / LESSONS_PER_PAGE));
+    cm.page = Math.max(1, Math.min(cm.page, totalPages));
+    const start = (cm.page - 1) * LESSONS_PER_PAGE;
+    const slice = lessons.slice(start, start + LESSONS_PER_PAGE);
+
+    let html = '<div class="lesson-list-modal">';
+    slice.forEach(l => {
+      const total = lessonSentenceCount(l);
+      const done = completedInLesson(progMap[l.id]);
+      const lessonPct = total ? Math.round(done / total * 100) : 0;
+      html +=
+        '<article class="lesson-card" data-lesson-id="' + esc(l.id) + '">' +
+          '<div class="lesson-card-main">' +
+            "<h4>" + esc(l.title) + "</h4>" +
+            (l.description ? '<p class="desc">' + esc(l.description) + "</p>" : "") +
+            '<p class="meta">' + esc(l.level) + " • " + total + " sentences</p>" +
+            '<div class="bar"><div class="bar-fill" style="width:' + lessonPct + '%"></div></div>' +
+            '<p class="meta">Progress: ' + done + " / " + total + " (" + lessonPct + "%)</p>" +
+          "</div>" +
+          '<div class="lesson-card-actions">' +
+            '<button class="btn small primary" data-action="open-lesson" data-id="' + esc(l.id) + '" type="button">Open</button>' +
+            '<button class="btn small danger" data-action="delete-lesson" data-id="' + esc(l.id) + '" type="button">Delete</button>' +
+          "</div>" +
+        "</article>";
+    });
+    html += "</div>";
+    body.innerHTML = html;
+  }
+
+  const pag = $("#courseLessonsPagination", cm.handle.el);
+  if(lessons.length <= LESSONS_PER_PAGE){
+    pag.innerHTML = ""; pag.hidden = true;
+  }else{
+    pag.hidden = false;
+    const totalPages = Math.ceil(lessons.length / LESSONS_PER_PAGE);
+    const pageNums = [];
+    const cur = cm.page;
+    if(totalPages <= 7){ for(let i = 1; i <= totalPages; i++) pageNums.push(i); }
+    else{
+      pageNums.push(1);
+      if(cur > 4) pageNums.push("…");
+      for(let i = Math.max(2, cur - 1); i <= Math.min(totalPages - 1, cur + 1); i++) pageNums.push(i);
+      if(cur < totalPages - 3) pageNums.push("…");
+      pageNums.push(totalPages);
+    }
+    pag.innerHTML =
+      '<button class="btn small" data-action="page-prev" type="button"' + (cur === 1 ? " disabled" : "") + '>‹ Prev</button>' +
+      '<div class="page-nums">' +
+        pageNums.map(p => {
+          if(p === "…") return '<span class="ellipsis">…</span>';
+          return '<button class="page-num' + (p === cur ? " active" : "") + '" data-action="page-go" data-page="' + p + '" type="button">' + p + '</button>';
+        }).join("") +
+      "</div>" +
+      '<span class="page-info">Page <strong>' + cur + "</strong> / " + totalPages + "</span>" +
+      '<button class="btn small" data-action="page-next" type="button"' + (cur === totalPages ? " disabled" : "") + '>Next ›</button>';
+  }
+
+  const foot = $("#courseLessonsFoot", cm.handle.el);
+  if(course.orphan){
+    foot.innerHTML =
+      '<span class="muted" style="font-size:.82rem;align-self:center">These lessons have no course yet.</span>' +
+      '<span class="spacer"></span>' +
+      '<button class="btn" type="button" data-modal-close>Close</button>';
+  }else{
+    foot.innerHTML =
+      '<button class="btn primary" data-action="import-to-course" data-course="' + esc(course.id) + '" type="button">Import Lesson</button>' +
+      '<button class="btn" data-action="edit-course" data-course="' + esc(course.id) + '" type="button">Edit course</button>' +
+      '<button class="btn danger" data-action="delete-course" data-course="' + esc(course.id) + '" type="button">Delete course</button>' +
+      '<span class="spacer"></span>' +
+      '<button class="btn" type="button" data-modal-close>Close</button>';
+  }
+
+  cm.handle.el.querySelectorAll("[data-modal-close]").forEach(b => {
+    b.addEventListener("click", () => cm.handle.close());
+  });
+}
+
+/* ---------- Course create / edit modal ---------- */
 function showCourseModal(course, onSave){
   const isEdit = !!course;
   const c = course || { title: "", description: "", level: "Beginner" };
@@ -1025,11 +1506,7 @@ function showCourseModal(course, onSave){
       errEl.hidden = false; titleEl.focus();
       return;
     }
-    const data = {
-      title: title,
-      description: descEl.value.trim(),
-      level: levelEl.value
-    };
+    const data = { title, description: descEl.value.trim(), level: levelEl.value };
     modal.close();
     onSave(data);
   }
@@ -1041,7 +1518,6 @@ function showCourseModal(course, onSave){
   });
 }
 
-/* ---------------- Delete course modal ---------------- */
 function showDeleteCourseModal(course, lessonCount){
   const html =
     '<div class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="delCourseTitle">' +
@@ -1079,211 +1555,6 @@ function showDeleteCourseModal(course, lessonCount){
   }
   $("#btnDeleteAll", modal.el).addEventListener("click", () => {
     modal.close(); deleteCourse(course.id, true);
-  });
-}
-
-/* ============================================================
-   Course lessons modal — paginated popup
-   ============================================================ */
-function openCourseLessonsModal(courseId, page){
-  const course = getCourseById(courseId);
-  if(!course) return;
-
-  const lessons = getLessonsForCourse(courseId);
-  const totalPages = Math.max(1, Math.ceil(lessons.length / LESSONS_PER_PAGE));
-  page = Math.max(1, Math.min(page || 1, totalPages));
-
-  const html =
-    '<div class="modal modal-medium" role="dialog" aria-modal="true" aria-labelledby="courseLessonsTitle">' +
-      '<div class="modal-head">' +
-        '<div class="modal-head-main">' +
-          '<h2 id="courseLessonsTitle"></h2>' +
-          '<p class="sub" id="courseLessonsSub"></p>' +
-        '</div>' +
-        '<span class="spacer"></span>' +
-        '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
-      '</div>' +
-      '<div class="modal-body" id="courseLessonsBody"></div>' +
-      '<div class="modal-pagination" id="courseLessonsPagination"></div>' +
-      '<div class="modal-foot" id="courseLessonsFoot"></div>' +
-    '</div>';
-
-  const modal = openModal(html);
-
-  const cm = {
-    courseId: courseId,
-    page: page,
-    handle: modal
-  };
-  state.courseModal = cm;
-
-  /* Wrap close to clear state */
-  const originalClose = modal.close;
-  modal.close = function(){
-    state.courseModal = null;
-    originalClose();
-  };
-  /* Rebind all close buttons to the wrapped close */
-  modal.el.querySelectorAll("[data-modal-close]").forEach(b => {
-    const clone = b.cloneNode(true);
-    b.parentNode.replaceChild(clone, b);
-    clone.addEventListener("click", () => modal.close());
-  });
-  /* Rebind backdrop */
-  modal.el.addEventListener("click", e => {
-    if(e.target === modal.el) modal.close();
-  });
-  /* Rebind Escape */
-  document.addEventListener("keydown", function esc2(e){
-    if(e.key === "Escape" && state.courseModal === cm){
-      document.removeEventListener("keydown", esc2);
-      modal.close();
-    }
-  });
-
-  renderCourseLessonsModal();
-}
-
-function getCourseById(courseId){
-  if(courseId === ORPHAN_ID){
-    return {
-      id: ORPHAN_ID,
-      title: "Uncategorized",
-      description: "Lessons not assigned to any course.",
-      level: "—",
-      orphan: true
-    };
-  }
-  return state.courses.find(c => c.id === courseId) || null;
-}
-
-function getLessonsForCourse(courseId){
-  if(courseId === ORPHAN_ID){
-    const ids = new Set(state.courses.map(c => c.id));
-    return state.lessons.filter(l => !l.courseId || !ids.has(l.courseId));
-  }
-  return state.lessons.filter(l => l.courseId === courseId);
-}
-
-function renderCourseLessonsModal(){
-  const cm = state.courseModal;
-  if(!cm) return;
-  const course = getCourseById(cm.courseId);
-  if(!course){ cm.handle.close(); return; }
-
-  const lessons = getLessonsForCourse(cm.courseId);
-  const totalSentences = lessons.reduce((sum, l) => sum + lessonSentenceCount(l), 0);
-  const progMap = {};
-  /* Rebuild prog map from cache (we keep progress records in state.progressCache) */
-  (state.progressCache || []).forEach(p => { progMap[p.lessonId] = p; });
-  let doneSentences = 0;
-  lessons.forEach(l => { doneSentences += completedInLesson(progMap[l.id]); });
-  const pct = totalSentences ? Math.round(doneSentences / totalSentences * 100) : 0;
-
-  /* ---- Head ---- */
-  const titleEl = $("#courseLessonsTitle", cm.handle.el);
-  const subEl   = $("#courseLessonsSub",   cm.handle.el);
-  titleEl.textContent = course.title;
-  subEl.innerHTML =
-    '<span>' + esc(course.level || "—") + "</span>" +
-    '<span class="dot">•</span>' +
-    "<span>" + lessons.length + " lesson" + (lessons.length === 1 ? "" : "s") + "</span>" +
-    '<span class="dot">•</span>' +
-    "<span>" + totalSentences + " sentences</span>" +
-    '<span class="dot">•</span>' +
-    "<span>Progress " + doneSentences + " / " + totalSentences + " (" + pct + "%)</span>";
-
-  /* ---- Body ---- */
-  const body = $("#courseLessonsBody", cm.handle.el);
-  if(!lessons.length){
-    body.innerHTML =
-      '<div class="modal-empty">' +
-        "<p><strong>No lessons yet.</strong></p>" +
-        "<p>Use <strong>Import Lesson</strong> below to add one to this course.</p>" +
-      "</div>";
-  }else{
-    const totalPages = Math.max(1, Math.ceil(lessons.length / LESSONS_PER_PAGE));
-    cm.page = Math.max(1, Math.min(cm.page, totalPages));
-    const start = (cm.page - 1) * LESSONS_PER_PAGE;
-    const slice = lessons.slice(start, start + LESSONS_PER_PAGE);
-
-    let html = '<div class="lesson-list-modal">';
-    slice.forEach(l => {
-      const total = lessonSentenceCount(l);
-      const done = completedInLesson(progMap[l.id]);
-      const lessonPct = total ? Math.round(done / total * 100) : 0;
-      html +=
-        '<article class="lesson-card" data-lesson-id="' + esc(l.id) + '">' +
-          '<div class="lesson-card-main">' +
-            "<h4>" + esc(l.title) + "</h4>" +
-            (l.description ? '<p class="desc">' + esc(l.description) + "</p>" : "") +
-            '<p class="meta">' + esc(l.level) + " • " + total + " sentences</p>" +
-            '<div class="bar"><div class="bar-fill" style="width:' + lessonPct + '%"></div></div>' +
-            '<p class="meta">Progress: ' + done + " / " + total + " (" + lessonPct + "%)</p>" +
-          "</div>" +
-          '<div class="lesson-card-actions">' +
-            '<button class="btn small primary" data-action="open-lesson" data-id="' + esc(l.id) + '" type="button">Open</button>' +
-            '<button class="btn small danger" data-action="delete-lesson" data-id="' + esc(l.id) + '" type="button">Delete</button>' +
-          "</div>" +
-        "</article>";
-    });
-    html += "</div>";
-    body.innerHTML = html;
-  }
-
-  /* ---- Pagination ---- */
-  const pag = $("#courseLessonsPagination", cm.handle.el);
-  if(lessons.length <= LESSONS_PER_PAGE){
-    pag.innerHTML = "";
-    pag.hidden = true;
-  }else{
-    pag.hidden = false;
-    const totalPages = Math.ceil(lessons.length / LESSONS_PER_PAGE);
-
-    /* Page numbers, with ellipses when many pages */
-    const pageNums = [];
-    const cur = cm.page;
-    if(totalPages <= 7){
-      for(let i = 1; i <= totalPages; i++) pageNums.push(i);
-    }else{
-      pageNums.push(1);
-      if(cur > 4) pageNums.push("…");
-      for(let i = Math.max(2, cur - 1); i <= Math.min(totalPages - 1, cur + 1); i++) pageNums.push(i);
-      if(cur < totalPages - 3) pageNums.push("…");
-      pageNums.push(totalPages);
-    }
-
-    pag.innerHTML =
-      '<button class="btn small" data-action="page-prev" type="button"' + (cur === 1 ? " disabled" : "") + '>‹ Prev</button>' +
-      '<div class="page-nums">' +
-        pageNums.map(p => {
-          if(p === "…") return '<span class="ellipsis">…</span>';
-          return '<button class="page-num' + (p === cur ? " active" : "") + '" data-action="page-go" data-page="' + p + '" type="button">' + p + '</button>';
-        }).join("") +
-      "</div>" +
-      '<span class="page-info">Page <strong>' + cur + "</strong> / " + totalPages + "</span>" +
-      '<button class="btn small" data-action="page-next" type="button"' + (cur === totalPages ? " disabled" : "") + '>Next ›</button>';
-  }
-
-  /* ---- Foot (actions) ---- */
-  const foot = $("#courseLessonsFoot", cm.handle.el);
-  if(course.orphan){
-    foot.innerHTML =
-      '<span class="muted" style="font-size:.82rem;align-self:center">These lessons have no course yet.</span>' +
-      '<span class="spacer"></span>' +
-      '<button class="btn" type="button" data-modal-close>Close</button>';
-  }else{
-    foot.innerHTML =
-      '<button class="btn primary" data-action="import-to-course" data-course="' + esc(course.id) + '" type="button">Import Lesson</button>' +
-      '<button class="btn" data-action="edit-course" data-course="' + esc(course.id) + '" type="button">Edit course</button>' +
-      '<button class="btn danger" data-action="delete-course" data-course="' + esc(course.id) + '" type="button">Delete course</button>' +
-      '<span class="spacer"></span>' +
-      '<button class="btn" type="button" data-modal-close>Close</button>';
-  }
-
-  /* Rebind the close buttons that were regenerated inside foot */
-  cm.handle.el.querySelectorAll("[data-modal-close]").forEach(b => {
-    b.addEventListener("click", () => cm.handle.close());
   });
 }
 
@@ -1469,7 +1740,7 @@ function validateLesson(data){
 }
 
 /* ============================================================
-   Import flow
+   Import (lesson JSON) flow
    ============================================================ */
 function clearImportUI(){
   $("#importMessages").hidden = true; $("#importMessages").innerHTML = "";
@@ -1569,9 +1840,7 @@ async function confirmImport(){
   $("#fileInput").value = "";
   await refreshLibrary();
 
-  /* If the course modal is open for this course, refresh it */
   if(state.courseModal && state.courseModal.courseId === (courseId || ORPHAN_ID)){
-    /* Bump to page 1 so the new lesson is visible */
     state.courseModal.page = 1;
     renderCourseLessonsModal();
   }
@@ -1617,7 +1886,6 @@ async function createCourse(data, silent){
   }
   return course;
 }
-
 async function updateCourse(id, data){
   let existing = null;
   try{ existing = await idbGet("courses", id); }catch(e){}
@@ -1629,12 +1897,9 @@ async function updateCourse(id, data){
   try{ await idbPut("courses", existing); }
   catch(err){ showToast("Could not save course: " + err.message, "error"); return; }
   await refreshLibrary();
-  if(state.courseModal && state.courseModal.courseId === id){
-    renderCourseLessonsModal();
-  }
+  if(state.courseModal && state.courseModal.courseId === id) renderCourseLessonsModal();
   showToast("Course updated.", "ok");
 }
-
 async function deleteCourse(courseId, deleteLessons){
   const lessons = getLessonsForCourse(courseId);
   try{
@@ -1653,12 +1918,9 @@ async function deleteCourse(courseId, deleteLessons){
     }
     await idbDelete("courses", courseId);
   }catch(err){ showToast("Could not delete course: " + err.message, "error"); return; }
-
-  /* Close any open modal referencing this course */
   if(state.courseModal && state.courseModal.courseId === courseId){
     state.courseModal.handle.close();
   }
-
   if(state.lesson && lessons.some(l => l.id === state.lesson.id)) goHome();
   await refreshLibrary();
   showToast("Course deleted.", "ok");
@@ -1711,14 +1973,11 @@ function buildCourseCard(course, lessons, progMap){
         '<span class="lesson-count-badge">' + lessons.length + "</span>" +
       "</h3>" +
       (course.description ? '<p class="desc">' + esc(course.description) + "</p>" : "") +
-      '<p class="meta">' + esc(course.level || "—") + " • " +
-        totalSentences + " sentences</p>" +
+      '<p class="meta">' + esc(course.level || "—") + " • " + totalSentences + " sentences</p>" +
       '<div class="bar"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
       '<p class="meta">Progress: ' + doneSentences + " / " + totalSentences + " (" + pct + "%)</p>" +
     "</div>" +
-    '<span class="course-open-hint">' +
-      (lessons.length ? "View lessons" : "Open") + " →" +
-    "</span>";
+    '<span class="course-open-hint">' + (lessons.length ? "View lessons" : "Open") + " →</span>";
   card.appendChild(head);
 
   const actions = document.createElement("div");
@@ -1741,7 +2000,6 @@ async function refreshLibrary(){
     $("#courseList").innerHTML = '<div class="empty">Local storage is unavailable, so courses cannot be loaded.</div>';
     return;
   }
-
   let courses = [], lessons = [], progs = [];
   try{
     courses = await idbAll("courses");
@@ -1751,7 +2009,6 @@ async function refreshLibrary(){
     showToast("Could not read stored data: " + err.message, "error");
     return;
   }
-
   courses.sort((a,b) => (a.createdAt || 0) - (b.createdAt || 0));
   lessons.sort((a,b) => (b.importedAt || 0) - (a.importedAt || 0));
   state.courses = courses;
@@ -1784,25 +2041,15 @@ async function refreshLibrary(){
       "</div>";
     return;
   }
-
-  courses.forEach(c => {
-    container.appendChild(buildCourseCard(c, lessonsByCourse[c.id] || [], progMap));
-  });
+  courses.forEach(c => container.appendChild(buildCourseCard(c, lessonsByCourse[c.id] || [], progMap)));
   if(orphans.length){
-    const orphanCourse = {
-      id: ORPHAN_ID,
-      title: "Uncategorized",
+    container.appendChild(buildCourseCard({
+      id: ORPHAN_ID, title: "Uncategorized",
       description: "Lessons not assigned to any course.",
-      level: "—",
-      orphan: true
-    };
-    container.appendChild(buildCourseCard(orphanCourse, orphans, progMap));
+      level: "—", orphan: true
+    }, orphans, progMap));
   }
-
-  /* If a course modal is open, re-render it so it stays in sync */
-  if(state.courseModal){
-    renderCourseLessonsModal();
-  }
+  if(state.courseModal) renderCourseLessonsModal();
 }
 
 async function deleteLesson(lessonId){
@@ -1851,9 +2098,7 @@ async function openLesson(lessonId){
   state.kanaInventory = buildKanaInventory(record.data);
 
   localStorage.setItem(LS_CURRENT, lessonId);
-
-  /* Close any open course modal */
-  if(state.courseModal){ state.courseModal.handle.close(); }
+  if(state.courseModal) state.courseModal.handle.close();
 
   $("#libraryView").hidden = true;
   $("#lessonView").hidden = false;
@@ -1872,7 +2117,7 @@ function goHome(){
   state.kanaInventory = [];
   localStorage.removeItem(LS_CURRENT);
   stopAudio(); releaseAudioURL();
-  if(state.courseModal){ state.courseModal.handle.close(); }
+  if(state.courseModal) state.courseModal.handle.close();
   $("#lessonView").hidden = true;
   $("#libraryView").hidden = false;
   $("#btnCsv").hidden = true;
@@ -1910,7 +2155,6 @@ function collectKanaFromText(text){
   for(const ch of String(text || "")){ if(isKana(ch) && ch !== "ー") set.add(ch); }
   return set;
 }
-
 function buildKanaInventory(lessonData){
   const map = new Map();
   function scriptOf(ch){
@@ -1918,7 +2162,6 @@ function buildKanaInventory(lessonData){
     return (c >= 0x30A1 && c <= 0x30F6) ? "KATAKANA" : "HIRAGANA";
   }
   function romajiOf(ch){ return KANA_MAP[toHiragana(ch)] || ""; }
-
   lessonData.sentences.forEach(sentence => {
     (sentence.kana || []).forEach(k => {
       if(!k || !k.character || !isKana(k.character)) return;
@@ -1957,11 +2200,8 @@ function buildKanaInventory(lessonData){
     });
   });
   const items = Array.from(map.values());
-  const hira = items.filter(x => x.script === "HIRAGANA");
-  const kata = items.filter(x => x.script === "KATAKANA");
-  return hira.concat(kata);
+  return items.filter(x => x.script === "HIRAGANA").concat(items.filter(x => x.script === "KATAKANA"));
 }
-
 function kanaGridHTML(sentence){
   const inventory = state.kanaInventory || [];
   if(!inventory.length) return '<p class="muted">No kana found in this lesson.</p>';
@@ -2037,7 +2277,6 @@ function buildTokenList(sentence){
   if(buf) tokens.push({ text: buf, plain: true });
   return tokens;
 }
-
 function sentenceHTML(sentence){
   const tokens = buildTokenList(sentence);
   let html = "";
@@ -2061,7 +2300,6 @@ function sentenceHTML(sentence){
   });
   return html;
 }
-
 function chunksHTML(sentence){
   const chunks = Array.isArray(sentence.chunks) ? sentence.chunks : [];
   if(!chunks.length) return '<p class="muted">No chunks provided for this sentence.</p>';
@@ -2070,7 +2308,6 @@ function chunksHTML(sentence){
     '<span class="cm">' + esc(c.meaning || "") + "</span></div>"
   ).join("");
 }
-
 function vocabUnitsHTML(sentence){
   const vocab = Array.isArray(sentence.vocabulary) ? sentence.vocabulary : [];
   const grammar = Array.isArray(sentence.grammar) ? sentence.grammar : [];
@@ -2095,7 +2332,6 @@ function vocabUnitsHTML(sentence){
   });
   return html;
 }
-
 function grammarNotesHTML(sentence){
   const grammar = Array.isArray(sentence.grammar) ? sentence.grammar : [];
   if(!grammar.length) return '<p class="muted">No grammar notes for this sentence.</p>';
@@ -2107,7 +2343,6 @@ function grammarNotesHTML(sentence){
     "</div>"
   ).join("");
 }
-
 function playerHTML(){
   const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2].map(v =>
     '<option value="' + v + '"' + (Number(state.settings.speed) === v ? " selected" : "") + ">" + v + "×</option>"
@@ -2146,7 +2381,6 @@ function renderLesson(){
   const sentence = currentSentence();
   if(!sentence) return;
   const total = state.lesson.data.sentences.length;
-
   if(state.progress.reading) state.progress.reading[sentence.id] = true;
 
   const romajiLine = (state.settings.romaji && sentence.romaji)
@@ -2214,26 +2448,20 @@ function renderLesson(){
     "</div>";
 
   const col2 =
-    '<div class="col col-2">' +
-      '<div class="col-head">Vocabulary &amp; Grammar Units</div>' +
-      '<div class="card"><div class="unit-list">' + vocabUnitsHTML(sentence) + "</div></div>" +
-    "</div>";
+    '<div class="col col-2"><div class="col-head">Vocabulary &amp; Grammar Units</div>' +
+    '<div class="card"><div class="unit-list">' + vocabUnitsHTML(sentence) + "</div></div></div>";
 
   const col3 =
-    '<div class="col col-3">' +
-      '<div class="col-head">Grammar Notes</div>' +
-      '<div class="card">' + grammarNotesHTML(sentence) + "</div>" +
-    "</div>";
+    '<div class="col col-3"><div class="col-head">Grammar Notes</div>' +
+    '<div class="card">' + grammarNotesHTML(sentence) + "</div></div>";
 
   const col4 =
-    '<div class="col col-4">' +
-      '<div class="col-head">Kana Information &amp; Practice</div>' +
+    '<div class="col col-4"><div class="col-head">Kana Information &amp; Practice</div>' +
       '<div class="kana-panel">' +
         '<h2 class="kana-title">Kana</h2>' +
         '<p class="kana-subtitle">Kana used in this lesson (highlighted cells appear in the current sentence).</p>' +
         kanaGridHTML(sentence) +
-      "</div>" +
-    "</div>";
+      "</div></div>";
 
   const gridAttrs = ' data-vocab="'   + (state.settings.showVocabPanel   ? "shown" : "hidden") +
                     '" data-grammar="' + (state.settings.showGrammarPanel ? "shown" : "hidden") +
@@ -2443,12 +2671,115 @@ async function resetProgress(){
 }
 
 /* ============================================================
+   Keyboard shortcuts
+   ============================================================ */
+function hasOpenModal(){
+  return !!$("#modalHost").firstElementChild;
+}
+function handleShortcut(e){
+  /* Ignore modifier combos (browser/OS) */
+  if(e.ctrlKey || e.metaKey || e.altKey) return;
+
+  /* Esc closes popups regardless of where we are */
+  if(e.key === "Escape"){
+    if(!$("#vocabPopup").hidden){ hidePopup(); return; }
+  }
+
+  /* Ignore typing in inputs */
+  if(isTypingTarget(e.target)) return;
+
+  /* "?" — open settings/shortcut help */
+  if(e.key === "?"){
+    e.preventDefault();
+    showSettingsModal();
+    return;
+  }
+  /* "," — settings */
+  if(e.key === ","){
+    e.preventDefault();
+    showSettingsModal();
+    return;
+  }
+  /* "t" — theme */
+  if(e.key === "t" || e.key === "T"){
+    e.preventDefault();
+    toggleTheme();
+    return;
+  }
+  /* "h" — home */
+  if(e.key === "h" || e.key === "H"){
+    if(state.lesson){
+      e.preventDefault();
+      goHome();
+      return;
+    }
+  }
+
+  /* Don't fire lesson shortcuts when a modal is open */
+  if(hasOpenModal()) return;
+
+  /* Only lesson shortcuts past this point */
+  if(!state.lesson || $("#lessonView").hidden) return;
+  const key = e.key;
+  const lower = key.length === 1 ? key.toLowerCase() : key;
+
+  switch(lower){
+    case " ":
+      e.preventDefault();
+      actionPlayPause();
+      return;
+    case "arrowleft":
+      e.preventDefault();
+      goToSentence(state.index - 1);
+      return;
+    case "arrowright":
+      e.preventDefault();
+      goToSentence(state.index + 1);
+      return;
+    case "f":
+      e.preventDefault();
+      state.settings.furigana = !state.settings.furigana;
+      if(state.settings.furigana) state.settings.romaji = false;
+      saveSettings(); renderLesson(); return;
+    case "r":
+      e.preventDefault();
+      state.settings.romaji = !state.settings.romaji;
+      if(state.settings.romaji) state.settings.furigana = false;
+      saveSettings(); renderLesson(); return;
+    case "c":
+      e.preventDefault();
+      state.reveals.chunks = !state.reveals.chunks;
+      renderLesson(); return;
+    case "v":
+      e.preventDefault();
+      state.reveals.connected = !state.reveals.connected;
+      renderLesson(); return;
+    case "1":
+      e.preventDefault();
+      state.settings.showVocabPanel = !state.settings.showVocabPanel;
+      saveSettings(); renderLesson(); return;
+    case "2":
+      e.preventDefault();
+      state.settings.showGrammarPanel = !state.settings.showGrammarPanel;
+      saveSettings(); renderLesson(); return;
+    case "3":
+      e.preventDefault();
+      state.settings.showKanaPanel = !state.settings.showKanaPanel;
+      saveSettings(); renderLesson(); return;
+    case "m":
+      e.preventDefault();
+      actionToggleComplete(); return;
+  }
+}
+
+/* ============================================================
    Event wiring
    ============================================================ */
 function wireEvents(){
 
   $("#homeLink").addEventListener("click", e => { e.preventDefault(); goHome(); });
   $("#btnTheme").addEventListener("click", toggleTheme);
+  $("#btnSettings").addEventListener("click", showSettingsModal);
   $("#btnJsonFormat").addEventListener("click", showJsonFormatModal);
 
   $("#btnCreateCourse").addEventListener("click", () => {
@@ -2464,7 +2795,7 @@ function wireEvents(){
     handleFileSelected(f);
   });
 
-  /* Course grid — delegation */
+  /* Course grid delegation */
   $("#courseList").addEventListener("click", e => {
     const el = e.target.closest("[data-action]");
     if(!el) return;
@@ -2492,31 +2823,24 @@ function wireEvents(){
     }
   });
 
-  /* Delegated clicks inside any open modal (for lesson actions + pagination + course actions) */
+  /* Global delegation for anything inside an open modal */
   document.addEventListener("click", e => {
     const inModal = e.target.closest(".modal-backdrop");
     if(!inModal) return;
-
     const el = e.target.closest("[data-action]");
     if(!el) return;
     const a = el.dataset.action;
     switch(a){
-      case "open-lesson":
-        openLesson(el.dataset.id);
-        return;
-      case "delete-lesson":
-        deleteLesson(el.dataset.id);
-        return;
+      case "open-lesson": openLesson(el.dataset.id); return;
+      case "delete-lesson": deleteLesson(el.dataset.id); return;
       case "page-prev":
         if(state.courseModal && state.courseModal.page > 1){
-          state.courseModal.page--;
-          renderCourseLessonsModal();
+          state.courseModal.page--; renderCourseLessonsModal();
         }
         return;
       case "page-next":
         if(state.courseModal){
-          state.courseModal.page++;
-          renderCourseLessonsModal();
+          state.courseModal.page++; renderCourseLessonsModal();
         }
         return;
       case "page-go":
@@ -2548,7 +2872,7 @@ function wireEvents(){
   $("#btnCsv").addEventListener("click", downloadCSV);
   $("#btnReset").addEventListener("click", resetProgress);
 
-  /* Lesson view */
+  /* Lesson view clicks */
   $("#lessonView").addEventListener("click", async e => {
     const token = e.target.closest(".jp-unit.token");
     if(token){
@@ -2655,18 +2979,16 @@ function wireEvents(){
     }
   });
 
+  /* Keyboard token access + shortcuts */
   document.addEventListener("keydown", e => {
-    if(e.key === "Escape"){ hidePopup(); return; }
     const t = e.target.closest ? e.target.closest(".jp-unit.token") : null;
     if(t && (e.key === "Enter" || e.key === " ")){
       e.preventDefault(); t.click(); return;
     }
-    if(e.target.matches && e.target.matches("input,select,textarea")) return;
-    if(!state.lesson || $("#lessonView").hidden) return;
-    if(e.key === "ArrowLeft"  && !e.target.closest("button")) goToSentence(state.index - 1);
-    if(e.key === "ArrowRight" && !e.target.closest("button")) goToSentence(state.index + 1);
+    handleShortcut(e);
   });
 
+  /* Click outside popup hides it */
   document.addEventListener("click", e => {
     if($("#vocabPopup").hidden) return;
     if(e.target.closest("#vocabPopup")) return;
