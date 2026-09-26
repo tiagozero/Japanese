@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Japanese Learning Challenge</title>
+<title>Japanese Study Hub</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -31,10 +31,15 @@
     --work-color: #6366f1;
     --break-color: #10b981;
     --longbreak-color: #0891b2;
-    --format-ebook: #3b82f6;
-    --format-audiobook: #eab308;
-    --format-audiobook-text: #422006;
-    --format-physical: #64748b;
+    --format-textbook: #3b82f6;
+    --format-youtube: #ef4444;
+    --format-podcast: #8b5cf6;
+    --format-app: #10b981;
+    --format-manga: #f59e0b;
+    --format-website: #06b6d4;
+    --format-audio: #eab308;
+    --format-audio-text: #422006;
+    --format-anki: #ec4899;
   }
 
   html[data-theme="dark"] {
@@ -54,10 +59,15 @@
     --work-color: #818cf8;
     --break-color: #34d399;
     --longbreak-color: #22d3ee;
-    --format-ebook: #2563eb;
-    --format-audiobook: #f59e0b;
-    --format-audiobook-text: #1c1917;
-    --format-physical: #94a3b8;
+    --format-textbook: #2563eb;
+    --format-youtube: #dc2626;
+    --format-podcast: #7c3aed;
+    --format-app: #059669;
+    --format-manga: #d97706;
+    --format-website: #0891b2;
+    --format-audio: #facc15;
+    --format-audio-text: #1c1917;
+    --format-anki: #db2777;
     color-scheme: dark;
   }
 
@@ -243,7 +253,7 @@
     will-change: width;
   }
 
-  /* ---------- Phase goals (learning objectives) ---------- */
+  /* ---------- Phase goals (learning objectives) — hidden by default ---------- */
   .phase-goals {
     margin: 0 0 14px;
     font-size: 12px;
@@ -465,21 +475,16 @@
     display: flex; align-items: center; gap: 2px;
     white-space: nowrap;
     letter-spacing: 0.2px;
-    text-transform: uppercase;
     line-height: 1.2;
   }
-  .card-format.ebook {
-    background: var(--format-ebook);
-    color: #fff;
-  }
-  .card-format.audiobook {
-    background: var(--format-audiobook);
-    color: var(--format-audiobook-text);
-  }
-  .card-format.physical {
-    background: var(--format-physical);
-    color: #fff;
-  }
+  .card-format.textbook { background: var(--format-textbook); color: #fff; }
+  .card-format.youtube  { background: var(--format-youtube);  color: #fff; }
+  .card-format.podcast  { background: var(--format-podcast);  color: #fff; }
+  .card-format.app      { background: var(--format-app);      color: #fff; }
+  .card-format.manga    { background: var(--format-manga);    color: #fff; }
+  .card-format.website  { background: var(--format-website);  color: #fff; }
+  .card-format.audio    { background: var(--format-audio);    color: var(--format-audio-text); }
+  .card-format.anki     { background: var(--format-anki);     color: #fff; }
 
   .book-card.empty {
     background: var(--surface-2); border: 2px dashed var(--border-strong);
@@ -621,12 +626,17 @@
     display: inline-flex; align-items: center; gap: 4px;
     padding: 2px 8px; border-radius: 10px;
     font-size: 11px; font-weight: 800;
-    text-transform: uppercase; letter-spacing: 0.3px;
+    letter-spacing: 0.3px;
     white-space: nowrap;
   }
-  .format-pill.ebook { background: var(--format-ebook); color: #fff; }
-  .format-pill.audiobook { background: var(--format-audiobook); color: var(--format-audiobook-text); }
-  .format-pill.physical { background: var(--format-physical); color: #fff; }
+  .format-pill.textbook { background: var(--format-textbook); color: #fff; }
+  .format-pill.youtube  { background: var(--format-youtube);  color: #fff; }
+  .format-pill.podcast  { background: var(--format-podcast);  color: #fff; }
+  .format-pill.app      { background: var(--format-app);      color: #fff; }
+  .format-pill.manga    { background: var(--format-manga);    color: #fff; }
+  .format-pill.website  { background: var(--format-website);  color: #fff; }
+  .format-pill.audio    { background: var(--format-audio);    color: var(--format-audio-text); }
+  .format-pill.anki     { background: var(--format-anki);     color: #fff; }
 
   .view-stats {
     margin-top: 20px;
@@ -910,12 +920,16 @@
     border-radius: 10px;
     font-size: 10px;
     font-weight: 800;
-    text-transform: uppercase;
     letter-spacing: 0.3px;
   }
-  .bulk-format-chip.ebook { background: var(--format-ebook); color: #fff; }
-  .bulk-format-chip.audiobook { background: var(--format-audiobook); color: var(--format-audiobook-text); }
-  .bulk-format-chip.physical { background: var(--format-physical); color: #fff; }
+  .bulk-format-chip.textbook { background: var(--format-textbook); color: #fff; }
+  .bulk-format-chip.youtube  { background: var(--format-youtube);  color: #fff; }
+  .bulk-format-chip.podcast  { background: var(--format-podcast);  color: #fff; }
+  .bulk-format-chip.app      { background: var(--format-app);      color: #fff; }
+  .bulk-format-chip.manga    { background: var(--format-manga);    color: #fff; }
+  .bulk-format-chip.website  { background: var(--format-website);  color: #fff; }
+  .bulk-format-chip.audio    { background: var(--format-audio);    color: var(--format-audio-text); }
+  .bulk-format-chip.anki     { background: var(--format-anki);     color: #fff; }
 
   .ie-section { margin-bottom: 4px; }
   .ie-section h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
@@ -1935,7 +1949,7 @@
   .heatmap-legend .heatmap-cell { cursor: default; }
   .heatmap-legend .heatmap-cell:hover { outline: none; }
 
-  /* ---------- Reset Challenge (settings) ---------- */
+  /* ---------- Reset Hub (settings) ---------- */
   .reset-challenge-row {
     display: flex;
     gap: 10px;
@@ -2162,10 +2176,10 @@
 
 <header class="app-header">
   <div class="header-inner">
-    <div class="app-title">📚 Japanese <span id="header-total">99</span> Book Challenge</div>
+    <div class="app-title">📚 Japanese Study Hub</div>
     <div class="header-progress">
       <div class="progress-info">
-        <span id="progress-text">0 / 99 finished</span>
+        <span id="progress-text">0 / 99 completed</span>
         <span id="progress-pct">0%</span>
       </div>
       <div class="progress-track">
@@ -2175,10 +2189,10 @@
       <div class="progress-goals" id="progress-goals"></div>
     </div>
     <div class="header-actions">
-      <button class="btn btn-primary" id="btn-add">+ Add Book</button>
-      <button class="btn" id="btn-bulk">Bulk Upload</button>
+      <button class="btn btn-primary" id="btn-add">+ Add Resource</button>
+      <button class="btn" id="btn-bulk">Bulk Add</button>
       <button class="btn" id="btn-ie">Import / Export</button>
-      <button class="btn" id="btn-authors">✍ Authors</button>
+      <button class="btn" id="btn-authors">✍ Sources</button>
       <button class="btn" id="btn-calendar">📅 Calendar</button>
       <button class="btn" id="btn-plan">📋 Daily Plan</button>
       <button class="btn" id="btn-streak">🔥 Streak</button>
@@ -2239,7 +2253,7 @@
 <template id="tpl-empty">
   <div class="book-card empty">
     <div class="empty-plus">+</div>
-    <div class="empty-label">Add book</div>
+    <div class="empty-label">Add resource</div>
   </div>
 </template>
 
@@ -2249,7 +2263,7 @@
 <div class="modal-backdrop" id="modal-view">
   <div class="modal" style="max-width:640px">
     <div class="modal-header">
-      <h2>Book Details</h2>
+      <h2>Resource Details</h2>
       <button class="modal-close" data-close>&times;</button>
     </div>
     <div class="modal-body">
@@ -2268,7 +2282,7 @@
             <div class="view-meta-row"><span class="view-meta-label">Pages</span><span id="view-pages"></span></div>
             <div class="view-meta-row"><span class="view-meta-label">ISBN</span><span id="view-isbn"></span></div>
             <div class="view-meta-row"><span class="view-meta-label">Started</span><span id="view-started"></span></div>
-            <div class="view-meta-row"><span class="view-meta-label">Finished</span><span id="view-finished"></span></div>
+            <div class="view-meta-row"><span class="view-meta-label">Completed</span><span id="view-finished"></span></div>
             <div class="view-meta-row"><span class="view-meta-label">Deadline</span><span id="view-deadline"></span></div>
           </div>
         </div>
@@ -2277,7 +2291,7 @@
       <div class="view-stats">
         <div>
           <div class="stat-value" id="view-time-total">0m</div>
-          <div class="stat-label">Time Read</div>
+          <div class="stat-label">Time Studied</div>
         </div>
         <div>
           <div class="stat-value" id="view-sessions">0</div>
@@ -2290,11 +2304,11 @@
       </div>
 
       <button class="view-pomodoro-btn" id="view-start-pomodoro">
-        <span>🍅</span><span id="view-pomodoro-label">Start Pomodoro Session</span>
+        <span>🍅</span><span id="view-pomodoro-label">Start Study Session</span>
       </button>
 
       <div class="view-notes-section" id="view-notes-section" style="margin-top:20px">
-        <h4>Notes / Review</h4>
+        <h4>Notes</h4>
         <p id="view-notes"></p>
       </div>
       <div class="view-links" id="view-links"></div>
@@ -2303,25 +2317,25 @@
       <div><button class="btn btn-danger" id="view-delete">Delete</button></div>
       <div class="modal-footer-right">
         <button class="btn" data-close>Close</button>
-        <button class="btn btn-primary" id="view-edit">✎ Edit Book</button>
+        <button class="btn btn-primary" id="view-edit">✎ Edit Resource</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ==================================================
-     AUTHORS LIST MODAL
+     SOURCES LIST MODAL
      ================================================== -->
 <div class="modal-backdrop" id="modal-authors">
   <div class="modal" style="max-width:820px">
     <div class="modal-header">
-      <h2>✍ Authors</h2>
+      <h2>✍ Sources</h2>
       <button class="modal-close" data-close>&times;</button>
     </div>
     <div class="modal-body">
       <div class="authors-search-wrap">
         <input type="text" id="author-search" class="authors-search-input"
-               placeholder="Search authors…" autocomplete="off">
+               placeholder="Search sources…" autocomplete="off">
       </div>
       <div id="authors-list" class="authors-grid"></div>
     </div>
@@ -2335,17 +2349,17 @@
 </div>
 
 <!-- ==================================================
-     AUTHOR BOOKS MODAL
+     SOURCE RESOURCES MODAL
      ================================================== -->
 <div class="modal-backdrop" id="modal-author-books" style="z-index:1050">
   <div class="modal" style="max-width:900px">
     <div class="modal-header">
-      <h2 id="author-books-title">Books by…</h2>
+      <h2 id="author-books-title">Resources by…</h2>
       <button class="modal-close" data-close>&times;</button>
     </div>
     <div class="modal-body">
       <div class="author-books-header">
-        <button class="btn" id="author-books-back">← All Authors</button>
+        <button class="btn" id="author-books-back">← All Sources</button>
         <span class="author-books-stats" id="author-books-stats"></span>
       </div>
       <div id="author-books-grid" class="books-grid"></div>
@@ -2365,7 +2379,7 @@
 <div class="modal-backdrop" id="modal-book">
   <div class="modal">
     <div class="modal-header">
-      <h2 id="modal-book-title">Add Book</h2>
+      <h2 id="modal-book-title">Add Resource</h2>
       <button class="modal-close" data-close>&times;</button>
     </div>
     <div class="modal-body">
@@ -2385,11 +2399,11 @@
         </div>
         <div class="form-group form-full">
           <label>Title *</label>
-          <input type="text" id="f-title" placeholder="Book title">
+          <input type="text" id="f-title" placeholder="Resource title">
         </div>
         <div class="form-group">
-          <label>Author</label>
-          <input type="text" id="f-author" placeholder="Author name" list="author-suggestions">
+          <label>Source / Creator</label>
+          <input type="text" id="f-author" placeholder="Author, channel, publisher…" list="author-suggestions">
           <datalist id="author-suggestions"></datalist>
         </div>
         <div class="form-group">
@@ -2404,18 +2418,23 @@
           <label>Format</label>
           <select id="f-format">
             <option value="">—</option>
-            <option value="physical">📖 Physical</option>
-            <option value="ebook">📱 eBook</option>
-            <option value="audiobook">🎧 Audiobook</option>
+            <option value="textbook">📘 Textbook</option>
+            <option value="youtube">▶️ YouTube Playlist</option>
+            <option value="podcast">🎙️ Podcast</option>
+            <option value="app">📱 App / Course</option>
+            <option value="manga">📚 Manga / Book</option>
+            <option value="website">🌐 Website</option>
+            <option value="audio">🎧 Audio Course</option>
+            <option value="anki">🃏 Flashcards</option>
           </select>
         </div>
         <div class="form-group form-full">
           <label>Status</label>
           <div class="status-pills" id="status-pills">
-            <button type="button" class="status-pill" data-status="unread">Unread</button>
-            <button type="button" class="status-pill" data-status="reading">Reading</button>
-            <button type="button" class="status-pill" data-status="finished">Finished</button>
-            <button type="button" class="status-pill" data-status="dnf">Did Not Finish</button>
+            <button type="button" class="status-pill" data-status="unread">Not Started</button>
+            <button type="button" class="status-pill" data-status="reading">In Progress</button>
+            <button type="button" class="status-pill" data-status="finished">Completed</button>
+            <button type="button" class="status-pill" data-status="dnf">Dropped</button>
           </div>
         </div>
         <div class="form-group form-full">
@@ -2433,7 +2452,7 @@
           <input type="date" id="f-dateStarted">
         </div>
         <div class="form-group">
-          <label>Date Finished</label>
+          <label>Date Completed</label>
           <input type="date" id="f-dateFinished">
         </div>
         <div class="form-group form-full">
@@ -2445,16 +2464,16 @@
           </div>
         </div>
         <div class="form-group">
-          <label>Pages</label>
+          <label>Pages / Length</label>
           <input type="number" id="f-pages" placeholder="0" min="0">
         </div>
         <div class="form-group">
-          <label>Goodreads URL</label>
-          <input type="url" id="f-goodreads" placeholder="https://goodreads.com/...">
+          <label>Link</label>
+          <input type="url" id="f-goodreads" placeholder="https://...">
         </div>
         <div class="form-group form-full">
-          <label>Notes / Review</label>
-          <textarea id="f-notes" placeholder="Your thoughts, favorite quotes, etc."></textarea>
+          <label>Notes</label>
+          <textarea id="f-notes" placeholder="What you've learned, key takeaways, timestamps…"></textarea>
         </div>
       </div>
     </div>
@@ -2481,12 +2500,12 @@
       <div class="form-group" style="margin-bottom:14px">
         <label>Search Query</label>
         <div style="display:flex;gap:8px">
-          <input type="text" id="cover-search-input" placeholder="Title, author, or ISBN..." style="flex:1">
+          <input type="text" id="cover-search-input" placeholder="Title, creator, or ISBN..." style="flex:1">
           <button class="btn btn-primary" id="cover-search-go">Search</button>
         </div>
       </div>
       <div class="cover-search-tools">
-        <button class="btn" id="cover-search-by-title">📖 By Title &amp; Author</button>
+        <button class="btn" id="cover-search-by-title">📖 By Title &amp; Creator</button>
         <button class="btn" id="cover-search-by-isbn">🔢 By ISBN</button>
         <a class="btn" id="cover-google-images" target="_blank" rel="noopener">🌐 Google Images</a>
       </div>
@@ -2508,7 +2527,7 @@
 <div class="modal-backdrop" id="modal-settings">
   <div class="modal" style="max-width:620px">
     <div class="modal-header">
-      <h2>Challenge Settings</h2>
+      <h2>Hub Settings</h2>
       <button class="modal-close" data-close>&times;</button>
     </div>
     <div class="modal-body">
@@ -2565,7 +2584,7 @@
           <input type="number" id="s-phaseCount" min="1" max="20" value="3" step="1">
         </div>
         <div class="form-group">
-          <label>Books per Phase</label>
+          <label>Items per Phase</label>
           <input type="number" id="s-booksPerPhase" min="1" max="50" value="33" step="1">
         </div>
       </div>
@@ -2583,12 +2602,12 @@
         <div class="deadline-preview-list" id="s-deadline-list"></div>
         <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;font-weight:600;color:var(--text-sub);cursor:pointer">
           <input type="checkbox" id="s-showDeadlineTime" style="width:16px;height:16px;cursor:pointer">
-          Show hours &amp; minutes remaining on book cover deadline badges
+          Show hours &amp; minutes remaining on card deadline badges
         </label>
       </div>
 
       <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
-        <div class="settings-section-title">🎯 Reading Goals</div>
+        <div class="settings-section-title">🎯 Study Goals</div>
         <div style="font-size:11px;font-weight:800;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px">Daily</div>
         <div class="form-grid">
           <div class="form-group">
@@ -2647,15 +2666,15 @@
       </div>
 
       <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
-        <div class="settings-section-title" style="color:var(--status-dnf)">🔄 Reset Challenge</div>
+        <div class="settings-section-title" style="color:var(--status-dnf)">🔄 Reset Hub</div>
         <p class="reset-note">
-          Clears <strong>all books</strong>, <strong>reading activity</strong>,
+          Clears <strong>all resources</strong>, <strong>study activity</strong>,
           <strong>daily plan tasks</strong> and <strong>challenges</strong>, and restarts the
-          challenge timeline from today (keeping the same duration). Phase names, colors,
+          timeline from today (keeping the same duration). Phase names, colors,
           learning objectives, goals, and timer settings are kept.
         </p>
         <div class="reset-challenge-row">
-          <button type="button" class="btn btn-danger" id="s-reset-challenge">Reset Challenge &amp; Books</button>
+          <button type="button" class="btn btn-danger" id="s-reset-challenge">Reset Hub &amp; Resources</button>
         </div>
       </div>
 
@@ -2671,45 +2690,50 @@
 </div>
 
 <!-- ==================================================
-     BULK UPLOAD MODAL
+     BULK ADD MODAL
      ================================================== -->
 <div class="modal-backdrop" id="modal-bulk">
   <div class="modal" style="max-width:660px">
     <div class="modal-header">
-      <h2>Bulk Upload Books</h2>
+      <h2>Bulk Add Resources</h2>
       <button class="modal-close" data-close>&times;</button>
     </div>
     <div class="modal-body">
       <p class="bulk-hint">
-        Paste one book per line, fields separated by <code>|</code> (pipe).<br>
-        <strong>Required:</strong> <code>Title | Author</code><br>
+        Paste one resource per line, fields separated by <code>|</code> (pipe).<br>
+        <strong>Required:</strong> <code>Title | Source</code><br>
         <strong>Optional (any order):</strong> ISBN, Cover URL, Format
       </p>
       <div class="bulk-format-chips">
-        <span class="bulk-format-chip physical">📖 physical</span>
-        <span class="bulk-format-chip ebook">📱 ebook</span>
-        <span class="bulk-format-chip audiobook">🎧 audiobook</span>
+        <span class="bulk-format-chip textbook">📘 textbook</span>
+        <span class="bulk-format-chip youtube">▶️ youtube</span>
+        <span class="bulk-format-chip podcast">🎙️ podcast</span>
+        <span class="bulk-format-chip app">📱 app</span>
+        <span class="bulk-format-chip manga">📚 manga</span>
+        <span class="bulk-format-chip website">🌐 website</span>
+        <span class="bulk-format-chip audio">🎧 audio</span>
+        <span class="bulk-format-chip anki">🃏 anki</span>
       </div>
       <div style="font-size:11px;color:var(--text-mute);margin:10px 0 14px">
-        Also accepts: kindle, epub, audio, audible, paperback, hardcover, print
+        Also accepts: book, course, video, playlist, comic, novel, flashcards, srs, blog, site, audiobook, cd
       </div>
       <div class="form-group" style="margin-bottom:14px">
         <label>Target Phase</label>
         <select id="bulk-phase"></select>
       </div>
       <div class="form-group">
-        <label>Books</label>
-        <textarea class="bulk-textarea" id="bulk-input" placeholder="Genki I | Eri Banno | 9784789014403 | physical
-Japanese from Zero! 1 | George Trombley | 9780976998129 | ebook
-Yotsuba&! Vol. 1 | Kiyohiko Azuma | audiobook
-Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://covers.openlibrary.org/b/isbn/9784167911020-L.jpg"></textarea>
+        <label>Resources</label>
+        <textarea class="bulk-textarea" id="bulk-input" placeholder="Genki I | Eri Banno | 9784789014403 | textbook
+JapanesePod101 Absolute Beginner | Innovative Language | podcast
+Japanese Ammo with Misa | Misa | youtube
+Anki Core 2k/6k | Anki Community | anki | https://example.com/cover.jpg"></textarea>
       </div>
     </div>
     <div class="modal-footer">
       <div></div>
       <div class="modal-footer-right">
         <button class="btn" data-close>Cancel</button>
-        <button class="btn btn-primary" id="bulk-submit">Add Books</button>
+        <button class="btn btn-primary" id="bulk-submit">Add Resources</button>
       </div>
     </div>
   </div>
@@ -2727,7 +2751,7 @@ Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://co
     <div class="modal-body">
       <div class="ie-section">
         <h3>📤 Export</h3>
-        <p>Download all books as a JSON file for backup or transfer.</p>
+        <p>Download all resources as a JSON file for backup or transfer.</p>
         <button class="btn btn-primary" id="ie-export">Download JSON</button>
       </div>
       <hr class="ie-divider">
@@ -2742,13 +2766,13 @@ Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://co
       <hr class="ie-divider">
       <div class="ie-section">
         <h3>📚 Sample Data</h3>
-        <p>Load a starter set of Japanese learning materials spread across all phases.</p>
-        <button class="btn" id="ie-sample">Load Sample Books</button>
+        <p>Load a starter set of Japanese learning resources spread across all phases.</p>
+        <button class="btn" id="ie-sample">Load Sample Resources</button>
       </div>
       <hr class="ie-divider">
       <div class="ie-section">
         <h3 style="color:var(--status-dnf)">⚠️ Danger Zone</h3>
-        <p>Clear all books. Cannot be undone.</p>
+        <p>Clear all resources. Cannot be undone.</p>
         <button class="btn btn-danger" id="ie-clear">Clear All Data</button>
       </div>
     </div>
@@ -2767,7 +2791,7 @@ Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://co
 <div class="modal-backdrop" id="modal-calendar">
   <div class="modal" style="max-width:760px">
     <div class="modal-header">
-      <h2>📅 Reading Calendar</h2>
+      <h2>📅 Study Calendar</h2>
       <button class="modal-close" data-close>&times;</button>
     </div>
     <div class="modal-body">
@@ -2780,7 +2804,7 @@ Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://co
       <div class="cal-legend">
         <div class="cal-legend-item"><span class="cal-legend-dot deadline"></span>Deadline</div>
         <div class="cal-legend-item"><span class="cal-legend-dot start"></span>Started</div>
-        <div class="cal-legend-item"><span class="cal-legend-dot finish"></span>Finished</div>
+        <div class="cal-legend-item"><span class="cal-legend-dot finish"></span>Completed</div>
       </div>
       <div class="cal-grid" id="cal-grid"></div>
       <div class="cal-day-detail" id="cal-day-detail"></div>
@@ -2800,7 +2824,7 @@ Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://co
 <div class="modal-backdrop" id="modal-streak">
   <div class="modal" style="max-width:920px">
     <div class="modal-header">
-      <h2>🔥 Reading Streak</h2>
+      <h2>🔥 Study Streak</h2>
       <button class="modal-close" data-close>&times;</button>
     </div>
     <div class="modal-body">
@@ -2829,7 +2853,7 @@ Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://co
         <div class="goals-title" style="margin-top:18px">📅 This Week</div>
         <div id="streak-weekly-goals"></div>
         <div class="log-pages-row">
-          <input type="number" id="log-pages-input" min="1" max="9999" placeholder="Pages read today…">
+          <input type="number" id="log-pages-input" min="1" max="9999" placeholder="Pages studied today…">
           <button class="btn btn-primary" id="log-pages-btn">Log Pages</button>
         </div>
       </div>
@@ -2944,7 +2968,7 @@ Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://co
         </div>
         <div class="form-group">
           <label>Title *</label>
-          <input type="text" id="ch-title" maxlength="60" placeholder="My reading challenge">
+          <input type="text" id="ch-title" maxlength="60" placeholder="My study challenge">
         </div>
         <div class="form-group form-full">
           <label>Description</label>
@@ -2990,7 +3014,7 @@ Convenience Store Woman | Sayaka Murata | 9784167911020 | audiobook | https://co
 
     <div id="pomo-idle">
       <div class="pomo-book-select">
-        <label>Book</label>
+        <label>Resource</label>
         <select id="pomo-book-select"></select>
       </div>
       <div class="pomo-mode-tabs">
@@ -3116,10 +3140,10 @@ const DEFAULT_SETTINGS = {
 
 const STATUS_ICONS = { reading: '📖', finished: '✓', dnf: '✕' };
 const STATUS_LABELS = {
-  unread: 'Unread',
-  reading: 'Reading',
-  finished: 'Finished',
-  dnf: 'Did Not Finish'
+  unread: 'Not Started',
+  reading: 'In Progress',
+  finished: 'Completed',
+  dnf: 'Dropped'
 };
 
 const MODE_LABELS = {
@@ -3131,19 +3155,49 @@ const MODE_LABELS = {
 const MONTH_NAMES_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MONTH_NAMES_LONG  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-const FORMAT_ICONS = { ebook: '📱', audiobook: '🎧', physical: '📖' };
-const FORMAT_LABELS = { ebook: 'eBook', audiobook: 'Audio', physical: 'Print' };
+/* ---------------- Study formats ---------------- */
+const FORMAT_ICONS = {
+  textbook: '📘',
+  youtube:  '▶️',
+  podcast:  '🎙️',
+  app:      '📱',
+  manga:    '📚',
+  website:  '🌐',
+  audio:    '🎧',
+  anki:     '🃏'
+};
+const FORMAT_LABELS = {
+  textbook: 'Textbook',
+  youtube:  'YouTube',
+  podcast:  'Podcast',
+  app:      'App / Course',
+  manga:    'Manga / Book',
+  website:  'Website',
+  audio:    'Audio Course',
+  anki:     'Flashcards'
+};
 
 const FORMAT_ALIASES = {
-  'ebook': 'ebook', 'e-book': 'ebook', 'e_book': 'ebook',
-  'digital': 'ebook', 'kindle': 'ebook', 'epub': 'ebook', 'pdf': 'ebook',
-  'mobi': 'ebook', 'kobo': 'ebook', 'nook': 'ebook',
-  'audiobook': 'audiobook', 'audio-book': 'audiobook', 'audio_book': 'audiobook',
-  'audio': 'audiobook', 'audible': 'audiobook', 'mp3': 'audiobook',
-  'cd': 'audiobook', 'aac': 'audiobook',
-  'physical': 'physical', 'paperback': 'physical', 'hardcover': 'physical',
-  'hardback': 'physical', 'print': 'physical', 'printed': 'physical',
-  'book': 'physical', 'paper': 'physical'
+  'textbook': 'textbook', 'text book': 'textbook', 'text-book': 'textbook',
+  'book': 'textbook', 'workbook': 'textbook', 'coursebook': 'textbook',
+  'course book': 'textbook', 'grammar book': 'textbook', 'reader': 'textbook',
+  'youtube': 'youtube', 'youtube playlist': 'youtube', 'yt': 'youtube',
+  'video': 'youtube', 'video course': 'youtube', 'playlist': 'youtube',
+  'channel': 'youtube', 'videos': 'youtube',
+  'podcast': 'podcast', 'radio': 'podcast', 'audio podcast': 'podcast',
+  'audio podcast series': 'podcast', 'podcasts': 'podcast',
+  'app': 'app', 'course': 'app', 'app course': 'app', 'application': 'app',
+  'software': 'app', 'program': 'app', 'srs': 'app', 'web app': 'app',
+  'mobile app': 'app',
+  'manga': 'manga', 'comic': 'manga', 'comics': 'manga',
+  'novel': 'manga', 'light novel': 'manga', 'graphic novel': 'manga',
+  'book/manga': 'manga', 'reader book': 'manga',
+  'website': 'website', 'web': 'website', 'site': 'website', 'blog': 'website',
+  'article': 'website', 'articles': 'website', 'web page': 'website',
+  'audio': 'audio', 'audio course': 'audio', 'cd': 'audio', 'cd course': 'audio',
+  'audiobook': 'audio', 'audio lessons': 'audio',
+  'anki': 'anki', 'flashcards': 'anki', 'flashcard': 'anki', 'deck': 'anki',
+  'srs deck': 'anki', 'anki deck': 'anki'
 };
 
 function detectFormat(str) {
@@ -3152,6 +3206,13 @@ function detectFormat(str) {
   return FORMAT_ALIASES[s] || null;
 }
 
+/* Map legacy formats (from earlier versions) to new ones */
+const FORMAT_MIGRATE = {
+  physical: 'textbook',
+  ebook: 'textbook',
+  audiobook: 'audio'
+};
+
 /* ==================================================
    State
    ================================================== */
@@ -3159,8 +3220,8 @@ const state = {
   books: [],
   settings: JSON.parse(JSON.stringify(DEFAULT_SETTINGS)),
   activityLog: {},
-  dailyPlans: {},     // "YYYY-MM-DD" -> { tasks: [{id, text, done}] }
-  challenges: [],     // [{ id, icon, title, desc, durationDays, startDate, tasks[], completions{}, presetId }]
+  dailyPlans: {},
+  challenges: [],
   timer: {
     bookId: null,
     mode: 'work',
@@ -3179,7 +3240,6 @@ const refs = {
   progressFill: null,
   progressDates: null,
   progressGoals: null,
-  headerTotal: null,
   phaseMap: new Map(),
   bookElMap: new Map(),
   imageObserver: null
@@ -3202,7 +3262,6 @@ const calState = {
   selectedDate: null
 };
 
-// Author view state
 const authorState = {
   currentAuthor: null
 };
@@ -3409,7 +3468,6 @@ function getDeadlineCountdown(deadlineIso) {
   return { text: days + ' days left', state: days <= 3 ? 'soon' : 'ok' };
 }
 
-/* Precise hours/minutes countdown, measured to the end of the deadline day. */
 function getDeadlineCountdownPrecise(deadlineIso) {
   if (!deadlineIso) return null;
   const target = new Date(deadlineIso + 'T23:59:59');
@@ -3505,6 +3563,12 @@ function loadState() {
     if (!raw) return;
     const parsed = JSON.parse(raw);
     if (parsed && Array.isArray(parsed.books)) state.books = parsed.books;
+    // Migrate legacy formats to new study-resource formats
+    for (const b of state.books) {
+      if (b && b.format && FORMAT_MIGRATE[b.format]) {
+        b.format = FORMAT_MIGRATE[b.format];
+      }
+    }
     if (parsed && parsed.settings && typeof parsed.settings === 'object') {
       state.settings = Object.assign({}, DEFAULT_SETTINGS, parsed.settings);
       const g = parsed.settings.goals || {};
@@ -3528,7 +3592,6 @@ function loadState() {
         if (typeof e.pages !== 'number') e.pages = 0;
       }
     }
-    // ---- Daily plans ----
     if (parsed && parsed.dailyPlans && typeof parsed.dailyPlans === 'object') {
       state.dailyPlans = parsed.dailyPlans;
       for (const k in state.dailyPlans) {
@@ -3539,12 +3602,11 @@ function loadState() {
         if (p.tasks.length === 0) delete state.dailyPlans[k];
       }
     }
-    // ---- Challenges ----
     if (parsed && Array.isArray(parsed.challenges)) {
       state.challenges = parsed.challenges.filter(c => c && typeof c === 'object' && c.title);
       state.challenges.forEach(c => {
         if (!c.id) c.id = uid();
-        if (!Array.isArray(c.tasks) || c.tasks.length === 0) c.tasks = ['Read'];
+        if (!Array.isArray(c.tasks) || c.tasks.length === 0) c.tasks = ['Study'];
         if (!c.completions || typeof c.completions !== 'object') c.completions = {};
         c.durationDays = Math.max(1, Math.min(365, parseInt(c.durationDays, 10) || 7));
         if (!c.startDate) c.startDate = todayISO();
@@ -3704,7 +3766,8 @@ function rebuildPhaseSections() {
     if (desc && goalsEl && goalsBody) {
       goalsBody.textContent = desc;
       goalsEl.style.display = '';
-      goalsEl.open = true;
+      // Hide learning objectives by default (details element starts closed)
+      goalsEl.open = false;
     } else if (goalsEl) {
       goalsEl.style.display = 'none';
     }
@@ -3763,7 +3826,7 @@ function createBookCard(book) {
   card.dataset.bookId = book.id;
   card.dataset.phase = String(book.phase);
   card.querySelector('.title').textContent = book.title || 'Untitled';
-  card.querySelector('.author').textContent = book.author || 'Unknown author';
+  card.querySelector('.author').textContent = book.author || 'Unknown source';
 
   const coverUrl = resolveCoverUrl(book);
   if (coverUrl) {
@@ -3830,7 +3893,7 @@ function applyCardFormat(card, book) {
   const el = card.querySelector('.card-format');
   if (!el) return;
   const fmt = book.format;
-  if (!fmt || (fmt !== 'ebook' && fmt !== 'audiobook' && fmt !== 'physical')) {
+  if (!fmt || !FORMAT_LABELS[fmt]) {
     el.style.display = 'none';
     el.textContent = '';
     return;
@@ -3894,7 +3957,7 @@ function rebuildPhaseGrid(phaseId) {
   if (phase.pctEl) phase.pctEl.textContent = pct + '%';
   if (phase.countEl) {
     phase.countEl.textContent =
-      finished + ' / ' + perPhase + ' finished · ' + books.length + ' added';
+      finished + ' / ' + perPhase + ' completed · ' + books.length + ' added';
   }
   if (phase.progressFill) {
     phase.progressFill.style.width = Math.min(100, Math.max(0, pct)) + '%';
@@ -3915,10 +3978,9 @@ function updateHeaderProgress() {
   for (const b of state.books) if (b.status === 'finished') finished++;
   const total = getTotalBooks();
   const pct = total > 0 ? Math.round((finished / total) * 100) : 0;
-  refs.progressText.textContent = finished + ' / ' + total + ' finished';
+  refs.progressText.textContent = finished + ' / ' + total + ' completed';
   refs.progressPct.textContent = pct + '%';
   refs.progressFill.style.width = pct + '%';
-  refs.headerTotal.textContent = total;
 }
 
 function updateHeaderDates() {
@@ -3977,14 +4039,12 @@ function updateHeaderGoals() {
   parts.push(chip('🍅', entry.sessions || 0, g.sessions, ''));
   parts.push(chip('📖', entry.pages || 0, g.pages, 'p'));
 
-  // ---- Daily plan chip ----
   const planTasks = getPlanTaskList(today);
   if (planTasks.length > 0) {
     const pDone = planTasks.filter(t => t.done).length;
     parts.push('<span class="goal-chip' + (pDone === planTasks.length ? ' done' : '') + '">' +
       '📋 <span class="gv">' + pDone + '</span>/' + planTasks.length + '</span>');
   }
-  // ---- Active challenges chip ----
   const activeCh = getActiveChallenges(today).length;
   if (activeCh > 0) {
     parts.push('<span class="goal-chip">🔥 <span class="gv">' + activeCh + '</span></span>');
@@ -4004,9 +4064,9 @@ function updateEmptyBanner() {
     emptyBannerEl = document.createElement('div');
     emptyBannerEl.className = 'empty-banner';
     emptyBannerEl.innerHTML =
-      '<div><strong>Welcome to your Japanese learning challenge! 🎉</strong>' +
+      '<div><strong>Welcome to your Japanese Study Hub! 🎉</strong>' +
       '<div style="font-size:13px;color:var(--text-sub);margin-top:4px">' +
-      'Get started by adding a book, bulk uploading, or ' +
+      'Get started by adding a resource, bulk adding, or ' +
       '<span class="link" id="banner-sample">loading sample data</span>.</div></div>';
     refs.container.insertBefore(emptyBannerEl, refs.container.firstChild);
     document.getElementById('banner-sample').addEventListener('click', loadSampleData);
@@ -4115,26 +4175,25 @@ function openViewModal(bookId) {
 
   const status = book.status || 'unread';
   viewEls.status.className = 'view-status ' + status;
-  viewEls.status.textContent = STATUS_LABELS[status] || 'Unread';
+  viewEls.status.textContent = STATUS_LABELS[status] || 'Not Started';
 
   viewEls.title.textContent = book.title || 'Untitled';
 
-  // ---- Clickable author link ----
   viewEls.author.innerHTML = '';
   if (book.author && book.author.trim()) {
-    viewEls.author.appendChild(document.createTextNode('by '));
+    viewEls.author.appendChild(document.createTextNode('from '));
     const link = document.createElement('a');
     link.href = '#';
     link.className = 'author-link';
     link.textContent = book.author;
-    link.title = 'View all books by ' + book.author;
+    link.title = 'View all resources from ' + book.author;
     link.addEventListener('click', (e) => {
       e.preventDefault();
       openAuthorBooks(book.author);
     });
     viewEls.author.appendChild(link);
   } else {
-    viewEls.author.textContent = 'Unknown author';
+    viewEls.author.textContent = 'Unknown source';
   }
 
   viewEls.stars.innerHTML = '';
@@ -4200,7 +4259,7 @@ function openViewModal(bookId) {
     viewEls.pomodoroLabel.textContent = 'Resume Session';
     viewEls.pomodoroBtn.disabled = false;
   } else {
-    viewEls.pomodoroLabel.textContent = 'Start Pomodoro Session';
+    viewEls.pomodoroLabel.textContent = 'Start Study Session';
     viewEls.pomodoroBtn.disabled = false;
   }
 
@@ -4215,7 +4274,7 @@ function openViewModal(bookId) {
   if (book.goodreads) {
     const a = document.createElement('a');
     a.href = book.goodreads; a.target = '_blank'; a.rel = 'noopener';
-    a.textContent = '📖 View on Goodreads';
+    a.textContent = '🔗 Open Link';
     viewEls.links.appendChild(a);
   }
   if (book.wiki) {
@@ -4241,7 +4300,7 @@ document.getElementById('view-delete').addEventListener('click', () => {
   if (!viewBookId) return;
   const book = getBook(viewBookId);
   if (!book) return;
-  if (!confirm('Delete "' + (book.title || 'this book') + '"? This cannot be undone.')) return;
+  if (!confirm('Delete "' + (book.title || 'this resource') + '"? This cannot be undone.')) return;
   if (state.timer.bookId === viewBookId) stopTimer(false);
   const pid = book.phase;
   removeBookRecord(viewBookId);
@@ -4252,7 +4311,7 @@ document.getElementById('view-delete').addEventListener('click', () => {
   editReturnToView = false;
   viewBookId = null;
   document.querySelectorAll('.modal-backdrop.show').forEach(m => m.classList.remove('show'));
-  showToast('Book deleted');
+  showToast('Resource deleted');
 });
 
 viewEls.pomodoroBtn.addEventListener('click', () => {
@@ -4263,7 +4322,7 @@ viewEls.pomodoroBtn.addEventListener('click', () => {
   if (!isCurrent) {
     if (state.timer.running || state.timer.remainingSeconds > 0) {
       if (!confirm('A session is already in progress. Stop it and start a new one for "' +
-        (book.title || 'this book') + '"?')) return;
+        (book.title || 'this resource') + '"?')) return;
       stopTimer(false);
     }
     state.timer.bookId = viewBookId;
@@ -4281,7 +4340,7 @@ viewEls.pomodoroBtn.addEventListener('click', () => {
 });
 
 /* ==================================================
-   AUTHORS — list & author book grid
+   SOURCES
    ================================================== */
 function getAllAuthors() {
   const map = new Map();
@@ -4321,15 +4380,15 @@ function renderAuthorsList(filter) {
   const filtered = q ? all.filter(a => a.name.toLowerCase().includes(q)) : all;
 
   const totalBooks = all.reduce((sum, a) => sum + a.books.length, 0);
-  footer.textContent = all.length + ' author' + (all.length !== 1 ? 's' : '') +
-    ' · ' + totalBooks + ' book' + (totalBooks !== 1 ? 's' : '');
+  footer.textContent = all.length + ' source' + (all.length !== 1 ? 's' : '') +
+    ' · ' + totalBooks + ' resource' + (totalBooks !== 1 ? 's' : '');
 
   if (all.length === 0) {
-    container.innerHTML = '<div class="authors-empty">No authors yet.<br>Add some books with authors to see them here.</div>';
+    container.innerHTML = '<div class="authors-empty">No sources yet.<br>Add some resources with a source to see them here.</div>';
     return;
   }
   if (filtered.length === 0) {
-    container.innerHTML = '<div class="authors-empty">No authors match "<strong>' + escapeHtml(filter) + '</strong>".</div>';
+    container.innerHTML = '<div class="authors-empty">No sources match "<strong>' + escapeHtml(filter) + '</strong>".</div>';
     return;
   }
 
@@ -4337,19 +4396,18 @@ function renderAuthorsList(filter) {
   for (const a of filtered) {
     const finished = a.books.filter(b => b.status === 'finished').length;
     const reading  = a.books.filter(b => b.status === 'reading').length;
-    const unread   = a.books.filter(b => !b.status || b.status === 'unread').length;
     const dnf      = a.books.filter(b => b.status === 'dnf').length;
 
-    let meta = a.books.length + ' book' + (a.books.length !== 1 ? 's' : '');
-    if (finished > 0) meta += ' · ' + finished + ' finished';
-    if (reading  > 0) meta += ' · ' + reading  + ' reading';
-    if (dnf      > 0) meta += ' · ' + dnf      + ' DNF';
+    let meta = a.books.length + ' resource' + (a.books.length !== 1 ? 's' : '');
+    if (finished > 0) meta += ' · ' + finished + ' done';
+    if (reading  > 0) meta += ' · ' + reading  + ' in progress';
+    if (dnf      > 0) meta += ' · ' + dnf      + ' dropped';
 
     const item = document.createElement('button');
     item.type = 'button';
     item.className = 'author-item';
     item.dataset.author = a.name;
-    item.title = 'View books by ' + a.name;
+    item.title = 'View resources from ' + a.name;
 
     const avatar = document.createElement('div');
     avatar.className = 'author-item-avatar';
@@ -4385,14 +4443,11 @@ function openAuthorBooks(authorName) {
 
   const books = state.books.filter(b => (b.author || '').trim() === authorName);
 
-  // Set title
   document.getElementById('author-books-title').textContent = '✍ ' + authorName;
 
-  // Build grid
   const grid = document.getElementById('author-books-grid');
   const frag = document.createDocumentFragment();
 
-  // Sort: finished first, then reading, then unread, then dnf, then by title
   const statusOrder = { finished: 0, reading: 1, unread: 2, dnf: 3 };
   const sorted = [...books].sort((a, b) => {
     const sa = statusOrder[a.status || 'unread'] ?? 2;
@@ -4406,22 +4461,20 @@ function openAuthorBooks(authorName) {
   }
   grid.replaceChildren(frag);
 
-  // Stats
   const finished = books.filter(b => b.status === 'finished').length;
   const reading  = books.filter(b => b.status === 'reading').length;
   const unread   = books.filter(b => !b.status || b.status === 'unread').length;
   const dnf      = books.filter(b => b.status === 'dnf').length;
   const totalSec = books.reduce((sum, b) => sum + (b.timeSpent || 0), 0);
 
-  const parts = [books.length + ' book' + (books.length !== 1 ? 's' : '')];
-  if (finished) parts.push(finished + ' finished');
-  if (reading)  parts.push(reading  + ' reading');
-  if (unread)   parts.push(unread   + ' unread');
-  if (dnf)      parts.push(dnf      + ' DNF');
-  if (totalSec > 0) parts.push(formatDuration(totalSec) + ' read');
+  const parts = [books.length + ' resource' + (books.length !== 1 ? 's' : '')];
+  if (finished) parts.push(finished + ' done');
+  if (reading)  parts.push(reading  + ' in progress');
+  if (unread)   parts.push(unread   + ' not started');
+  if (dnf)      parts.push(dnf      + ' dropped');
+  if (totalSec > 0) parts.push(formatDuration(totalSec) + ' studied');
   document.getElementById('author-books-stats').textContent = parts.join(' · ');
 
-  // Open
   closeAllAndOpen('modal-author-books');
 }
 
@@ -4432,7 +4485,7 @@ function createAuthorBookCard(book) {
   card.draggable = false;
 
   card.querySelector('.title').textContent = book.title || 'Untitled';
-  card.querySelector('.author').textContent = book.author || 'Unknown author';
+  card.querySelector('.author').textContent = book.author || 'Unknown source';
 
   const coverUrl = resolveCoverUrl(book);
   if (coverUrl) {
@@ -4552,7 +4605,7 @@ function updateDeadlineHint() {
 document.getElementById('f-deadline-auto').addEventListener('click', () => {
   const phaseId = parseInt(f.phase.value, 10);
   const pd = getPhaseDeadline(phaseId - 1);
-  if (!pd) { showToast('Set challenge dates in Settings first', 'error'); return; }
+  if (!pd) { showToast('Set hub dates in Settings first', 'error'); return; }
   f.deadline.value = pd;
 });
 document.getElementById('f-deadline-clear').addEventListener('click', () => {
@@ -4581,7 +4634,7 @@ function openBookModal(bookId, defaultPhase) {
   };
 
   document.getElementById('modal-book-title').textContent =
-    modalIsNew ? 'Add Book' : 'Edit Book';
+    modalIsNew ? 'Add Resource' : 'Edit Resource';
   f.title.value     = modalEditing.title || '';
   f.author.value    = modalEditing.author || '';
   f.isbn.value      = modalEditing.isbn || '';
@@ -4601,7 +4654,7 @@ function openBookModal(bookId, defaultPhase) {
   updateDeadlineHint();
   refreshAuthorSuggestions();
 
-  document.getElementById('btn-save').textContent = modalIsNew ? 'Add Book' : 'Save Changes';
+  document.getElementById('btn-save').textContent = modalIsNew ? 'Add Resource' : 'Save Changes';
 
   openModal('modal-book');
   requestAnimationFrame(() => f.title.focus());
@@ -4639,13 +4692,13 @@ function saveBookFromModal() {
   if (modalIsNew) {
     insertBook(record);
     affectedPhases.add(record.phase);
-    showToast('Book added ✓', 'success');
+    showToast('Resource added ✓', 'success');
   } else {
     const old = getBook(record.id);
     if (old) affectedPhases.add(old.phase);
     updateBookRecord(record.id, record);
     affectedPhases.add(record.phase);
-    showToast('Book updated ✓', 'success');
+    showToast('Resource updated ✓', 'success');
   }
 
   viewBookId = record.id;
@@ -4682,7 +4735,7 @@ coverEls.closeBtn2.addEventListener('click', closeCoverModal);
 
 function updateGoogleImagesLink(query) {
   coverEls.google.href = 'https://www.google.com/search?tbm=isch&q=' +
-    encodeURIComponent(query || 'book cover');
+    encodeURIComponent(query || 'resource cover');
 }
 
 function openCoverSearch() {
@@ -4695,7 +4748,7 @@ function openCoverSearch() {
 
   coverEls.input.value = q;
   coverEls.results.innerHTML = '';
-  coverEls.status.textContent = q ? 'Press Search to find covers.' : 'Enter a title, author, or ISBN.';
+  coverEls.status.textContent = q ? 'Press Search to find covers.' : 'Enter a title, source, or ISBN.';
   updateGoogleImagesLink(q);
   coverEls.modal.classList.add('show');
 
@@ -4727,7 +4780,7 @@ async function runCoverSearch() {
   const q = coverEls.input.value.trim();
   if (!q) { showToast('Enter a search query', 'error'); coverEls.input.focus(); return; }
 
-  updateGoogleImagesLink(q + ' book cover');
+  updateGoogleImagesLink(q + ' cover');
   coverEls.status.textContent = 'Searching…';
   coverEls.results.innerHTML = '<div class="cover-loading">Searching Google Books &amp; Open Library…</div>';
 
@@ -4940,17 +4993,17 @@ function updateSettingsPreview() {
   const total = phases * perPhase;
 
   s.preview.innerHTML =
-    '<strong>' + total + ' books</strong>' +
+    '<strong>' + total + ' resources</strong>' +
     '<span class="sub">' + phases + ' phase' + (phases !== 1 ? 's' : '') +
-    ' × ' + perPhase + ' book' + (perPhase !== 1 ? 's' : '') + '</span>';
+    ' × ' + perPhase + ' item' + (perPhase !== 1 ? 's' : '') + '</span>';
 
   const orphaned = state.books.filter(b => b.phase > phases);
   if (orphaned.length > 0) {
     const uniquePhases = [...new Set(orphaned.map(b => b.phase))].sort((a, b) => a - b);
     s.warning.style.display = '';
     s.warning.innerHTML =
-      '<strong>⚠️ Books will be reassigned</strong>' +
-      orphaned.length + ' book' + (orphaned.length !== 1 ? 's' : '') +
+      '<strong>⚠️ Resources will be reassigned</strong>' +
+      orphaned.length + ' resource' + (orphaned.length !== 1 ? 's' : '') +
       ' currently in phase' + (uniquePhases.length !== 1 ? 's' : '') + ' ' +
       uniquePhases.join(', ') +
       ' will be moved to the last phase (Phase ' + phases + ').';
@@ -5036,7 +5089,7 @@ presetButtons.forEach(btn => {
     s.endDate.value = addDaysISO(start, days);
     setActivePreset(days);
     updateSettingsPreview();
-    showToast(days + '-day challenge set ✓', 'success');
+    showToast(days + '-day plan set ✓', 'success');
   });
 });
 
@@ -5112,7 +5165,7 @@ function saveSettings() {
   if (orphaned.length > 0) {
     const uniquePhases = [...new Set(orphaned.map(b => b.phase))].sort((a, b) => a - b);
     const ok = confirm(
-      orphaned.length + ' book' + (orphaned.length !== 1 ? 's' : '') +
+      orphaned.length + ' resource' + (orphaned.length !== 1 ? 's' : '') +
       ' in phase' + (uniquePhases.length !== 1 ? 's' : '') + ' ' + uniquePhases.join(', ') +
       ' will be moved to Phase ' + newPhaseCount + '.\n\nContinue?'
     );
@@ -5178,7 +5231,7 @@ document.getElementById('s-reset').addEventListener('click', () => {
 });
 
 /* ==================================================
-   Reset Challenge & Books
+   Reset Hub & Resources
    ================================================== */
 document.getElementById('s-reset-challenge').addEventListener('click', () => {
   const bookCount = state.books.length;
@@ -5186,11 +5239,11 @@ document.getElementById('s-reset-challenge').addEventListener('click', () => {
   const challengeCount = (state.challenges || []).length;
 
   const msg1 =
-    'Reset the challenge and books?\n\n' +
-    '• ' + bookCount + ' book' + (bookCount !== 1 ? 's' : '') + ' will be permanently deleted\n' +
-    '• ' + activityDays + ' day' + (activityDays !== 1 ? 's' : '') + ' of reading activity will be cleared\n' +
+    'Reset the hub and resources?\n\n' +
+    '• ' + bookCount + ' resource' + (bookCount !== 1 ? 's' : '') + ' will be permanently deleted\n' +
+    '• ' + activityDays + ' day' + (activityDays !== 1 ? 's' : '') + ' of study activity will be cleared\n' +
     '• All daily plan tasks and ' + challengeCount + ' challenge' + (challengeCount !== 1 ? 's' : '') + ' will be cleared\n' +
-    '• The challenge timeline will restart from today (same duration)\n\n' +
+    '• The timeline will restart from today (same duration)\n\n' +
     'Phase names, colors, learning objectives, goals, and timer settings will be kept.\n\n' +
     'This cannot be undone.';
   if (!confirm(msg1)) return;
@@ -5231,7 +5284,7 @@ document.getElementById('s-reset-challenge').addEventListener('click', () => {
   rebuildPomoBookSelect();
 
   closeAllModals();
-  showToast('Challenge reset — good luck! 🎉', 'success');
+  showToast('Hub reset — good luck! 🎉', 'success');
 });
 
 /* ==================================================
@@ -5252,7 +5305,7 @@ function getModeColorClass(mode) {
 
 function startTimer() {
   if (!state.timer.bookId) {
-    showToast('Select a book first', 'error');
+    showToast('Select a resource first', 'error');
     return;
   }
   if (state.timer.running) return;
@@ -5383,7 +5436,6 @@ function ensureTicking() {
   timerInterval = setInterval(tickTimer, 250);
 }
 
-/* Keep hours/minutes deadline badges live even when the pomodoro timer isn't running. */
 setInterval(() => {
   if (state.settings.showDeadlineTime) refreshCardDeadlines();
 }, 30000);
@@ -5440,7 +5492,7 @@ document.addEventListener('click', (e) => {
 
 function rebuildPomoBookSelect() {
   const prevVal = state.timer.bookId || pomoBookSelect.value;
-  let html = '<option value="">— Select a book —</option>';
+  let html = '<option value="">— Select a resource —</option>';
   const phases = getPhases();
   phases.forEach(phase => {
     const phaseBooks = getPhaseBooks(phase.id);
@@ -5467,7 +5519,7 @@ pomoBookSelect.addEventListener('change', () => {
   }
   if (state.timer.running || state.timer.remainingSeconds > 0 && state.timer.bookId) {
     if (state.timer.bookId && state.timer.bookId !== id) {
-      if (!confirm('A session is already set up. Switch to a different book?')) {
+      if (!confirm('A session is already set up. Switch to a different resource?')) {
         pomoBookSelect.value = state.timer.bookId || '';
         return;
       }
@@ -5503,7 +5555,7 @@ pomoStart.addEventListener('click', () => {
     if (sel) state.timer.bookId = sel;
   }
   if (!state.timer.bookId) {
-    showToast('Select a book first', 'error');
+    showToast('Select a resource first', 'error');
     return;
   }
   if (state.timer.remainingSeconds <= 0) {
@@ -5547,7 +5599,7 @@ function updateTimerWidget() {
 
     if (book) {
       pomoBookTitle.textContent = book.title || 'Untitled';
-      pomoBookAuthor.textContent = book.author || 'Unknown author';
+      pomoBookAuthor.textContent = book.author || 'Unknown source';
       const coverUrl = resolveCoverUrl(book);
       if (coverUrl) {
         pomoBookCover.innerHTML = '<img src="' + escapeHtml(coverUrl) + '" alt="">';
@@ -5614,7 +5666,6 @@ refs.progressPct  = document.getElementById('progress-pct');
 refs.progressFill = document.getElementById('progress-fill');
 refs.progressDates = document.getElementById('progress-dates');
 refs.progressGoals = document.getElementById('progress-goals');
-refs.headerTotal = document.getElementById('header-total');
 
 refs.container.addEventListener('click', (e) => {
   if (justDragged) return;
@@ -5769,7 +5820,7 @@ document.getElementById('btn-calendar').addEventListener('click', openCalendar);
 document.getElementById('btn-streak').addEventListener('click', openStreak);
 
 /* ==================================================
-   Bulk upload
+   Bulk add
    ================================================== */
 document.getElementById('bulk-submit').addEventListener('click', () => {
   const text = document.getElementById('bulk-input').value.trim();
@@ -5830,7 +5881,7 @@ document.getElementById('bulk-submit').addEventListener('click', () => {
   closeAllModals();
   document.getElementById('bulk-input').value = '';
 
-  let msg = 'Added ' + added + ' book' + (added !== 1 ? 's' : '') + ' ✓';
+  let msg = 'Added ' + added + ' resource' + (added !== 1 ? 's' : '') + ' ✓';
   if (formatCount > 0) msg += ' (' + formatCount + ' with format)';
   showToast(msg, 'success');
 });
@@ -5850,7 +5901,7 @@ document.getElementById('ie-export').addEventListener('click', () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'reading-challenge-' + todayISO() + '.json';
+  a.download = 'japanese-study-hub-' + todayISO() + '.json';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -5872,13 +5923,15 @@ document.getElementById('ie-import-file').addEventListener('change', (e) => {
         if (typeof b.timeSpent !== 'number') b.timeSpent = 0;
         if (typeof b.sessionsCompleted !== 'number') b.sessionsCompleted = 0;
         if (typeof b.deadline !== 'string') b.deadline = '';
+        // Migrate legacy formats
+        if (b.format && FORMAT_MIGRATE[b.format]) b.format = FORMAT_MIGRATE[b.format];
         if (b.format && !FORMAT_LABELS[b.format]) {
           const detected = detectFormat(b.format);
           b.format = detected || '';
         }
       }
 
-      if (!confirm('Import ' + cleaned.length + ' book' + (cleaned.length !== 1 ? 's' : '') + '?\nThis will replace your current data and settings.')) return;
+      if (!confirm('Import ' + cleaned.length + ' resource' + (cleaned.length !== 1 ? 's' : '') + '?\nThis will replace your current data and settings.')) return;
 
       state.books = cleaned;
       if (parsed.settings && typeof parsed.settings === 'object') {
@@ -5904,7 +5957,6 @@ document.getElementById('ie-import-file').addEventListener('change', (e) => {
         state.activityLog = {};
       }
 
-      // ---- Daily plans ----
       if (parsed.dailyPlans && typeof parsed.dailyPlans === 'object') {
         state.dailyPlans = parsed.dailyPlans;
         for (const k in state.dailyPlans) {
@@ -5918,12 +5970,11 @@ document.getElementById('ie-import-file').addEventListener('change', (e) => {
         state.dailyPlans = {};
       }
 
-      // ---- Challenges ----
       if (Array.isArray(parsed.challenges)) {
         state.challenges = parsed.challenges.filter(c => c && typeof c === 'object' && c.title);
         state.challenges.forEach(c => {
           if (!c.id) c.id = uid();
-          if (!Array.isArray(c.tasks) || c.tasks.length === 0) c.tasks = ['Read'];
+          if (!Array.isArray(c.tasks) || c.tasks.length === 0) c.tasks = ['Study'];
           if (!c.completions || typeof c.completions !== 'object') c.completions = {};
           c.durationDays = Math.max(1, Math.min(365, parseInt(c.durationDays, 10) || 7));
           if (!c.startDate) c.startDate = todayISO();
@@ -5950,7 +6001,7 @@ document.getElementById('ie-import-file').addEventListener('change', (e) => {
       updateEmptyBanner();
       updateTimerWidget();
       closeAllModals();
-      showToast('Imported ' + cleaned.length + ' books ✓', 'success');
+      showToast('Imported ' + cleaned.length + ' resource' + (cleaned.length !== 1 ? 's' : '') + ' ✓', 'success');
     } catch (err) {
       console.error(err);
       showToast('Invalid file', 'error');
@@ -5961,7 +6012,7 @@ document.getElementById('ie-import-file').addEventListener('change', (e) => {
 });
 
 document.getElementById('ie-clear').addEventListener('click', () => {
-  if (!confirm('Delete ALL books? This cannot be undone.')) return;
+  if (!confirm('Delete ALL resources? This cannot be undone.')) return;
   if (!confirm('Are you absolutely sure? Consider exporting first.')) return;
   if (state.timer.running) stopTimer(false);
   state.books = [];
@@ -5980,40 +6031,39 @@ document.getElementById('ie-clear').addEventListener('click', () => {
 });
 
 /* ==================================================
-   Sample data — Japanese learning materials
+   Sample data — Japanese study resources
    ================================================== */
 function loadSampleData() {
   const samples = [
     // ---------- Phase 1 — Absolute Beginner ----------
-    { t: 'Genki I: An Integrated Course in Elementary Japanese', a: 'Eri Banno', isbn: '9784789014403', f: 'physical' },
-    { t: 'Japanese from Zero! 1', a: 'George Trombley', isbn: '9780976998129', f: 'physical' },
-    { t: 'Japanese Hiragana & Katakana for Beginners', a: 'Timothy G. Stout', isbn: '9784805311448', f: 'physical' },
-    { t: 'Remembering the Kana', a: 'James W. Heisig', isbn: '9780824831646', f: 'ebook' },
-    { t: 'Tae Kim\'s Guide to Learning Japanese', a: 'Tae Kim', isbn: '', f: 'ebook' },
-    { t: 'NHK Easy News', a: 'NHK', isbn: '', f: 'ebook' },
-    { t: 'JapanesePod101 Absolute Beginner Season 1', a: 'Innovative Language', isbn: '', f: 'audiobook' },
-    { t: 'Japanese Pronunciation Training', a: 'Dogen', isbn: '', f: 'audiobook' },
+    { t: 'Genki I: An Integrated Course in Elementary Japanese', a: 'Eri Banno', isbn: '9784789014403', f: 'textbook' },
+    { t: 'Japanese from Zero! 1', a: 'George Trombley', isbn: '9780976998129', f: 'textbook' },
+    { t: 'Tae Kim\'s Guide to Learning Japanese', a: 'Tae Kim', isbn: '', f: 'website' },
+    { t: 'JapanesePod101 Absolute Beginner Season 1', a: 'Innovative Language', isbn: '', f: 'podcast' },
+    { t: 'Japanese Ammo with Misa — Beginner Course', a: 'Misa', isbn: '', f: 'youtube' },
+    { t: 'Anki Core 2k/6k Optimized', a: 'Anki Community', isbn: '', f: 'anki' },
+    { t: 'NHK Easy News', a: 'NHK', isbn: '', f: 'website' },
+    { t: 'Dogen — Japanese Phonetics', a: 'Dogen', isbn: '', f: 'youtube' },
 
     // ---------- Phase 2 — N5 → N4 ----------
-    { t: 'Genki II: An Integrated Course in Elementary Japanese', a: 'Eri Banno', isbn: '9784789014434', f: 'physical' },
-    { t: 'Minna no Nihongo I (Second Edition)', a: '3A Corporation', isbn: '9784883196036', f: 'physical' },
-    { t: 'Nihongo Sou Matome N5', a: 'Hitoko Sasaki', isbn: '9784872177873', f: 'physical' },
-    { t: 'Nihongo Sou Matome N4', a: 'Hitoko Sasaki', isbn: '9784872177181', f: 'physical' },
-    { t: 'Short Stories in Japanese for Beginners', a: 'Olly Richards', isbn: '9781529358858', f: 'ebook' },
-    { t: 'Yotsuba&! Vol. 1', a: 'Kiyohiko Azuma', isbn: '9784048690020', f: 'physical' },
-    { t: 'Shirokuma Cafe', a: 'Aloha Higa', isbn: '9784091790424', f: 'ebook' },
-    { t: 'Japanese Graded Readers Level 1', a: 'NPO Tadoku Supporters', isbn: '', f: 'physical' },
-    { t: 'Nihongo con Teppei (Beginner Podcast)', a: 'Teppei', isbn: '', f: 'audiobook' },
+    { t: 'Genki II: An Integrated Course in Elementary Japanese', a: 'Eri Banno', isbn: '9784789014434', f: 'textbook' },
+    { t: 'Minna no Nihongo I (Second Edition)', a: '3A Corporation', isbn: '9784883196036', f: 'textbook' },
+    { t: 'Nihongo Sou Matome N4', a: 'Hitoko Sasaki', isbn: '9784872177181', f: 'textbook' },
+    { t: 'Nihongo con Teppei (Beginner Podcast)', a: 'Teppei', isbn: '', f: 'podcast' },
+    { t: 'Yotsuba&! Vol. 1', a: 'Kiyohiko Azuma', isbn: '9784048690020', f: 'manga' },
+    { t: 'Shirokuma Cafe', a: 'Aloha Higa', isbn: '9784091790424', f: 'manga' },
+    { t: 'Japanese Graded Readers Level 1', a: 'NPO Tadoku Supporters', isbn: '', f: 'manga' },
+    { t: 'Renshuu — N5/N4 Course', a: 'Renshuu', isbn: '', f: 'app' },
 
     // ---------- Phase 3 — N4 → N3 ----------
-    { t: 'Tobira: Gateway to Advanced Japanese', a: 'Mayumi Oka', isbn: '9784872176081', f: 'physical' },
-    { t: 'An Integrated Approach to Intermediate Japanese', a: 'Akira Miura', isbn: '9784789013079', f: 'physical' },
-    { t: 'Nihongo Sou Matome N3', a: 'Hitoko Sasaki', isbn: '9784872177514', f: 'physical' },
-    { t: 'Convenience Store Woman', a: 'Sayaka Murata', isbn: '9784167911020', f: 'ebook' },
-    { t: 'Kitchen', a: 'Banana Yoshimoto', isbn: '9784041800116', f: 'ebook' },
-    { t: 'Norwegian Wood', a: 'Haruki Murakami', isbn: '9784062748681', f: 'ebook' },
-    { t: 'Your Name.', a: 'Makoto Shinkai', isbn: '9784041026366', f: 'ebook' },
-    { t: 'Japanese Graded Readers Level 4', a: 'NPO Tadoku Supporters', isbn: '', f: 'physical' }
+    { t: 'Tobira: Gateway to Advanced Japanese', a: 'Mayumi Oka', isbn: '9784872176081', f: 'textbook' },
+    { t: 'An Integrated Approach to Intermediate Japanese', a: 'Akira Miura', isbn: '9784789013079', f: 'textbook' },
+    { t: 'Nihongo Sou Matome N3', a: 'Hitoko Sasaki', isbn: '9784872177514', f: 'textbook' },
+    { t: 'Convenience Store Woman', a: 'Sayaka Murata', isbn: '9784167911020', f: 'manga' },
+    { t: 'Kitchen', a: 'Banana Yoshimoto', isbn: '9784041800116', f: 'manga' },
+    { t: 'Japanese with Shun (Intermediate Podcast)', a: 'Shun', isbn: '', f: 'podcast' },
+    { t: 'Nihongo no Mori — N3 Grammar', a: 'Nihongo no Mori', isbn: '', f: 'youtube' },
+    { t: 'WaniKani (Levels 1–30)', a: 'Tofugu', isbn: '', f: 'app' }
   ];
 
   state.books = [];
@@ -6095,7 +6145,7 @@ function loadSampleData() {
   updateHeaderGoals();
   updateEmptyBanner();
   closeAllModals();
-  showToast('Sample data loaded ✓', 'success');
+  showToast('Sample resources loaded ✓', 'success');
 }
 document.getElementById('ie-sample').addEventListener('click', loadSampleData);
 
@@ -6167,7 +6217,6 @@ function renderCalendar() {
     num.textContent = d.getDate();
     cell.appendChild(num);
 
-    // Daily plan indicator
     if (hasPlanItems(iso)) {
       const dot = document.createElement('span');
       dot.className = 'cal-plan-dot';
@@ -6203,7 +6252,7 @@ function renderCalendar() {
         titleSpan.textContent = ev.book.title || 'Untitled';
         evEl.appendChild(titleSpan);
 
-        evEl.title = (ev.type === 'deadline' ? 'Deadline: ' : ev.type === 'start' ? 'Started: ' : 'Finished: ') + (ev.book.title || 'Untitled');
+        evEl.title = (ev.type === 'deadline' ? 'Deadline: ' : ev.type === 'start' ? 'Started: ' : 'Completed: ') + (ev.book.title || 'Untitled');
         evWrap.appendChild(evEl);
       }
 
@@ -6252,7 +6301,7 @@ function renderCalendarDetail(events) {
   dayEvents.sort((a, b) => order[a.type] - order[b.type]);
 
   dayEvents.forEach(ev => {
-    const label = ev.type === 'deadline' ? 'Deadline' : ev.type === 'start' ? 'Started' : 'Finished';
+    const label = ev.type === 'deadline' ? 'Deadline' : ev.type === 'start' ? 'Started' : 'Completed';
     const coverUrl = resolveCoverUrl(ev.book);
     html += '<div class="cal-detail-row" data-book-id="' + escapeHtml(ev.book.id) + '">';
     if (coverUrl) {
@@ -6456,7 +6505,7 @@ function renderStreak() {
           else level = 4;
           cell.classList.add('lv' + level);
         }
-        const label = seconds > 0 ? formatDurationOrShort(seconds) : 'No reading';
+        const label = seconds > 0 ? formatDurationOrShort(seconds) : 'No study';
         cell.title = formatDate(iso) + ' — ' + label;
       }
 
@@ -6505,7 +6554,6 @@ streakEls.logPagesInput.addEventListener('keydown', (e) => {
    DAILY PLAN + CHALLENGES
    ================================================== */
 
-/* --- Pre-created quick checklist items --- */
 const QUICK_TASKS = [
   '📖 Study for 30 minutes',
   '📄 Read 20 pages',
@@ -6513,23 +6561,21 @@ const QUICK_TASKS = [
   '📝 Log my progress',
   '🧘 Study with no phone nearby',
   '🛏️ Study before bed',
-  '⭐ Rate / review a book',
-  '🔖 Pick my next book'
+  '⭐ Rate / review a resource',
+  '🔖 Pick my next resource'
 ];
 
-/* --- Pre-created challenges --- */
 const CHALLENGE_PRESETS = [
   { id: 'p-sprint',   icon: '⚡', title: '7-Day Study Sprint',       desc: 'Study for at least 30 minutes every day for a week.',   days: 7,  tasks: ['Study 30 minutes', 'Log my progress'] },
   { id: 'p-pages',    icon: '📄', title: '30-Day Page Turner',       desc: 'Read 20 pages a day for a whole month.',                days: 30, tasks: ['Read 20 pages', 'Log pages read'] },
-  { id: 'p-finish',   icon: '🏁', title: 'Finish a Book in a Week',  desc: 'Pick one book and finish it within 7 days.',            days: 7,  tasks: ['Read 50 pages', 'Update my progress'] },
+  { id: 'p-finish',   icon: '🏁', title: 'Finish in a Week',         desc: 'Pick one resource and finish it within 7 days.',        days: 7,  tasks: ['Read 50 pages', 'Update my progress'] },
   { id: 'p-pomodoro', icon: '🍅', title: '4 Pomodoros a Day',        desc: 'Four focused study sessions a day for 5 days.',         days: 5,  tasks: ['Complete 4 pomodoro sessions'] },
   { id: 'p-morning',  icon: '🌅', title: 'Early Bird Learner',       desc: 'Study before 9am for 10 days straight.',                days: 10, tasks: ['Study before 9am'] },
   { id: 'p-audio',    icon: '🎧', title: 'Audio Commute',            desc: 'Listen on every commute for two weeks.',                days: 14, tasks: ['Listen during my commute', 'Note a favourite line'] },
   { id: 'p-deep',     icon: '🧠', title: 'Deep Focus Week',          desc: 'One hour of uninterrupted study a day.',                days: 7,  tasks: ['Study 60 minutes, no phone'] },
-  { id: 'p-new',      icon: '🌈', title: 'Explore New Material',     desc: 'Try 3 new authors or sources in 21 days.',              days: 21, tasks: ['Study from a new source', 'Note the source'] }
+  { id: 'p-new',      icon: '🌈', title: 'Explore New Material',     desc: 'Try 3 new sources or formats in 21 days.',              days: 21, tasks: ['Study from a new source', 'Note the source'] }
 ];
 
-/* ---------- Data helpers ---------- */
 function ensureDailyPlan(iso) {
   if (!state.dailyPlans || typeof state.dailyPlans !== 'object') state.dailyPlans = {};
   if (!state.dailyPlans[iso]) state.dailyPlans[iso] = { tasks: [] };
@@ -6582,7 +6628,6 @@ function hasPlanItems(iso) {
   return getActiveChallenges(iso).length > 0;
 }
 
-/* ---------- Element refs ---------- */
 const planState = { date: todayISO() };
 
 const planEls = {
@@ -6603,7 +6648,6 @@ const planEls = {
   footer:       document.getElementById('plan-footer')
 };
 
-/* ---------- Rendering ---------- */
 function renderDailyPlan() {
   const iso = planState.date;
   const d = new Date(iso + 'T00:00:00');
@@ -6620,7 +6664,6 @@ function renderDailyPlan() {
     diff > 1    ? 'In ' + diff + ' days' :
                   Math.abs(diff) + ' days ago';
 
-  /* ---- Checklist ---- */
   const tasks = getPlanTaskList(iso);
   const doneCount = tasks.filter(t => t.done).length;
   planEls.taskCount.textContent = tasks.length ? doneCount + ' / ' + tasks.length + ' done' : '';
@@ -6662,7 +6705,6 @@ function renderDailyPlan() {
     planEls.taskList.appendChild(frag);
   }
 
-  /* ---- Quick task chips ---- */
   planEls.quickAdd.innerHTML = '';
   QUICK_TASKS.forEach(q => {
     const chip = document.createElement('button');
@@ -6673,7 +6715,6 @@ function renderDailyPlan() {
     planEls.quickAdd.appendChild(chip);
   });
 
-  /* ---- Active challenges ---- */
   const active = getActiveChallenges(iso);
   planEls.activeWrap.innerHTML = '';
   if (active.length === 0) {
@@ -6685,10 +6726,8 @@ function renderDailyPlan() {
     active.forEach(ch => planEls.activeWrap.appendChild(buildChallengeCard(ch, iso)));
   }
 
-  /* ---- Pre-made challenges ---- */
   renderChallengePresets();
 
-  /* ---- Summary ---- */
   const entry = state.activityLog[iso] || { seconds: 0 };
   const mins = Math.round((entry.seconds || 0) / 60);
   planEls.summary.innerHTML =
@@ -6707,7 +6746,6 @@ function buildChallengeCard(ch, iso) {
   const card = document.createElement('div');
   card.className = 'challenge-card';
 
-  /* Header */
   const head = document.createElement('div');
   head.className = 'challenge-head';
 
@@ -6749,7 +6787,6 @@ function buildChallengeCard(ch, iso) {
   head.appendChild(del);
   card.appendChild(head);
 
-  /* Description */
   if (ch.desc) {
     const desc = document.createElement('div');
     desc.className = 'challenge-desc';
@@ -6757,7 +6794,6 @@ function buildChallengeCard(ch, iso) {
     card.appendChild(desc);
   }
 
-  /* Progress bar */
   const bar = document.createElement('div');
   bar.className = 'challenge-bar';
   const fill = document.createElement('div');
@@ -6766,7 +6802,6 @@ function buildChallengeCard(ch, iso) {
   bar.appendChild(fill);
   card.appendChild(bar);
 
-  /* Daily task checklist */
   const list = document.createElement('div');
   list.className = 'challenge-tasks';
   const tasks = Array.isArray(ch.tasks) ? ch.tasks : [];
@@ -6853,7 +6888,6 @@ function renderChallengePresets() {
   });
 }
 
-/* ---------- Actions ---------- */
 function addPlanTask(text) {
   const t = String(text || '').trim();
   if (!t) return;
@@ -6887,7 +6921,6 @@ function startChallengeFromPreset(preset) {
   showToast('Challenge started 🔥', 'success');
 }
 
-/* ---------- Event wiring ---------- */
 function openDailyPlan() {
   planState.date = todayISO();
   renderDailyPlan();
@@ -6934,7 +6967,6 @@ planEls.taskList.addEventListener('click', (e) => {
   updateHeaderGoals();
 });
 
-/* ---------- Custom challenge modal ---------- */
 const chEls = {
   modal: document.getElementById('modal-challenge'),
   icon:  document.getElementById('ch-icon'),
