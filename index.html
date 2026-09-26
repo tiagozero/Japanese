@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Japanese Trainer</title>
+<style>
+/* ============================================================
+   THEME VARIABLES — Light (default)
+   ============================================================ */
+:root{
+  --bg:#f5f1e8;
+  --card:#fffdf8;
+  --card-alt:#fbf6ea;
+  --border:#efe4cb;
+  --border-soft:#efe8d6;
+  --ink:#2a2620;
+  --ink-soft:#4a3f2a;
+  --muted:#8a7f68;
+  --accent:#b06a2c;
+  --accent-warm:#d6a33a;
+  --accent-soft:#fbe9d0;
+  --accent-soft-strong:#fde8c8;
+  --ok:#4a8b5c;
+  --err:#c25a4a;
+  --btn-bg:#fffdf8;
+  --btn-text:#5b4b2e;
+  --btn-border:#e0d7c2;
+  --btn-hover:#efe8d6;
+  --btn-primary-text:#fff;
+  --btn-primary-hover:#9a5a22;
+  --shadow:0 6px 24px rgba(60,40,10,.08);
+  --shadow-soft:0 4px 16px rgba(60,40,10,.07);
+  --popup-bg:#fffdf8;
+  --toast-bg:#fffdf8;
+  --header-bg:rgba(245,241,232,.94);
+  --hover-bg:#f7efdd;
+  --bar-bg:#efe8d6;
+  --highlight-bg:rgba(74,139,92,.28);
+  --highlight-ring:rgba(74,139,92,.45);
+  --token-dash:rgba(176,106,44,.4);
+  --msg-error-bg:#fbeceb; --msg-error-br:#e8c7c3; --msg-error-tx:#8a2f24;
+  --msg-warn-bg:#fbf3df;  --msg-warn-br:#ecd9a5;  --msg-warn-tx:#6b5114;
+  --msg-ok-bg:#eaf4ec;    --msg-ok-br:#c8ddcc;    --msg-ok-tx:#2f5c3d;
+  --kana-ring:rgba(214,163,58,.3);
+  --radius:16px;
+  --radius-sm:12px;
+}
+
+/* ============================================================
+   THEME VARIABLES — Dark
+   ============================================================ */
+html[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#141414;
+  --card:#1a1a1a;
+  --card-alt:#1f1f1f;
+  --border:#2a2a2a;
+  --border-soft:#232323;
+  --ink:#e8e8e8;
+  --ink-soft:#f0f0f0;
+  --muted:#8a8a8a;
+  --accent:#e8a34a;
+  --accent-warm:#c47a2c;
+  --accent-soft:#2a2218;
+  --accent-soft-strong:#332a1d;
+  --ok:#4ade80;
+  --err:#f87171;
+  --btn-bg:#1f1f1f;
+  --btn-text:#d0d0d0;
+  --btn-border:#2f2f2f;
+  --btn-hover:#2a2a2a;
+  --btn-primary-text:#141414;
+  --btn-primary-hover:#f0b562;
+  --shadow:0 6px 24px rgba(0,0,0,.45);
+  --shadow-soft:0 4px 16px rgba(0,0,0,.35);
+  --popup-bg:#232323;
+  --toast-bg:#232323;
+  --header-bg:rgba(20,20,20,.94);
+  --hover-bg:#252525;
+  --bar-bg:#2a2a2a;
+  --highlight-bg:rgba(74,222,128,.25);
+  --highlight-ring:rgba(74,222,128,.45);
+  --token-dash:rgba(232,163,74,.4);
+  --msg-error-bg:#2a1818; --msg-error-br:#4a2828; --msg-error-tx:#ffb0b0;
+  --msg-warn-bg:#2a2418;  --msg-warn-br:#4a4028;  --msg-warn-tx:#ffe0a0;
+  --msg-ok-bg:#182a1d;    --msg-ok-br:#284a30;    --msg-ok-tx:#a8f0b8;
+  --kana-ring:rgba(196,122,44,.35);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*{box-sizing:border-box}
+html,body{margin:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;min-height:100vh;
+  transition:background-color .2s,color .2s;
+}
+button,input,select{font:inherit;color:inherit}
+h1,h2,h3,h4{margin:0 0 .35rem;line-height:1.25}
+.jp{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo","Noto Sans JP",system-ui,sans-serif}
+.muted{color:var(--muted)}
+.hidden{display:none !important}
+ruby{ruby-position:over}
+rt{font-size:.5em;letter-spacing:0}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:var(--btn-bg);color:var(--btn-text);
+  border:1px solid var(--btn-border);border-radius:10px;
+  padding:.42rem .8rem;cursor:pointer;white-space:nowrap;font-size:.9rem;
+  transition:background .15s,border-color .15s,transform .05s;
+}
+.btn:hover{background:var(--btn-hover)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.primary{
+  background:var(--accent);border-color:var(--accent);
+  color:var(--btn-primary-text);font-weight:700;
+}
+.btn.primary:hover{background:var(--btn-primary-hover)}
+.btn.danger{color:var(--err);border-color:var(--btn-border)}
+.btn.danger:hover{background:var(--btn-hover)}
+.btn.small{padding:.3rem .55rem;font-size:.82rem}
+.btn.toggle[aria-pressed="true"]{
+  background:var(--accent-soft);border-color:var(--accent-warm);
+  color:var(--accent);font-weight:700;
+}
+.btn.toggle[aria-pressed="true"]::before{content:"● ";}
+.btn.toggle[aria-pressed="false"]::before{content:"○ ";}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.app-header{
+  position:sticky;top:0;z-index:50;
+  background:var(--header-bg);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border-soft);
+}
+.header-inner{
+  max-width:1600px;margin:0 auto;padding:.65rem 1rem;
+  display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+}
+.home-link{
+  text-decoration:none;font-weight:600;padding:.38rem .75rem;
+  border:1px solid var(--btn-border);border-radius:10px;background:var(--btn-bg);color:var(--btn-text);
+}
+.home-link:hover{background:var(--btn-hover)}
+.home-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.brand{font-weight:700;color:var(--ink-soft)}
+.header-lesson{
+  color:var(--muted);font-size:.9rem;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;max-width:36ch;
+}
+.header-actions{margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+
+/* Theme toggle — icon-only, fixed width so it doesn't shift on swap */
+.btn.theme-toggle{
+  padding:.42rem .6rem;min-width:2.4rem;justify-content:center;
+  font-size:1rem;line-height:1;
+}
+
+/* ============================================================
+   Main + Library
+   ============================================================ */
+.app-main{max-width:1600px;margin:0 auto;padding:1rem 1rem 4rem}
+.library-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.library-head h1{font-size:1.35rem;color:var(--ink-soft)}
+.lesson-list{display:flex;flex-direction:column;gap:.85rem;max-width:900px;margin:0 auto}
+.lesson-card{
+  background:var(--card);border-radius:var(--radius);padding:1.15rem 1.25rem;
+  box-shadow:var(--shadow);display:flex;gap:1rem;justify-content:space-between;flex-wrap:wrap;
+}
+.lesson-card-main{flex:1 1 280px;min-width:0}
+.lesson-card h3{font-size:1.1rem;color:var(--ink-soft)}
+.lesson-card .desc{color:var(--muted);margin:.15rem 0 .45rem;font-size:.94rem}
+.lesson-card .meta{color:var(--muted);font-size:.85rem;margin:.15rem 0}
+.lesson-card-actions{display:flex;gap:.5rem;align-items:flex-start;flex-wrap:wrap}
+.bar{height:8px;border-radius:99px;background:var(--bar-bg);overflow:hidden;margin:.5rem 0}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--accent-warm),var(--ok));width:0}
+.empty{
+  background:var(--card);border-radius:var(--radius);padding:2.2rem 1.2rem;
+  text-align:center;color:var(--muted);box-shadow:var(--shadow-soft);
+  max-width:900px;margin:0 auto;
+}
+
+.messages{margin-bottom:1rem;max-width:900px;margin-left:auto;margin-right:auto}
+.msg{
+  border-radius:var(--radius-sm);padding:.85rem 1rem;margin-bottom:.6rem;
+  font-size:.92rem;background:var(--card);
+}
+.msg.error{background:var(--msg-error-bg);border:1px solid var(--msg-error-br);color:var(--msg-error-tx)}
+.msg.warn {background:var(--msg-warn-bg); border:1px solid var(--msg-warn-br); color:var(--msg-warn-tx)}
+.msg.ok   {background:var(--msg-ok-bg);   border:1px solid var(--msg-ok-br);   color:var(--msg-ok-tx)}
+.msg ul{margin:.4rem 0 0 1.1rem;padding:0}
+.msg li{margin:.15rem 0}
+.preview{
+  background:var(--card);border-radius:var(--radius);padding:1.2rem;
+  box-shadow:var(--shadow);margin-bottom:1rem;border:2px solid var(--accent-warm);
+  max-width:900px;margin-left:auto;margin-right:auto;
+}
+.preview-list{margin:.5rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.9rem}
+.preview-actions{display:flex;gap:.5rem;margin-top:.9rem;flex-wrap:wrap}
+
+/* ============================================================
+   Lesson toolbar
+   ============================================================ */
+.lesson-toolbar{
+  display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:.6rem .9rem;box-shadow:var(--shadow-soft);margin-bottom:.9rem;
+}
+.lesson-toolbar .toolbar-label{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--muted);font-weight:700;margin-right:.2rem;
+}
+.lesson-toolbar .spacer{margin-left:auto}
+
+/* ============================================================
+   Grid
+   ============================================================ */
+.grid4{display:grid;gap:.9rem;align-items:start;grid-template-columns:minmax(0,1fr)}
+.grid4[data-vocab="hidden"]   .col-2{display:none}
+.grid4[data-grammar="hidden"] .col-3{display:none}
+.grid4[data-kana="hidden"]    .col-4{display:none}
+
+@media (min-width:760px) and (max-width:1299px){
+  .grid4{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="hidden"]{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .grid4 .col-3, .grid4 .col-4{grid-column:1 / -1}
+  .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="hidden"] .col-3{grid-column:auto}
+  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="shown"] .col-4{grid-column:auto}
+  .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="shown"]  .col-3{grid-column:auto}
+}
+@media (min-width:1300px){
+  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="hidden"]{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .grid4[data-vocab="shown"][data-grammar="hidden"][data-kana="hidden"],
+  .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="hidden"],
+  .grid4[data-vocab="hidden"][data-grammar="hidden"][data-kana="shown"]{
+    grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);
+  }
+  .grid4[data-vocab="shown"][data-grammar="shown"][data-kana="hidden"],
+  .grid4[data-vocab="shown"][data-grammar="hidden"][data-kana="shown"],
+  .grid4[data-vocab="hidden"][data-grammar="shown"][data-kana="shown"]{
+    grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);
+  }
+  .grid4[data-vocab="shown"][data-grammar="shown"][data-kana="shown"]{
+    grid-template-columns:minmax(0,1.55fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);
+  }
+  .grid4 .col-2, .grid4 .col-3, .grid4 .col-4{grid-column:auto}
+}
+
+.col{min-width:0;display:flex;flex-direction:column;gap:.85rem}
+.col-head{
+  font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--muted);font-weight:700;padding:0 .15rem .1rem;
+}
+.card{background:var(--card);border-radius:var(--radius);padding:1rem 1.1rem;box-shadow:var(--shadow)}
+
+/* ============================================================
+   Sentence
+   ============================================================ */
+.sentence-nav{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.5rem}
+.counter{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;font-size:.95rem}
+.counter strong{color:var(--accent)}
+.sentence-block{
+  background:linear-gradient(180deg,var(--card-alt),var(--card));
+  border-radius:var(--radius-sm);padding:1rem .9rem;margin-bottom:.85rem;
+}
+.sentence{
+  font-size:clamp(1.35rem,2.4vw,2rem);line-height:2.5;text-align:center;margin:0;
+  letter-spacing:.01em;word-break:normal;overflow-wrap:anywhere;
+}
+.sentence rt{color:var(--accent)}
+.sentence .jp-unit.token{
+  cursor:pointer;border-bottom:1px dashed var(--token-dash);
+  border-radius:5px;padding:0 .05em;transition:background .15s;
+}
+.sentence .jp-unit.token:hover{background:var(--accent-soft)}
+.sentence .jp-unit.token:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sentence .jp-unit.highlight{background:var(--highlight-bg);box-shadow:0 0 0 2px var(--highlight-ring)}
+.romaji{text-align:center;color:var(--muted);margin:.4rem 0 0;font-style:italic;letter-spacing:.03em;font-size:.92rem}
+
+.display-controls{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:.7rem}
+.meaning-block{
+  background:var(--card-alt);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:.7rem .85rem;margin-bottom:.7rem;
+}
+.meaning-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin-bottom:.2rem}
+.meaning{font-size:1rem;color:var(--ink-soft);margin:0}
+.aids-controls{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem;justify-content:center}
+
+/* ============================================================
+   Player
+   ============================================================ */
+.player{background:var(--card-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.85rem}
+.player-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
+.player-row:last-child{margin-bottom:0}
+.player-seek{display:flex;align-items:center;gap:.5rem;width:100%}
+.player-seek input[type=range]{flex:1;min-width:80px;accent-color:var(--accent)}
+.time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.8rem;min-width:3em;text-align:center}
+.field{display:flex;align-items:center;gap:.3rem;font-size:.82rem;color:var(--muted)}
+.field select,.field input[type=range]{
+  background:var(--btn-bg);border:1px solid var(--border);border-radius:8px;
+  padding:.22rem .4rem;color:var(--ink);font-size:.85rem;
+}
+.field input[type=range]{padding:0;width:90px;accent-color:var(--accent)}
+.status{font-size:.78rem;color:var(--muted);margin-top:.5rem;min-height:1.1em}
+.status.error{color:var(--err)}
+#audioEl{display:none}
+.player-upload{
+  display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;
+  margin-top:.55rem;border-top:1px dashed var(--border);padding-top:.55rem;
+}
+.player-upload .fname{
+  font-size:.75rem;color:var(--muted);
+  overflow:hidden;text-overflow:ellipsis;max-width:20ch;white-space:nowrap;
+}
+
+/* ============================================================
+   Chunks / Connected / Progress
+   ============================================================ */
+.chunks{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-top:.5rem}
+.chunk{
+  background:var(--card-alt);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:.45rem .7rem;text-align:center;min-width:0;
+}
+.chunk .ct{font-size:1rem;font-weight:600;display:block}
+.chunk .cm{font-size:.74rem;color:var(--muted);margin-top:.1rem;display:block}
+.connected{
+  background:var(--card-alt);border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:.6rem;text-align:center;font-size:1.05rem;margin-top:.5rem;
+}
+.complete{display:flex;justify-content:center;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.7rem}
+.progress{text-align:center;color:var(--muted);font-size:.85rem;margin:.4rem 0 0}
+
+/* ============================================================
+   Vocabulary & Grammar Units
+   ============================================================ */
+.unit-list{display:flex;flex-direction:column;gap:.4rem}
+.unit{
+  text-align:left;background:var(--card-alt);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:.55rem .7rem;cursor:pointer;
+  display:flex;flex-direction:column;gap:.1rem;transition:background .15s,border-color .15s;width:100%;
+}
+.unit:hover{background:var(--hover-bg);border-color:var(--accent-warm)}
+.unit:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.unit .u-t{font-size:1rem;font-weight:700;color:var(--ink-soft)}
+.unit .u-s{font-size:.76rem;color:var(--accent)}
+.unit .u-m{font-size:.84rem;color:var(--ink-soft)}
+.unit .u-p{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.15rem}
+.unit.grammar{border-left:3px solid var(--accent-warm)}
+
+/* ============================================================
+   Grammar Notes
+   ============================================================ */
+.grammar-item{
+  border-left:3px solid var(--accent-warm);
+  padding-left:.7rem;padding-top:.15rem;padding-bottom:.15rem;margin-bottom:.85rem;
+}
+.grammar-item:last-child{margin-bottom:0}
+.grammar-item h4{font-size:.98rem;margin:0 0 .2rem;color:var(--ink-soft)}
+.grammar-item p{margin:.15rem 0;font-size:.88rem;color:var(--ink-soft)}
+.grammar-item .pattern{
+  color:var(--accent);font-size:.82rem;font-weight:600;
+  background:var(--accent-soft);display:inline-block;padding:.15rem .5rem;border-radius:6px;margin-top:.25rem;
+}
+
+/* ============================================================
+   Kana panel
+   ============================================================ */
+.kana-panel{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.1rem 1.1rem 1.15rem;box-shadow:var(--shadow);
+}
+.kana-title{
+  color:var(--accent);font-size:.95rem;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;margin:0 0 .3rem;
+}
+.kana-subtitle{color:var(--muted);font-size:.8rem;margin:0 0 .85rem;line-height:1.45}
+.kana-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(72px, 1fr));gap:.5rem}
+.kana-divider{grid-column:1 / -1;height:1px;background:var(--border);margin:.2rem 0 .05rem}
+.kana-cell{
+  background:var(--card-alt);border:1px solid var(--border);border-radius:10px;
+  padding:.65rem .3rem .55rem;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:.1rem;min-width:0;transition:background .18s,border-color .18s,box-shadow .18s;
+}
+.kana-cell .kc-char{font-size:1.5rem;line-height:1.1;color:var(--ink-soft);font-weight:500;margin-bottom:.05rem}
+.kana-cell .kc-romaji{font-size:.7rem;color:var(--muted);letter-spacing:.02em}
+.kana-cell .kc-script{font-size:.55rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-top:.1rem}
+.kana-cell .kc-example{
+  font-size:.76rem;color:var(--muted);margin-top:.2rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+}
+.kana-cell.in-sentence{background:var(--accent-soft-strong);border-color:var(--accent-warm);box-shadow:0 0 0 1px var(--kana-ring)}
+.kana-cell.in-sentence .kc-char{color:var(--accent);font-weight:700}
+.kana-cell.in-sentence .kc-romaji{color:var(--accent)}
+.kana-cell.in-sentence .kc-script{color:var(--accent)}
+.kana-cell.in-sentence .kc-example{color:var(--ink-soft)}
+
+/* ============================================================
+   Popup + Toast
+   ============================================================ */
+#vocabPopup{
+  position:absolute;z-index:200;max-width:300px;
+  background:var(--popup-bg);border:1px solid var(--accent);
+  border-radius:var(--radius-sm);padding:.75rem .9rem;font-size:.9rem;
+  box-shadow:0 14px 40px rgba(0,0,0,.35);color:var(--ink);
+}
+#vocabPopup .pop-word{font-size:1.15rem;font-weight:700;color:var(--ink-soft);margin-bottom:.2rem}
+#vocabPopup .pop-row{color:var(--muted);font-size:.85rem;margin:.1rem 0}
+#vocabPopup .pop-row b{color:var(--ink-soft);font-weight:600}
+.toast{
+  position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%);
+  background:var(--toast-bg);border:1px solid var(--border);border-radius:12px;
+  padding:.65rem 1.05rem;z-index:500;max-width:90vw;
+  box-shadow:0 12px 40px rgba(0,0,0,.35);font-size:.9rem;color:var(--ink-soft);
+}
+.toast.error{border-color:var(--err);color:var(--err);background:var(--msg-error-bg)}
+.toast.ok{border-color:var(--ok);color:var(--msg-ok-tx);background:var(--msg-ok-bg)}
+
+@media (max-width:720px){
+  .app-main{padding:.75rem .65rem 3rem}
+  .header-inner{padding:.55rem .7rem}
+  .card{padding:.9rem .95rem}
+  .lesson-card{padding:1rem}
+  .sentence{font-size:1.4rem;line-height:2.4}
+  .header-lesson{max-width:100%;order:5;flex-basis:100%}
+  .kana-grid{grid-template-columns:repeat(auto-fill, minmax(64px, 1fr))}
+}
+</style>
+</head>
+<body>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="vocabPopup" hidden></div>
+<audio id="audioEl" preload="metadata"></audio>
+
+<header class="app-header">
+  <div class="header-inner">
+    <a href="index.html" id="homeLink" class="home-link">Home</a>
+    <span class="brand">Japanese Trainer</span>
+    <span id="headerLessonTitle" class="header-lesson"></span>
+    <div class="header-actions">
+      <button id="btnTheme" class="btn theme-toggle" type="button" aria-label="Switch to dark mode">🌙</button>
+      <button id="btnCsv" class="btn" type="button" hidden>Download CSV</button>
+      <button id="btnReset" class="btn danger" type="button" hidden>Reset Progress</button>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <section id="libraryView">
+    <div class="library-head">
+      <h1>Your Lessons</h1>
+      <div>
+        <button id="btnUpload" class="btn primary" type="button">Upload Lesson JSON</button>
+        <input type="file" id="fileInput" accept=".json,application/json" hidden>
+      </div>
+    </div>
+    <div id="importMessages" class="messages" hidden></div>
+    <div id="importPreview" class="preview" hidden></div>
+    <div id="lessonList" class="lesson-list"></div>
+  </section>
+  <section id="lessonView" hidden></section>
+</main>
+
+<script>
+"use strict";
+
+const DB_NAME = "jp-trainer-db";
+const DB_VERSION = 1;
+const LS_SETTINGS = "jt.settings.v1";
+const LS_CURRENT  = "jt.currentLesson.v1";
+const LS_POS      = "jt.positions.v1";
+
+const $  = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
+
+function esc(s){
+  return String(s == null ? "" : s).replace(/[&<>"']/g, c => (
+    {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]
+  ));
+}
+function isKana(ch){ return /[\u3040-\u309F\u30A0-\u30FF]/.test(ch); }
+function toHiragana(ch){
+  const c = ch.charCodeAt(0);
+  return (c >= 0x30A1 && c <= 0x30F6) ? String.fromCharCode(c - 0x60) : ch;
+}
+function fmtTime(t){
+  if(!isFinite(t) || t < 0) return "0:00";
+  const m = Math.floor(t / 60), s = Math.floor(t % 60);
+  return m + ":" + String(s).padStart(2, "0");
+}
+function attr(name, value){
+  return "[" + name + '="' + String(value).replace(/["\\]/g, "\\$&") + '"]';
+}
+function isKanji(ch){
+  return /[\u3005\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]/.test(ch);
+}
+function hasKanji(str){
+  for(let i = 0; i < str.length; i++) if(isKanji(str[i])) return true;
+  return false;
+}
+
+function makeRuby(text, reading){
+  const t = String(text == null ? "" : text);
+  const r = String(reading == null ? "" : reading);
+  if(!t) return "";
+  if(!r || r === t || !hasKanji(t)) return esc(t);
+  let out = "", ti = 0, ri = 0;
+  while(ti < t.length){
+    const ch = t[ti];
+    if(isKanji(ch)){
+      let kj = ti;
+      while(kj < t.length && isKanji(t[kj])) kj++;
+      const kanjiRun = t.slice(ti, kj);
+      const nextCh = t[kj];
+      let end;
+      if(nextCh === undefined){ end = r.length; }
+      else{
+        let found = -1;
+        for(let p = ri + 1; p < r.length; p++){
+          if(r[p] === nextCh){ found = p; break; }
+        }
+        end = (found === -1) ? r.length : found;
+      }
+      const rt = r.slice(ri, end);
+      out += rt ? "<ruby>" + esc(kanjiRun) + "<rt>" + esc(rt) + "</rt></ruby>" : esc(kanjiRun);
+      ri = end; ti = kj;
+    }else{
+      out += esc(ch);
+      if(r[ri] === ch) ri++;
+      ti++;
+    }
+  }
+  return out;
+}
+
+const KANA_MAP = {
+  "あ":"a","い":"i","う":"u","え":"e","お":"o",
+  "か":"ka","き":"ki","く":"ku","け":"ke","こ":"ko",
+  "が":"ga","ぎ":"gi","ぐ":"gu","げ":"ge","ご":"go",
+  "さ":"sa","し":"shi","す":"su","せ":"se","そ":"so",
+  "ざ":"za","じ":"ji","ず":"zu","ぜ":"ze","ぞ":"zo",
+  "た":"ta","ち":"chi","つ":"tsu","て":"te","と":"to",
+  "だ":"da","ぢ":"ji","づ":"zu","で":"de","ど":"do",
+  "な":"na","に":"ni","ぬ":"nu","ね":"ne","の":"no",
+  "は":"ha","ひ":"hi","ふ":"fu","へ":"he","ほ":"ho",
+  "ば":"ba","び":"bi","ぶ":"bu","べ":"be","ぼ":"bo",
+  "ぱ":"pa","ぴ":"pi","ぷ":"pu","ぺ":"pe","ぽ":"po",
+  "ま":"ma","み":"mi","む":"mu","め":"me","も":"mo",
+  "や":"ya","ゆ":"yu","よ":"yo",
+  "ら":"ra","り":"ri","る":"ru","れ":"re","ろ":"ro",
+  "わ":"wa","ゐ":"wi","ゑ":"we","を":"o","ん":"n",
+  "ぁ":"a","ぃ":"i","ぅ":"u","ぇ":"e","ぉ":"o",
+  "ゃ":"ya","ゅ":"yu","ょ":"yo","っ":"(sokuon)"
+};
+
+const state = {
+  db: null,
+  lessons: [],
+  lesson: null,
+  index: 0,
+  settings: {
+    furigana: true, romaji: false,
+    speed: 1, repeat: 0, volume: 1,
+    showVocabPanel:   false,
+    showGrammarPanel: true,
+    showKanaPanel:    false,
+    theme: "light"
+  },
+  progress: null,
+  audioURL: null,
+  pending: null,
+  reveals: { chunks: false, connected: false },
+  kanaInventory: []
+};
+let repeatsLeft = 0;
+let countNextPlay = false;
+
+/* ============================================================
+   Theme
+   ============================================================ */
+function applyTheme(){
+  const t = state.settings.theme === "dark" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", t);
+  const btn = $("#btnTheme");
+  if(btn){
+    if(t === "dark"){
+      btn.textContent = "☀️";
+      btn.setAttribute("aria-label", "Switch to light mode");
+      btn.setAttribute("title", "Switch to light mode");
+    }else{
+      btn.textContent = "🌙";
+      btn.setAttribute("aria-label", "Switch to dark mode");
+      btn.setAttribute("title", "Switch to dark mode");
+    }
+  }
+}
+function toggleTheme(){
+  state.settings.theme = state.settings.theme === "dark" ? "light" : "dark";
+  saveSettings();
+  applyTheme();
+}
+
+/* ============================================================
+   IndexedDB
+   ============================================================ */
+function openDB(){
+  return new Promise((resolve, reject) => {
+    if(!("indexedDB" in window)){ reject(new Error("IndexedDB is not supported.")); return; }
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if(!db.objectStoreNames.contains("lessons"))  db.createObjectStore("lessons",  { keyPath: "id" });
+      if(!db.objectStoreNames.contains("audio"))    db.createObjectStore("audio",    { keyPath: ["lessonId","sentenceId"] });
+      if(!db.objectStoreNames.contains("progress")) db.createObjectStore("progress", { keyPath: "lessonId" });
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error || new Error("Unable to open database."));
+  });
+}
+function dbReq(storeName, mode, fn){
+  return new Promise((resolve, reject) => {
+    if(!state.db){ reject(new Error("Storage unavailable.")); return; }
+    let tx;
+    try{ tx = state.db.transaction(storeName, mode); }catch(e){ reject(e); return; }
+    const store = tx.objectStore(storeName);
+    let request = null;
+    try{ request = fn(store); }catch(e){ reject(e); return; }
+    tx.oncomplete = () => resolve(request ? request.result : undefined);
+    tx.onerror = () => reject(tx.error || new Error("DB error."));
+    tx.onabort = () => reject(tx.error || new Error("DB aborted."));
+  });
+}
+const idbGet    = (s, k) => dbReq(s, "readonly",  st => st.get(k));
+const idbAll    = (s)    => dbReq(s, "readonly",  st => st.getAll());
+const idbPut    = (s, v) => dbReq(s, "readwrite", st => st.put(v));
+const idbDelete = (s, k) => dbReq(s, "readwrite", st => st.delete(k));
+
+function deleteAudioForLesson(lessonId){
+  return new Promise((resolve, reject) => {
+    if(!state.db){ resolve(); return; }
+    let tx;
+    try{ tx = state.db.transaction("audio", "readwrite"); }catch(e){ reject(e); return; }
+    const store = tx.objectStore("audio");
+    let range;
+    try{ range = IDBKeyRange.bound([lessonId], [lessonId, []]); }catch(e){ resolve(); return; }
+    const req = store.openCursor(range);
+    req.onsuccess = () => {
+      const cur = req.result;
+      if(cur){ cur.delete(); cur.continue(); }
+    };
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+/* ============================================================
+   localStorage
+   ============================================================ */
+function loadSettings(){
+  try{
+    const raw = localStorage.getItem(LS_SETTINGS);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed && typeof parsed === "object") Object.assign(state.settings, parsed);
+    }
+  }catch(e){}
+  if(state.settings.furigana && state.settings.romaji) state.settings.romaji = false;
+  state.settings.speed  = Number(state.settings.speed) || 1;
+  state.settings.repeat = Number(state.settings.repeat) || 0;
+  state.settings.volume = (typeof state.settings.volume === "number") ? state.settings.volume : 1;
+  state.settings.showVocabPanel   = !!state.settings.showVocabPanel;
+  state.settings.showGrammarPanel = state.settings.showGrammarPanel === undefined
+    ? true : !!state.settings.showGrammarPanel;
+  state.settings.showKanaPanel    = !!state.settings.showKanaPanel;
+  state.settings.furigana         = !!state.settings.furigana;
+  state.settings.romaji           = !!state.settings.romaji;
+  state.settings.theme = state.settings.theme === "dark" ? "dark" : "light";
+}
+function saveSettings(){
+  try{ localStorage.setItem(LS_SETTINGS, JSON.stringify(state.settings)); }catch(e){}
+}
+function loadPositions(){
+  try{ return JSON.parse(localStorage.getItem(LS_POS) || "{}") || {}; }catch(e){ return {}; }
+}
+function savePosition(lessonId, i){
+  try{
+    const m = loadPositions(); m[lessonId] = i;
+    localStorage.setItem(LS_POS, JSON.stringify(m));
+  }catch(e){}
+}
+
+/* ============================================================
+   Toast & popup
+   ============================================================ */
+let toastTimer = null;
+function showToast(msg, kind){
+  const el = $("#toast");
+  el.textContent = msg;
+  el.className = "toast " + (kind || "");
+  el.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.hidden = true; }, 4200);
+}
+function showPopup(anchor, html){
+  const pop = $("#vocabPopup");
+  pop.innerHTML = html;
+  pop.hidden = false;
+  const r = anchor.getBoundingClientRect();
+  const pr = pop.getBoundingClientRect();
+  const sx = window.scrollX || window.pageXOffset;
+  const sy = window.scrollY || window.pageYOffset;
+  const vw = document.documentElement.clientWidth;
+  let left = r.left + sx + r.width/2 - pr.width/2;
+  left = Math.max(sx + 8, Math.min(left, sx + vw - pr.width - 8));
+  let top = r.bottom + sy + 8;
+  if(top + pr.height > sy + window.innerHeight){
+    top = r.top + sy - pr.height - 8;
+    if(top < sy) top = r.bottom + sy + 8;
+  }
+  pop.style.left = left + "px";
+  pop.style.top = top + "px";
+}
+function hidePopup(){ $("#vocabPopup").hidden = true; }
+
+/* ============================================================
+   Validation
+   ============================================================ */
+function validateLesson(data){
+  const errors = [], warnings = [];
+  if(!data || typeof data !== "object" || Array.isArray(data)){
+    errors.push("The JSON root must be an object."); return { errors, warnings };
+  }
+  if(!data.app) errors.push("Missing required field: app");
+  if(data.version === undefined || data.version === null || data.version === "")
+    errors.push("Missing required field: version");
+  const lesson = data.lesson;
+  if(!lesson || typeof lesson !== "object" || Array.isArray(lesson)){
+    errors.push("Missing required field: lesson");
+  }else{
+    if(!lesson.id)          errors.push("lesson: Missing required field: id");
+    if(!lesson.title)       errors.push("lesson: Missing required field: title");
+    if(!lesson.description) errors.push("lesson: Missing required field: description");
+    if(!lesson.level)       errors.push("lesson: Missing required field: level");
+  }
+  if(!Array.isArray(data.sentences)){
+    errors.push("Missing or invalid field: sentences (must be an array)");
+    return { errors, warnings };
+  }
+  if(data.sentences.length === 0) errors.push("sentences: must contain at least one sentence");
+  const seen = new Set();
+  data.sentences.forEach((s, i) => {
+    const label = "Sentence " + (i + 1);
+    if(!s || typeof s !== "object" || Array.isArray(s)){
+      errors.push(label + ": must be an object."); return;
+    }
+    if(!s.id) errors.push(label + ": Missing required field: id");
+    else if(seen.has(s.id)) errors.push(label + ': Duplicate sentence id "' + s.id + '"');
+    else seen.add(s.id);
+    if(!s.expression) errors.push(label + ": Missing required field: expression");
+    if(!s.reading)    errors.push(label + ": Missing required field: reading");
+    if(!s.meaning)    errors.push(label + ": Missing required field: meaning");
+    if(!s.romaji)     warnings.push(label + ": optional field 'romaji' is missing.");
+    if(s.vocabulary !== undefined && !Array.isArray(s.vocabulary)) errors.push(label + ": vocabulary must be an array.");
+    if(s.tokens !== undefined && !Array.isArray(s.tokens)) errors.push(label + ": tokens must be an array.");
+    if(s.chunks !== undefined && !Array.isArray(s.chunks)) errors.push(label + ": chunks must be an array.");
+    if(s.grammar !== undefined && !Array.isArray(s.grammar)) errors.push(label + ": grammar must be an array.");
+    if(s.kana !== undefined && !Array.isArray(s.kana)) errors.push(label + ": kana must be an array.");
+  });
+  return { errors, warnings };
+}
+
+/* ============================================================
+   Import flow
+   ============================================================ */
+function clearImportUI(){
+  $("#importMessages").hidden = true; $("#importMessages").innerHTML = "";
+  $("#importPreview").hidden = true;  $("#importPreview").innerHTML = "";
+  state.pending = null;
+}
+function renderImportErrors(errors, warnings){
+  const box = $("#importMessages");
+  let html = '<div class="msg error"><strong>Unable to import lesson.</strong><ul>' +
+    errors.map(e => "<li>" + esc(e) + "</li>").join("") + "</ul></div>";
+  if(warnings && warnings.length){
+    html += '<div class="msg warn"><strong>Warnings</strong><ul>' +
+      warnings.map(w => "<li>" + esc(w) + "</li>").join("") + "</ul></div>";
+  }
+  box.innerHTML = html; box.hidden = false;
+}
+function renderImportPreview(data, warnings){
+  const box = $("#importPreview");
+  const sentences = data.sentences;
+  const first = sentences.slice(0, 4).map(s =>
+    "<li><span class='jp'>" + esc(s.expression) + "</span> — " + esc(s.meaning) + "</li>"
+  ).join("");
+  let html = "<h2>Lesson preview</h2>";
+  html += '<div class="msg ok"><strong>' + esc(data.lesson.title) + "</strong><br>" +
+    esc(data.lesson.description) + "<br><span class='muted'>" +
+    esc(data.lesson.level) + " • " + sentences.length + " sentences • id: " +
+    esc(data.lesson.id) + "</span></div>";
+  html += '<ul class="preview-list">' + first +
+    (sentences.length > 4 ? "<li>… and " + (sentences.length - 4) + " more</li>" : "") + "</ul>";
+  if(warnings && warnings.length){
+    html += '<div class="msg warn"><strong>Warnings</strong><ul>' +
+      warnings.map(w => "<li>" + esc(w) + "</li>").join("") + "</ul></div>";
+  }
+  html += '<div class="preview-actions">' +
+    '<button class="btn primary" id="btnConfirmImport" type="button">Confirm Import</button>' +
+    '<button class="btn" id="btnCancelImport" type="button">Cancel</button></div>';
+  box.innerHTML = html; box.hidden = false;
+  $("#btnConfirmImport").addEventListener("click", confirmImport);
+  $("#btnCancelImport").addEventListener("click", clearImportUI);
+}
+async function confirmImport(){
+  if(!state.pending) return;
+  const data = state.pending;
+  const lessonId = data.lesson.id;
+  let existing = null;
+  try{ existing = await idbGet("lessons", lessonId); }catch(e){}
+  if(existing && !window.confirm('A lesson with the id "' + lessonId + '" already exists.\n\nReplace it?')) return;
+  const record = {
+    id: lessonId, title: data.lesson.title, description: data.lesson.description,
+    level: data.lesson.level, sentenceCount: data.sentences.length,
+    importedAt: Date.now(), data: data
+  };
+  try{ await idbPut("lessons", record); }
+  catch(err){ renderImportErrors(["Could not save lesson: " + err.message], []); return; }
+  clearImportUI(); $("#fileInput").value = "";
+  await refreshLibrary();
+  showToast('Lesson "' + record.title + '" imported.', "ok");
+}
+function handleFileSelected(file){
+  clearImportUI();
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onerror = () => renderImportErrors(["The selected file could not be read."], []);
+  reader.onload = () => {
+    let parsed;
+    try{ parsed = JSON.parse(String(reader.result)); }
+    catch(err){ renderImportErrors(["Invalid JSON syntax: " + err.message], []); return; }
+    const r = validateLesson(parsed);
+    if(r.errors.length){ renderImportErrors(r.errors, r.warnings); return; }
+    state.pending = parsed;
+    renderImportPreview(parsed, r.warnings);
+  };
+  reader.readAsText(file, "utf-8");
+}
+
+/* ============================================================
+   Library
+   ============================================================ */
+async function refreshLibrary(){
+  if(!state.db){
+    $("#lessonList").innerHTML = '<div class="empty">Local storage is unavailable, so lessons cannot be loaded.</div>';
+    return;
+  }
+  let lessons = [], progs = [];
+  try{ lessons = await idbAll("lessons"); progs = await idbAll("progress"); }
+  catch(err){ showToast("Could not read stored lessons: " + err.message, "error"); lessons = []; }
+  lessons.sort((a,b) => (b.importedAt || 0) - (a.importedAt || 0));
+  state.lessons = lessons;
+  const progMap = {};
+  progs.forEach(p => { progMap[p.lessonId] = p; });
+
+  const list = $("#lessonList");
+  list.innerHTML = "";
+  if(!lessons.length){
+    list.innerHTML = '<div class="empty">No lessons yet. Click <strong>Upload Lesson JSON</strong> to import your first lesson.</div>';
+    return;
+  }
+  lessons.forEach(l => {
+    const total = l.sentenceCount || (l.data && l.data.sentences ? l.data.sentences.length : 0);
+    const pr = progMap[l.id];
+    let done = 0;
+    if(pr && pr.completed) done = Object.keys(pr.completed).filter(k => pr.completed[k]).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    const card = document.createElement("article");
+    card.className = "lesson-card";
+    card.innerHTML =
+      '<div class="lesson-card-main">' +
+        "<h3>" + esc(l.title) + "</h3>" +
+        '<p class="desc">' + esc(l.description) + "</p>" +
+        '<p class="meta">' + esc(l.level) + " • " + total + " sentences</p>" +
+        '<div class="bar"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
+        '<p class="meta">Progress: ' + done + " / " + total + " (" + pct + "%)</p>" +
+      "</div>" +
+      '<div class="lesson-card-actions">' +
+        '<button class="btn primary" data-open="' + esc(l.id) + '" type="button">Open Lesson</button>' +
+        '<button class="btn danger" data-delete="' + esc(l.id) + '" type="button">Delete</button>' +
+      "</div>";
+    list.appendChild(card);
+  });
+}
+
+async function deleteLesson(lessonId){
+  const l = state.lessons.find(x => x.id === lessonId);
+  const title = l ? l.title : lessonId;
+  if(!window.confirm('Delete "' + title + '"?\n\nThis also deletes its uploaded audio and progress.')) return;
+  try{
+    await idbDelete("lessons", lessonId);
+    await idbDelete("progress", lessonId);
+    await deleteAudioForLesson(lessonId);
+  }catch(err){ showToast("Could not delete lesson: " + err.message, "error"); return; }
+  if(localStorage.getItem(LS_CURRENT) === lessonId) localStorage.removeItem(LS_CURRENT);
+  if(state.lesson && state.lesson.id === lessonId) goHome();
+  await refreshLibrary();
+  showToast("Lesson deleted.", "ok");
+}
+
+/* ============================================================
+   Progress
+   ============================================================ */
+function defaultProgress(lessonId){
+  return { lessonId, completed: {}, currentSentence: 0, reading: {}, listening: {}, updatedAt: Date.now() };
+}
+async function saveProgress(){
+  if(!state.progress || !state.db) return;
+  state.progress.updatedAt = Date.now();
+  try{ await idbPut("progress", state.progress); }catch(e){}
+}
+
+/* ============================================================
+   Lesson open / navigation
+   ============================================================ */
+async function openLesson(lessonId){
+  let record = null;
+  try{ record = await idbGet("lessons", lessonId); }catch(e){}
+  if(!record || !record.data || !Array.isArray(record.data.sentences) || !record.data.sentences.length){
+    showToast("This lesson is missing or has no valid sentences.", "error");
+    localStorage.removeItem(LS_CURRENT);
+    return;
+  }
+  state.lesson = record;
+
+  let prog = null;
+  try{ prog = await idbGet("progress", lessonId); }catch(e){}
+  if(!prog || typeof prog !== "object") prog = defaultProgress(lessonId);
+  prog.completed = prog.completed || {};
+  prog.reading = prog.reading || {};
+  prog.listening = prog.listening || {};
+  state.progress = prog;
+
+  const positions = loadPositions();
+  let start = typeof positions[lessonId] === "number"
+    ? positions[lessonId]
+    : (typeof prog.currentSentence === "number" ? prog.currentSentence : 0);
+  start = Math.max(0, Math.min(start, record.data.sentences.length - 1));
+  state.index = start;
+
+  state.kanaInventory = buildKanaInventory(record.data);
+
+  localStorage.setItem(LS_CURRENT, lessonId);
+
+  $("#libraryView").hidden = true;
+  $("#lessonView").hidden = false;
+  $("#btnCsv").hidden = false;
+  $("#btnReset").hidden = false;
+  $("#headerLessonTitle").textContent = record.title;
+  document.title = record.title + " – Japanese Trainer";
+
+  state.reveals = { chunks: false, connected: false };
+  renderLesson();
+}
+
+function goHome(){
+  state.lesson = null;
+  state.progress = null;
+  state.kanaInventory = [];
+  localStorage.removeItem(LS_CURRENT);
+  stopAudio(); releaseAudioURL();
+  $("#lessonView").hidden = true;
+  $("#libraryView").hidden = false;
+  $("#btnCsv").hidden = true;
+  $("#btnReset").hidden = true;
+  $("#headerLessonTitle").textContent = "";
+  $("#vocabPopup").hidden = true;
+  document.title = "Japanese Trainer";
+  refreshLibrary();
+}
+
+function currentSentence(){
+  if(!state.lesson) return null;
+  return state.lesson.data.sentences[state.index] || null;
+}
+
+function goToSentence(newIndex){
+  if(!state.lesson) return;
+  const total = state.lesson.data.sentences.length;
+  if(!total) return;
+  const idx = Math.max(0, Math.min(newIndex, total - 1));
+  if(idx === state.index) return;
+  state.index = idx;
+  state.progress.currentSentence = idx;
+  savePosition(state.lesson.id, idx);
+  saveProgress();
+  state.reveals = { chunks: false, connected: false };
+  renderLesson();
+}
+
+/* ============================================================
+   Kana inventory + rendering
+   ============================================================ */
+function collectKanaFromText(text){
+  const set = new Set();
+  for(const ch of String(text || "")){
+    if(isKana(ch) && ch !== "ー") set.add(ch);
+  }
+  return set;
+}
+
+function buildKanaInventory(lessonData){
+  const map = new Map();
+  function scriptOf(ch){
+    const c = ch.charCodeAt(0);
+    return (c >= 0x30A1 && c <= 0x30F6) ? "KATAKANA" : "HIRAGANA";
+  }
+  function romajiOf(ch){ return KANA_MAP[toHiragana(ch)] || ""; }
+
+  lessonData.sentences.forEach(sentence => {
+    (sentence.kana || []).forEach(k => {
+      if(!k || !k.character || !isKana(k.character)) return;
+      const ch = k.character;
+      if(map.has(ch)){
+        const e = map.get(ch);
+        if(k.romaji) e.romaji = k.romaji;
+        if(k.script) e.script = String(k.script).toUpperCase();
+        if(k.reading && !e.example) e.example = k.reading;
+        return;
+      }
+      map.set(ch, {
+        char: ch,
+        romaji: k.romaji || romajiOf(ch),
+        script: (k.script ? String(k.script).toUpperCase() : scriptOf(ch)),
+        example: k.reading || ""
+      });
+    });
+
+    (sentence.vocabulary || []).forEach(v => {
+      if(!v) return;
+      const text = v.text || "";
+      const reading = v.reading || "";
+      const all = collectKanaFromText(text);
+      collectKanaFromText(reading).forEach(ch => all.add(ch));
+      all.forEach(ch => {
+        if(!map.has(ch)){
+          map.set(ch, { char: ch, romaji: romajiOf(ch), script: scriptOf(ch), example: "" });
+        }
+        const entry = map.get(ch);
+        if(!entry.example){
+          if(text && text.indexOf(ch) !== -1) entry.example = text;
+          else if(reading && reading.indexOf(ch) !== -1) entry.example = reading;
+        }
+      });
+    });
+
+    collectKanaFromText(sentence.expression).forEach(ch => {
+      if(!map.has(ch)){
+        map.set(ch, {
+          char: ch, romaji: romajiOf(ch), script: scriptOf(ch),
+          example: sentence.expression || ""
+        });
+      }
+    });
+  });
+
+  const items = Array.from(map.values());
+  const hira = items.filter(x => x.script === "HIRAGANA");
+  const kata = items.filter(x => x.script === "KATAKANA");
+  return hira.concat(kata);
+}
+
+function kanaGridHTML(sentence){
+  const inventory = state.kanaInventory || [];
+  if(!inventory.length) return '<p class="muted">No kana found in this lesson.</p>';
+
+  const present = collectKanaFromText(sentence.expression);
+  (sentence.vocabulary || []).forEach(v => {
+    if(!v) return;
+    collectKanaFromText(v.text).forEach(ch => present.add(ch));
+    collectKanaFromText(v.reading).forEach(ch => present.add(ch));
+  });
+
+  let html = '<div class="kana-grid" role="list">';
+  let lastScript = null;
+  inventory.forEach(k => {
+    if(lastScript && k.script !== lastScript){
+      html += '<div class="kana-divider" aria-hidden="true"></div>';
+    }
+    lastScript = k.script;
+    const hi = present.has(k.char);
+    const label = k.char + ", " + k.romaji + ", " + k.script.toLowerCase() +
+      (k.example ? ", example " + k.example : "") +
+      (hi ? ", appears in the current sentence" : "");
+    html += '<div class="kana-cell' + (hi ? " in-sentence" : "") + '" role="listitem" aria-label="' + esc(label) + '">' +
+      '<span class="kc-char jp">' + esc(k.char) + "</span>" +
+      '<span class="kc-romaji">' + esc(k.romaji) + "</span>" +
+      '<span class="kc-script">' + esc(k.script) + "</span>" +
+      (k.example ? '<span class="kc-example jp">' + esc(k.example) + "</span>" : "") +
+    "</div>";
+  });
+  html += "</div>";
+  return html;
+}
+
+/* ============================================================
+   Token building & sentence HTML
+   ============================================================ */
+function buildTokenList(sentence){
+  const expr = sentence.expression || "";
+  const vocab = Array.isArray(sentence.vocabulary) ? sentence.vocabulary : [];
+  const vById = new Map();
+  vocab.forEach(v => { if(v && v.id) vById.set(v.id, v); });
+  const tokens = [];
+
+  if(Array.isArray(sentence.tokens) && sentence.tokens.length){
+    let cursor = 0;
+    sentence.tokens.forEach(t => {
+      if(!t || !t.text) return;
+      let idx = expr.indexOf(t.text, cursor);
+      if(idx === -1) idx = expr.indexOf(t.text);
+      if(idx === -1) return;
+      if(idx > cursor) tokens.push({ text: expr.slice(cursor, idx), plain: true });
+      tokens.push({
+        text: t.text,
+        vocab: t.vocabularyId ? (vById.get(t.vocabularyId) || null) : null,
+        grammarId: t.grammarId || null
+      });
+      cursor = idx + t.text.length;
+    });
+    if(cursor < expr.length) tokens.push({ text: expr.slice(cursor), plain: true });
+    return tokens;
+  }
+
+  let i = 0, buf = "";
+  while(i < expr.length){
+    let best = null;
+    for(const v of vocab){
+      if(!v || !v.text) continue;
+      if(expr.startsWith(v.text, i) && (!best || v.text.length > best.text.length)) best = v;
+    }
+    if(best){
+      if(buf){ tokens.push({ text: buf, plain: true }); buf = ""; }
+      tokens.push({ text: best.text, vocab: best, grammarId: null });
+      i += best.text.length;
+    }else{ buf += expr[i]; i++; }
+  }
+  if(buf) tokens.push({ text: buf, plain: true });
+  return tokens;
+}
+
+function sentenceHTML(sentence){
+  const tokens = buildTokenList(sentence);
+  let html = "";
+  tokens.forEach(t => {
+    const cls = "jp-unit" + (t.plain ? "" : " token");
+    let inner;
+    if(!t.plain && t.vocab && state.settings.furigana && hasKanji(t.text)){
+      inner = makeRuby(t.text, t.vocab.reading);
+    }else{
+      inner = esc(t.text);
+    }
+    let attrs = "";
+    if(!t.plain && t.vocab){
+      attrs = ' tabindex="0" role="button" data-vocab-id="' + esc(t.vocab.id) + '"' +
+              ' aria-label="' + esc(t.text) + " — " + esc(t.vocab.meaning || "") + '. Activate for details."';
+    }else if(!t.plain && t.grammarId){
+      attrs = ' tabindex="0" role="button" data-grammar-id="' + esc(t.grammarId) + '"' +
+              ' aria-label="' + esc(t.text) + ' — grammar unit."';
+    }
+    html += '<span class="' + cls + '"' + attrs + ">" + inner + "</span>";
+  });
+  return html;
+}
+
+/* ============================================================
+   HTML builders
+   ============================================================ */
+function chunksHTML(sentence){
+  const chunks = Array.isArray(sentence.chunks) ? sentence.chunks : [];
+  if(!chunks.length) return '<p class="muted">No chunks provided for this sentence.</p>';
+  return chunks.map(c =>
+    '<div class="chunk"><span class="ct jp">' + esc(c.text || "") + "</span>" +
+    '<span class="cm">' + esc(c.meaning || "") + "</span></div>"
+  ).join("");
+}
+
+function vocabUnitsHTML(sentence){
+  const vocab = Array.isArray(sentence.vocabulary) ? sentence.vocabulary : [];
+  const grammar = Array.isArray(sentence.grammar) ? sentence.grammar : [];
+  if(!vocab.length && !grammar.length){
+    return '<p class="muted">No vocabulary or grammar data for this sentence.</p>';
+  }
+  let html = "";
+  vocab.forEach(v => {
+    const sub = [v.reading, v.romaji].filter(Boolean).map(esc).join(" • ");
+    html += '<button class="unit" type="button" data-action="highlight-vocab" data-vocab-id="' + esc(v.id) + '">' +
+      '<span class="u-t jp">' + esc(v.text) + "</span>" +
+      (sub ? '<span class="u-s">' + sub + "</span>" : "") +
+      (v.meaning ? '<span class="u-m">' + esc(v.meaning) + "</span>" : "") +
+      (v.partOfSpeech ? '<span class="u-p">' + esc(v.partOfSpeech) + "</span>" : "") +
+    "</button>";
+  });
+  grammar.forEach(g => {
+    html += '<button class="unit grammar" type="button" data-action="scroll-grammar">' +
+      '<span class="u-t jp">' + esc(g.title) + "</span>" +
+      (g.pattern ? '<span class="u-s">Pattern: ' + esc(g.pattern) + "</span>" : "") +
+      (g.explanation ? '<span class="u-m">' + esc(g.explanation) + "</span>" : "") +
+      '<span class="u-p">grammar</span>' +
+    "</button>";
+  });
+  return html;
+}
+
+function grammarNotesHTML(sentence){
+  const grammar = Array.isArray(sentence.grammar) ? sentence.grammar : [];
+  if(!grammar.length) return '<p class="muted">No grammar notes for this sentence.</p>';
+  return grammar.map(g =>
+    '<div class="grammar-item">' +
+      '<h4 class="jp">' + esc(g.title) + "</h4>" +
+      (g.explanation ? "<p>" + esc(g.explanation) + "</p>" : "") +
+      (g.pattern ? '<p class="pattern jp">Pattern: ' + esc(g.pattern) + "</p>" : "") +
+    "</div>"
+  ).join("");
+}
+
+function playerHTML(){
+  const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2].map(v =>
+    '<option value="' + v + '"' + (Number(state.settings.speed) === v ? " selected" : "") + ">" + v + "×</option>"
+  ).join("");
+  const repeats = [0, 1, 2, 3, 5].map(v =>
+    '<option value="' + v + '"' + (Number(state.settings.repeat) === v ? " selected" : "") + ">" +
+    (v === 0 ? "Off" : v) + "</option>"
+  ).join("");
+  return '<div class="player">' +
+    '<div class="player-row">' +
+      '<button class="btn primary" data-action="play-pause" type="button" aria-label="Play">▶ Play</button>' +
+      '<button class="btn" data-action="restart" type="button" aria-label="Restart">↺</button>' +
+    "</div>" +
+    '<div class="player-row player-seek">' +
+      '<span class="time" data-time="current">0:00</span>' +
+      '<input type="range" min="0" max="1000" value="0" data-action="seek" aria-label="Seek">' +
+      '<span class="time" data-time="duration">0:00</span>' +
+    "</div>" +
+    '<div class="player-row">' +
+      '<label class="field">Vol <input type="range" min="0" max="1" step="0.01" value="' +
+        state.settings.volume + '" data-action="volume" aria-label="Volume"></label>' +
+      '<label class="field">Speed <select data-action="speed" aria-label="Playback speed">' + speeds + "</select></label>" +
+      '<label class="field">Repeat <select data-action="repeat" aria-label="Repeat count">' + repeats + "</select></label>" +
+    "</div>" +
+    '<div class="status" data-status></div>' +
+    '<div class="player-upload">' +
+      '<button class="btn small" data-action="upload-audio" type="button">Upload MP3</button>' +
+      '<button class="btn small danger" data-action="remove-audio" type="button" hidden>Remove MP3</button>' +
+      '<span class="fname" data-filename></span>' +
+    "</div>" +
+  "</div>";
+}
+
+/* ============================================================
+   Lesson render
+   ============================================================ */
+function renderLesson(){
+  if(!state.lesson) return;
+  const sentence = currentSentence();
+  if(!sentence) return;
+  const total = state.lesson.data.sentences.length;
+
+  if(state.progress.reading) state.progress.reading[sentence.id] = true;
+
+  const romajiLine = (state.settings.romaji && sentence.romaji)
+    ? '<p class="romaji">' + esc(sentence.romaji) + "</p>" : "";
+
+  const done = !!(state.progress.completed && state.progress.completed[sentence.id]);
+  let progDone = 0;
+  for(const k in state.progress.completed) if(state.progress.completed[k]) progDone++;
+  const pct = total ? Math.round(progDone / total * 100) : 0;
+
+  const toolbar =
+    '<div class="lesson-toolbar">' +
+      '<span class="toolbar-label">Panels</span>' +
+      '<button class="btn toggle" data-action="toggle-vocab-panel" type="button" aria-pressed="' +
+        state.settings.showVocabPanel + '">Vocabulary &amp; Grammar Units</button>' +
+      '<button class="btn toggle" data-action="toggle-grammar-panel" type="button" aria-pressed="' +
+        state.settings.showGrammarPanel + '">Grammar Notes</button>' +
+      '<button class="btn toggle" data-action="toggle-kana-panel" type="button" aria-pressed="' +
+        state.settings.showKanaPanel + '">Kana Information &amp; Practice</button>' +
+      '<span class="spacer"></span>' +
+      '<span class="muted" style="font-size:.82rem">' + progDone + " / " + total + " completed — " + pct + "%</span>" +
+    "</div>";
+
+  const col1 =
+    '<div class="col col-1">' +
+      '<div class="col-head">Sentence &amp; Audio</div>' +
+      '<div class="card">' +
+        '<div class="sentence-nav">' +
+          '<button class="btn" data-action="prev" type="button" aria-label="Previous sentence">← Previous</button>' +
+          '<span class="counter"><strong>' + (state.index + 1) + "</strong> / " + total + "</span>" +
+          '<button class="btn" data-action="next" type="button" aria-label="Next sentence">Next →</button>' +
+        "</div>" +
+        '<div class="sentence-block">' +
+          '<p class="sentence jp" lang="ja">' + sentenceHTML(sentence) + "</p>" +
+          romajiLine +
+        "</div>" +
+        '<div class="display-controls">' +
+          '<button class="btn toggle" data-action="toggle-furigana" type="button" aria-pressed="' +
+            state.settings.furigana + '">Furigana: ' + (state.settings.furigana ? "ON" : "OFF") + "</button>" +
+          '<button class="btn toggle" data-action="toggle-romaji" type="button" aria-pressed="' +
+            state.settings.romaji + '">Romaji: ' + (state.settings.romaji ? "ON" : "OFF") + "</button>" +
+        "</div>" +
+        playerHTML() +
+        '<div class="meaning-block">' +
+          '<div class="meaning-label">Meaning</div>' +
+          '<p class="meaning">' + esc(sentence.meaning || "") + "</p>" +
+        "</div>" +
+        '<div class="aids-controls">' +
+          '<button class="btn toggle" data-action="toggle-chunks" type="button" aria-pressed="' +
+            state.reveals.chunks + '">' + (state.reveals.chunks ? "Hide Chunks" : "Show Chunks") + "</button>" +
+          '<button class="btn toggle" data-action="toggle-connected" type="button" aria-pressed="' +
+            state.reveals.connected + '">' +
+            (state.reveals.connected ? "Hide Connected Reading" : "Show Connected Reading") + "</button>" +
+        "</div>" +
+        (state.reveals.chunks ? '<div class="chunks">' + chunksHTML(sentence) + "</div>" : "") +
+        (state.reveals.connected
+          ? '<div class="connected jp">' + esc(sentence.connectedReading || "No connected reading provided.") + "</div>"
+          : "") +
+        '<div class="complete">' +
+          '<button class="btn' + (done ? " primary" : "") + '" data-action="toggle-complete" type="button" aria-pressed="' +
+            done + '">' + (done ? "✓ Completed (click to undo)" : "Mark sentence complete") + "</button>" +
+        "</div>" +
+        '<p class="progress">' + progDone + " / " + total + " completed — " + pct + "%</p>" +
+      "</div>" +
+    "</div>";
+
+  const col2 =
+    '<div class="col col-2">' +
+      '<div class="col-head">Vocabulary &amp; Grammar Units</div>' +
+      '<div class="card"><div class="unit-list">' + vocabUnitsHTML(sentence) + "</div></div>" +
+    "</div>";
+
+  const col3 =
+    '<div class="col col-3">' +
+      '<div class="col-head">Grammar Notes</div>' +
+      '<div class="card">' + grammarNotesHTML(sentence) + "</div>" +
+    "</div>";
+
+  const col4 =
+    '<div class="col col-4">' +
+      '<div class="col-head">Kana Information &amp; Practice</div>' +
+      '<div class="kana-panel">' +
+        '<h2 class="kana-title">Kana</h2>' +
+        '<p class="kana-subtitle">Kana used in this lesson (highlighted cells appear in the current sentence).</p>' +
+        kanaGridHTML(sentence) +
+      "</div>" +
+    "</div>";
+
+  const gridAttrs = ' data-vocab="'   + (state.settings.showVocabPanel   ? "shown" : "hidden") +
+                    '" data-grammar="' + (state.settings.showGrammarPanel ? "shown" : "hidden") +
+                    '" data-kana="'    + (state.settings.showKanaPanel    ? "shown" : "hidden") + '"';
+
+  $("#lessonView").innerHTML =
+    toolbar + '<div class="grid4"' + gridAttrs + ">" + col1 + col2 + col3 + col4 + "</div>";
+
+  loadSentenceAudio();
+}
+
+/* ============================================================
+   Audio
+   ============================================================ */
+const audioEl = $("#audioEl");
+
+function setPlayerStatus(msg, isErr){
+  const el = document.querySelector("[data-status]");
+  if(el){ el.textContent = msg || ""; el.classList.toggle("error", !!isErr); }
+}
+function releaseAudioURL(){
+  if(state.audioURL){ try{ URL.revokeObjectURL(state.audioURL); }catch(e){} state.audioURL = null; }
+}
+function stopAudio(){
+  try{ audioEl.pause(); }catch(e){}
+  repeatsLeft = 0; countNextPlay = false;
+}
+function updatePlayButton(){
+  const btn = document.querySelector('[data-action="play-pause"]');
+  if(!btn) return;
+  btn.textContent = audioEl.paused ? "▶ Play" : "❚❚ Pause";
+  btn.setAttribute("aria-label", audioEl.paused ? "Play" : "Pause");
+}
+async function loadSentenceAudio(){
+  const sentence = currentSentence();
+  stopAudio(); releaseAudioURL();
+
+  const seek = document.querySelector('[data-action="seek"]'); if(seek) seek.value = 0;
+  const cur = document.querySelector('[data-time="current"]'); if(cur) cur.textContent = "0:00";
+  const dur = document.querySelector('[data-time="duration"]'); if(dur) dur.textContent = "0:00";
+  const fn = document.querySelector("[data-filename]"); if(fn) fn.textContent = "";
+  setPlayerStatus("");
+
+  if(!sentence) return;
+  try{ audioEl.removeAttribute("src"); audioEl.load(); }catch(e){}
+
+  let record = null;
+  if(state.db){
+    try{ record = await idbGet("audio", [state.lesson.id, sentence.id]); }catch(e){}
+  }
+
+  let hasUploaded = false;
+  if(record && record.blob){
+    state.audioURL = URL.createObjectURL(record.blob);
+    audioEl.src = state.audioURL;
+    if(fn) fn.textContent = record.filename || "uploaded.mp3";
+    hasUploaded = true;
+    setPlayerStatus("Playing uploaded audio.");
+  }else if(sentence.audio){
+    audioEl.src = sentence.audio;
+    if(fn) fn.textContent = sentence.audio;
+    setPlayerStatus("Referenced file: " + sentence.audio);
+  }else{
+    setPlayerStatus("No audio for this sentence yet. Use “Upload MP3” to add one.");
+  }
+
+  const up = document.querySelector('[data-action="upload-audio"]');
+  if(up) up.textContent = hasUploaded ? "Replace MP3" : "Upload MP3";
+  const rm = document.querySelector('[data-action="remove-audio"]');
+  if(rm) rm.hidden = !hasUploaded;
+
+  audioEl.volume = state.settings.volume;
+  audioEl.playbackRate = state.settings.speed;
+  updatePlayButton();
+}
+
+audioEl.addEventListener("loadedmetadata", () => {
+  audioEl.volume = state.settings.volume;
+  audioEl.playbackRate = state.settings.speed;
+  const dur = document.querySelector('[data-time="duration"]');
+  if(dur) dur.textContent = fmtTime(audioEl.duration);
+});
+audioEl.addEventListener("timeupdate", () => {
+  const cur = document.querySelector('[data-time="current"]');
+  if(cur) cur.textContent = fmtTime(audioEl.currentTime);
+  const seek = document.querySelector('[data-action="seek"]');
+  if(seek && isFinite(audioEl.duration) && audioEl.duration > 0){
+    seek.value = Math.round((audioEl.currentTime / audioEl.duration) * 1000);
+  }
+});
+audioEl.addEventListener("play", () => {
+  if(countNextPlay){
+    countNextPlay = false;
+    const sid = currentSentence().id;
+    state.progress.listening[sid] = (state.progress.listening[sid] || 0) + 1;
+    saveProgress();
+  }
+  updatePlayButton();
+});
+audioEl.addEventListener("pause", updatePlayButton);
+audioEl.addEventListener("ended", () => {
+  if(repeatsLeft > 0){
+    repeatsLeft--;
+    try{ audioEl.currentTime = 0; audioEl.play().catch(() => {}); }catch(e){}
+    return;
+  }
+  setPlayerStatus("Finished.");
+  updatePlayButton();
+});
+audioEl.addEventListener("error", () => {
+  if(!audioEl.getAttribute("src")) return;
+  setPlayerStatus("Audio could not be loaded. The file may be missing or unsupported.", true);
+  updatePlayButton();
+});
+
+/* ============================================================
+   Actions
+   ============================================================ */
+async function actionPlayPause(){
+  if(audioEl.paused){
+    if(!audioEl.getAttribute("src")){ setPlayerStatus("No audio available for this sentence.", true); return; }
+    countNextPlay = true;
+    repeatsLeft = Number(state.settings.repeat) || 0;
+    const p = audioEl.play();
+    if(p && p.catch) p.catch(err => setPlayerStatus("Playback failed: " + (err && err.message ? err.message : "unknown error"), true));
+  }else{
+    audioEl.pause();
+  }
+}
+
+function actionToggleComplete(){
+  const s = currentSentence();
+  if(!s || !state.progress) return;
+  const cur = !!state.progress.completed[s.id];
+  state.progress.completed[s.id] = !cur;
+  saveProgress();
+  const btn = document.querySelector('[data-action="toggle-complete"]');
+  if(btn){
+    btn.setAttribute("aria-pressed", String(!cur));
+    btn.classList.toggle("primary", !cur);
+    btn.textContent = !cur ? "✓ Completed (click to undo)" : "Mark sentence complete";
+  }
+  const total = state.lesson.data.sentences.length;
+  let done = 0;
+  for(const k in state.progress.completed) if(state.progress.completed[k]) done++;
+  const pct = total ? Math.round(done / total * 100) : 0;
+  const prog = document.querySelector(".progress");
+  if(prog) prog.textContent = done + " / " + total + " completed — " + pct + "%";
+  refreshLibrary();
+}
+
+function actionHighlightVocab(vocabId){
+  const nodes = $$(".jp-unit" + attr("data-vocab-id", vocabId));
+  if(!nodes.length){ showToast("Word not found in this sentence.", ""); return; }
+  nodes.forEach(n => {
+    n.classList.add("highlight");
+    setTimeout(() => n.classList.remove("highlight"), 2200);
+  });
+  try{ nodes[0].scrollIntoView({ block: "center", behavior: "smooth" }); }catch(e){}
+}
+
+async function handleAudioUpload(file){
+  const s = currentSentence();
+  if(!s || !state.lesson) return;
+  const name = (file.name || "").toLowerCase();
+  const type = (file.type || "").toLowerCase();
+  if(!(name.endsWith(".mp3") || type === "audio/mpeg" || type === "audio/mp3")){
+    setPlayerStatus("Invalid file type. Please choose an .mp3 (audio/mpeg) file.", true);
+    showToast("Only .mp3 audio files are accepted.", "error");
+    return;
+  }
+  const record = {
+    lessonId: state.lesson.id, sentenceId: s.id,
+    blob: file, filename: file.name, mime: file.type || "audio/mpeg",
+    updatedAt: Date.now()
+  };
+  try{ await idbPut("audio", record); }
+  catch(err){ setPlayerStatus("Could not store audio: " + err.message, true); return; }
+  setPlayerStatus("Audio saved for this sentence.");
+  await loadSentenceAudio();
+}
+
+async function removeAudio(){
+  const s = currentSentence();
+  if(!s || !state.lesson) return;
+  if(!window.confirm("Remove the uploaded MP3 for this sentence?")) return;
+  try{ await idbDelete("audio", [state.lesson.id, s.id]); }catch(e){}
+  setPlayerStatus("Uploaded audio removed.");
+  await loadSentenceAudio();
+}
+
+function downloadCSV(){
+  if(!state.lesson) return;
+  const rows = [["Expression","Reading","Meaning"]];
+  state.lesson.data.sentences.forEach(s => rows.push([s.expression || "", s.reading || "", s.meaning || ""]));
+  const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(",")).join("\r\n");
+  const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = (state.lesson.id || "lesson") + "-sentences.csv";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+async function resetProgress(){
+  if(!state.lesson) return;
+  if(!window.confirm('Reset all learning progress for "' + state.lesson.title + '"?\n\nThe lesson and its uploaded audio will be kept.')) return;
+  const lessonId = state.lesson.id;
+  state.progress = defaultProgress(lessonId);
+  state.index = 0;
+  try{ await idbDelete("progress", lessonId); await idbPut("progress", state.progress); }
+  catch(err){ showToast("Could not reset progress: " + err.message, "error"); }
+  const pos = loadPositions(); delete pos[lessonId];
+  try{ localStorage.setItem(LS_POS, JSON.stringify(pos)); }catch(e){}
+  state.reveals = { chunks: false, connected: false };
+  renderLesson();
+  refreshLibrary();
+  showToast("Progress reset.", "ok");
+}
+
+/* ============================================================
+   Event wiring
+   ============================================================ */
+function wireEvents(){
+
+  $("#homeLink").addEventListener("click", e => { e.preventDefault(); goHome(); });
+  $("#btnTheme").addEventListener("click", toggleTheme);
+
+  $("#btnUpload").addEventListener("click", () => $("#fileInput").click());
+  $("#fileInput").addEventListener("change", e => {
+    const f = e.target.files && e.target.files[0];
+    handleFileSelected(f);
+  });
+
+  $("#lessonList").addEventListener("click", e => {
+    const openBtn = e.target.closest("[data-open]");
+    if(openBtn){ openLesson(openBtn.dataset.open); return; }
+    const delBtn = e.target.closest("[data-delete]");
+    if(delBtn){ deleteLesson(delBtn.dataset.delete); }
+  });
+
+  $("#btnCsv").addEventListener("click", downloadCSV);
+  $("#btnReset").addEventListener("click", resetProgress);
+
+  $("#lessonView").addEventListener("click", async e => {
+    const token = e.target.closest(".jp-unit.token");
+    if(token){
+      const s = currentSentence();
+      if(!s) return;
+      let html = "";
+      const vid = token.dataset.vocabId;
+      const gid = token.dataset.grammarId;
+      if(vid){
+        const v = (s.vocabulary || []).find(x => x && x.id === vid);
+        if(v){
+          html += '<div class="pop-word jp">' + esc(v.text) + "</div>";
+          if(v.reading) html += '<div class="pop-row">Reading: <b class="jp">' + esc(v.reading) + "</b></div>";
+          if(v.romaji)  html += '<div class="pop-row">Romaji: <b>' + esc(v.romaji) + "</b></div>";
+          if(v.meaning) html += '<div class="pop-row">Meaning: <b>' + esc(v.meaning) + "</b></div>";
+          if(v.partOfSpeech) html += '<div class="pop-row">Part of speech: <b>' + esc(v.partOfSpeech) + "</b></div>";
+        }
+      }
+      if(gid){
+        const g = (s.grammar || []).find(x => x && x.id === gid);
+        if(g){
+          html += '<div class="pop-word jp">' + esc(g.title) + "</div>";
+          if(g.pattern) html += '<div class="pop-row">Pattern: <b class="jp">' + esc(g.pattern) + "</b></div>";
+          if(g.explanation) html += '<div class="pop-row">' + esc(g.explanation) + "</div>";
+        }
+      }
+      if(html) showPopup(token, html);
+      return;
+    }
+
+    const el = e.target.closest("[data-action]");
+    if(!el) return;
+    const a = el.dataset.action;
+    switch(a){
+      case "prev": goToSentence(state.index - 1); return;
+      case "next": goToSentence(state.index + 1); return;
+      case "play-pause": await actionPlayPause(); return;
+      case "restart": try{ audioEl.currentTime = 0; }catch(err){} return;
+      case "toggle-vocab-panel":
+        state.settings.showVocabPanel = !state.settings.showVocabPanel;
+        saveSettings(); renderLesson(); return;
+      case "toggle-grammar-panel":
+        state.settings.showGrammarPanel = !state.settings.showGrammarPanel;
+        saveSettings(); renderLesson(); return;
+      case "toggle-kana-panel":
+        state.settings.showKanaPanel = !state.settings.showKanaPanel;
+        saveSettings(); renderLesson(); return;
+      case "toggle-furigana":
+        state.settings.furigana = !state.settings.furigana;
+        if(state.settings.furigana) state.settings.romaji = false;
+        saveSettings(); renderLesson(); return;
+      case "toggle-romaji":
+        state.settings.romaji = !state.settings.romaji;
+        if(state.settings.romaji) state.settings.furigana = false;
+        saveSettings(); renderLesson(); return;
+      case "toggle-chunks":
+        state.reveals.chunks = !state.reveals.chunks; renderLesson(); return;
+      case "toggle-connected":
+        state.reveals.connected = !state.reveals.connected; renderLesson(); return;
+      case "toggle-complete": actionToggleComplete(); return;
+      case "highlight-vocab": actionHighlightVocab(el.dataset.vocabId); return;
+      case "scroll-grammar": {
+        const items = $$(".grammar-item");
+        if(items.length) items[0].scrollIntoView({ block: "nearest", behavior: "smooth" });
+        return;
+      }
+      case "upload-audio": {
+        const inp = document.createElement("input");
+        inp.type = "file"; inp.accept = ".mp3,audio/mpeg";
+        inp.addEventListener("change", ev => {
+          const f = ev.target.files && ev.target.files[0];
+          if(f) handleAudioUpload(f);
+        });
+        inp.click();
+        return;
+      }
+      case "remove-audio": await removeAudio(); return;
+    }
+  });
+
+  $("#lessonView").addEventListener("input", e => {
+    const el = e.target.closest("[data-action]");
+    if(!el) return;
+    if(el.dataset.action === "seek"){
+      const v = Number(el.value);
+      if(isFinite(audioEl.duration) && audioEl.duration > 0){
+        try{ audioEl.currentTime = (v / 1000) * audioEl.duration; }catch(err){}
+      }
+    }else if(el.dataset.action === "volume"){
+      const v = Number(el.value);
+      state.settings.volume = v; audioEl.volume = v; saveSettings();
+    }
+  });
+
+  $("#lessonView").addEventListener("change", e => {
+    const el = e.target.closest("[data-action]");
+    if(!el) return;
+    if(el.dataset.action === "speed"){
+      const v = Number(el.value);
+      state.settings.speed = v; audioEl.playbackRate = v; saveSettings();
+    }else if(el.dataset.action === "repeat"){
+      const v = Number(el.value);
+      state.settings.repeat = v; repeatsLeft = v; saveSettings();
+    }
+  });
+
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape"){ hidePopup(); return; }
+    const t = e.target.closest ? e.target.closest(".jp-unit.token") : null;
+    if(t && (e.key === "Enter" || e.key === " ")){
+      e.preventDefault(); t.click(); return;
+    }
+    if(e.target.matches && e.target.matches("input,select,textarea")) return;
+    if(!state.lesson || $("#lessonView").hidden) return;
+    if(e.key === "ArrowLeft"  && !e.target.closest("button")) goToSentence(state.index - 1);
+    if(e.key === "ArrowRight" && !e.target.closest("button")) goToSentence(state.index + 1);
+  });
+
+  document.addEventListener("click", e => {
+    if($("#vocabPopup").hidden) return;
+    if(e.target.closest("#vocabPopup")) return;
+    if(e.target.closest(".jp-unit.token")) return;
+    hidePopup();
+  });
+
+  window.addEventListener("scroll", hidePopup, { passive: true });
+  window.addEventListener("resize", hidePopup);
+  window.addEventListener("beforeunload", releaseAudioURL);
+}
+
+/* ============================================================
+   Init
+   ============================================================ */
+async function init(){
+  loadSettings();
+  applyTheme();
+  wireEvents();
+  try{ state.db = await openDB(); }
+  catch(err){ state.db = null; showToast("Local storage is unavailable: " + err.message, "error"); }
+  await refreshLibrary();
+  if(state.db){
+    const stored = localStorage.getItem(LS_CURRENT);
+    if(stored){
+      let rec = null;
+      try{ rec = await idbGet("lessons", stored); }catch(e){}
+      if(rec) await openLesson(stored);
+      else localStorage.removeItem(LS_CURRENT);
+    }
+  }
+}
+
+init();
+</script>
+</body>
+</html>
