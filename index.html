@@ -105,11 +105,11 @@ body{
   line-height:1.6;min-height:100vh;
   transition:background-color .2s,color .2s;
 }
-button,input,select{font:inherit;color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
 h1,h2,h3,h4{margin:0 0 .35rem;line-height:1.25}
 .jp{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo","Noto Sans JP",system-ui,sans-serif}
 .muted{color:var(--muted)}
-.hidden{display:none !important}
+.hidden, [hidden]{display:none !important}
 ruby{ruby-position:over}
 rt{font-size:.5em;letter-spacing:0}
 code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace}
@@ -155,26 +155,92 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .btn.theme-toggle{padding:.42rem .6rem;min-width:2.4rem;justify-content:center;font-size:1rem;line-height:1}
 
 .app-main{max-width:1600px;margin:0 auto;padding:1rem 1rem 4rem}
+
 .library-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
 .library-head h1{font-size:1.35rem;color:var(--ink-soft)}
 .library-head .actions{display:flex;gap:.5rem;flex-wrap:wrap}
-.lesson-list{display:flex;flex-direction:column;gap:.85rem;max-width:900px;margin:0 auto}
-.lesson-card{
-  background:var(--card);border-radius:var(--radius);padding:1.15rem 1.25rem;
-  box-shadow:var(--shadow);display:flex;gap:1rem;justify-content:space-between;flex-wrap:wrap;
+
+/* ============================================================
+   Courses — responsive grid of clickable cards
+   ============================================================ */
+.course-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+  gap:1rem;
+  align-items:start;
 }
-.lesson-card-main{flex:1 1 280px;min-width:0}
-.lesson-card h3{font-size:1.1rem;color:var(--ink-soft)}
-.lesson-card .desc{color:var(--muted);margin:.15rem 0 .45rem;font-size:.94rem}
-.lesson-card .meta{color:var(--muted);font-size:.85rem;margin:.15rem 0}
-.lesson-card-actions{display:flex;gap:.5rem;align-items:flex-start;flex-wrap:wrap}
+@media (max-width:420px){
+  .course-list{grid-template-columns:1fr}
+}
+
+.course-card{
+  background:var(--card);border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transition:box-shadow .2s,transform .15s;
+  border:1px solid transparent;
+}
+.course-card:hover{
+  box-shadow:0 10px 34px rgba(60,40,10,.14);
+  transform:translateY(-1px);
+}
+.course-card.orphan{border:1px dashed var(--border)}
+
+.course-card-head{
+  padding:1.15rem 1.25rem .9rem;
+  cursor:pointer;
+  display:flex;
+  gap:.75rem;
+  align-items:flex-start;
+  user-select:none;
+  transition:background .15s;
+  border:0;background:transparent;color:inherit;text-align:left;width:100%;
+  font-family:inherit;
+}
+.course-card-head:hover{background:var(--hover-bg)}
+.course-card-head:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+.course-head-main{flex:1 1 auto;min-width:0}
+.course-head-main h3{font-size:1.1rem;color:var(--ink-soft);margin-bottom:.15rem}
+.course-head-main .desc{color:var(--muted);font-size:.85rem;margin:.1rem 0 .35rem;line-height:1.45}
+.course-head-main .meta{color:var(--muted);font-size:.78rem;margin:.15rem 0}
+
+.course-open-hint{
+  flex:0 0 auto;
+  display:flex;align-items:center;gap:.35rem;
+  color:var(--accent);font-size:.78rem;font-weight:700;
+  letter-spacing:.04em;
+  padding:.35rem .6rem;
+  border-radius:99px;
+  background:var(--accent-soft);
+  white-space:nowrap;
+}
+.course-card.orphan .course-open-hint{
+  color:var(--muted);background:var(--card-alt);
+}
+.course-card-head:hover .course-open-hint{
+  background:var(--accent-warm);color:#fff;
+}
+.course-card.orphan .course-card-head:hover .course-open-hint{
+  background:var(--muted);color:#fff;
+}
+
+.course-actions{
+  padding:0 1.25rem 1.15rem;
+  display:flex;gap:.4rem;flex-wrap:wrap;
+}
+
 .bar{height:8px;border-radius:99px;background:var(--bar-bg);overflow:hidden;margin:.5rem 0}
 .bar-fill{height:100%;background:linear-gradient(90deg,var(--accent-warm),var(--ok));width:0}
+
 .empty{
   background:var(--card);border-radius:var(--radius);padding:2.2rem 1.2rem;
   text-align:center;color:var(--muted);box-shadow:var(--shadow-soft);
-  max-width:900px;margin:0 auto;
+  grid-column:1 / -1;
 }
+.empty strong{color:var(--accent)}
+
 .messages{margin-bottom:1rem;max-width:900px;margin-left:auto;margin-right:auto}
 .msg{border-radius:var(--radius-sm);padding:.85rem 1rem;margin-bottom:.6rem;font-size:.92rem;background:var(--card)}
 .msg.error{background:var(--msg-error-bg);border:1px solid var(--msg-error-br);color:var(--msg-error-tx)}
@@ -190,6 +256,25 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .preview-list{margin:.5rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.9rem}
 .preview-actions{display:flex;gap:.5rem;margin-top:.9rem;flex-wrap:wrap}
 
+.course-picker{
+  display:flex;gap:.5rem;align-items:flex-end;flex-wrap:wrap;
+  margin:1rem 0 .6rem;padding-top:.9rem;border-top:1px solid var(--border);
+}
+.course-picker label{display:flex;flex-direction:column;gap:.3rem;flex:1 1 240px;min-width:0}
+.course-picker label > span{
+  font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--muted);font-weight:700;
+}
+.course-picker select{
+  background:var(--btn-bg);border:1px solid var(--border);
+  border-radius:10px;padding:.5rem .7rem;color:var(--ink);
+  font-size:.9rem;width:100%;
+}
+.course-picker select:focus{outline:2px solid var(--accent);outline-offset:1px}
+
+/* ============================================================
+   Lesson view
+   ============================================================ */
 .lesson-toolbar{
   display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;
   background:var(--card);border-radius:var(--radius-sm);
@@ -345,14 +430,13 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .kana-cell.in-sentence .kc-example{color:var(--ink-soft)}
 
 /* ============================================================
-   JSON demo modal
+   Modal
    ============================================================ */
 .modal-backdrop{
   position:fixed;inset:0;z-index:1000;
   background:var(--overlay-bg);
   display:flex;align-items:center;justify-content:center;
-  padding:1.2rem;
-  animation:fadeIn .15s ease;
+  padding:1.2rem;animation:fadeIn .15s ease;
 }
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -361,54 +445,49 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
   box-shadow:0 24px 60px rgba(0,0,0,.35);
   width:100%;max-width:880px;max-height:min(90vh, 780px);
   display:flex;flex-direction:column;overflow:hidden;
-  animation:slideUp .18s ease;
-  border:1px solid var(--border);
+  animation:slideUp .18s ease;border:1px solid var(--border);
 }
+.modal.modal-narrow{max-width:520px}
+.modal.modal-medium{max-width:720px}
 .modal-head{
-  display:flex;align-items:center;gap:.8rem;
-  padding:.9rem 1.15rem;
-  border-bottom:1px solid var(--border);
-  flex-wrap:wrap;
+  display:flex;align-items:flex-start;gap:.8rem;
+  padding:.95rem 1.15rem;border-bottom:1px solid var(--border);flex-wrap:wrap;
 }
-.modal-head h2{font-size:1.05rem;color:var(--ink-soft);margin:0}
+.modal-head-main{flex:1 1 auto;min-width:0}
+.modal-head h2{font-size:1.1rem;color:var(--ink-soft);margin:0 0 .15rem}
+.modal-head .sub{
+  color:var(--muted);font-size:.85rem;margin:0;
+  display:flex;gap:.6rem;flex-wrap:wrap;
+}
+.modal-head .sub .dot{opacity:.5}
 .modal-head .spacer{margin-left:auto}
 .modal-head .close-btn{
   background:transparent;border:1px solid var(--btn-border);
   width:2rem;height:2rem;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;color:var(--muted);font-size:1rem;line-height:1;
+  flex:0 0 auto;
 }
 .modal-head .close-btn:hover{background:var(--btn-hover);color:var(--ink)}
 .modal-head .close-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.modal-body{
-  flex:1;overflow-y:auto;
-  padding:1rem 1.15rem 1.2rem;
-}
-.modal-intro{
-  font-size:.88rem;color:var(--muted);
-  margin:0 0 .9rem;line-height:1.55;
-}
+
+.modal-body{flex:1;overflow-y:auto;padding:1rem 1.15rem 1.1rem}
+.modal-intro{font-size:.88rem;color:var(--muted);margin:0 0 .9rem;line-height:1.55}
 .modal-intro code{
   background:var(--card-alt);border:1px solid var(--border);
   padding:.05rem .35rem;border-radius:5px;font-size:.82em;color:var(--accent);
 }
 .json-block{
   background:var(--code-bg);color:var(--code-ink);
-  border-radius:var(--radius-sm);
-  padding:1rem 1.1rem;
-  overflow-x:auto;
-  font-size:.82rem;line-height:1.65;
-  margin:0;
-  white-space:pre;
-  tab-size:2;
-  border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:1rem 1.1rem;
+  overflow-x:auto;font-size:.82rem;line-height:1.65;margin:0;
+  white-space:pre;tab-size:2;border:1px solid var(--border);
 }
-.json-block .k{color:var(--code-key)}      /* keys */
-.json-block .s{color:var(--code-string)}    /* strings */
-.json-block .n{color:var(--code-number)}    /* numbers */
-.json-block .z{color:var(--code-null)}      /* null */
-.json-block .p{color:var(--code-punct)}     /* punctuation */
-
+.json-block .k{color:var(--code-key)}
+.json-block .s{color:var(--code-string)}
+.json-block .n{color:var(--code-number)}
+.json-block .z{color:var(--code-null)}
+.json-block .p{color:var(--code-punct)}
 .modal-note{
   background:var(--card-alt);border-left:3px solid var(--accent-warm);
   padding:.7rem .9rem;border-radius:8px;margin-top:1rem;
@@ -419,11 +498,106 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .modal-note li{margin:.2rem 0}
 .modal-foot{
   display:flex;gap:.5rem;flex-wrap:wrap;
-  padding:.9rem 1.15rem;
-  border-top:1px solid var(--border);
+  padding:.9rem 1.15rem;border-top:1px solid var(--border);
   background:var(--card-alt);
 }
 .modal-foot .spacer{margin-left:auto}
+
+/* ---- Lesson list inside the course modal ---- */
+.lesson-list-modal{
+  display:flex;flex-direction:column;gap:.6rem;
+}
+.lesson-card{
+  background:var(--card-alt);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:.85rem 1rem;
+  display:flex;gap:.8rem;justify-content:space-between;flex-wrap:wrap;
+}
+.lesson-card-main{flex:1 1 220px;min-width:0}
+.lesson-card h4{font-size:1rem;color:var(--ink-soft);margin-bottom:.15rem}
+.lesson-card .desc{color:var(--muted);font-size:.82rem;margin:.15rem 0 .35rem;line-height:1.45}
+.lesson-card .meta{color:var(--muted);font-size:.78rem;margin:.15rem 0}
+.lesson-card .bar{height:6px;margin:.4rem 0}
+.lesson-card-actions{display:flex;gap:.4rem;flex-wrap:wrap;align-items:flex-start}
+
+.lesson-count-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:1.4rem;height:1.4rem;padding:0 .35rem;
+  border-radius:99px;background:var(--accent-soft);color:var(--accent);
+  font-size:.72rem;font-weight:800;letter-spacing:.02em;
+  margin-left:.35rem;
+}
+
+/* ---- Pagination ---- */
+.modal-pagination{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.75rem 1.15rem;
+  border-top:1px solid var(--border);
+  background:var(--card);
+  flex-wrap:wrap;
+}
+.modal-pagination .page-info{
+  font-size:.85rem;color:var(--muted);
+  font-variant-numeric:tabular-nums;
+  margin:0 .35rem;
+}
+.modal-pagination .page-info strong{color:var(--ink-soft)}
+.modal-pagination .page-nums{
+  display:flex;gap:.25rem;flex-wrap:wrap;
+}
+.modal-pagination .page-num{
+  min-width:2rem;height:2rem;padding:0 .5rem;
+  background:transparent;border:1px solid var(--border);border-radius:8px;
+  cursor:pointer;color:var(--muted);font-size:.85rem;font-weight:600;
+  font-variant-numeric:tabular-nums;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.modal-pagination .page-num:hover{background:var(--hover-bg);color:var(--ink)}
+.modal-pagination .page-num.active{
+  background:var(--accent);border-color:var(--accent);
+  color:var(--btn-primary-text);
+}
+.modal-pagination .page-num:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.modal-pagination .ellipsis{
+  color:var(--muted);padding:0 .15rem;user-select:none;
+}
+@media (max-width:520px){
+  .modal-pagination .page-nums{display:none}
+}
+
+/* ---- Empty state inside modal ---- */
+.modal-empty{
+  text-align:center;color:var(--muted);
+  padding:2.5rem 1rem;
+  background:var(--card-alt);border-radius:var(--radius-sm);
+  border:1px dashed var(--border);
+}
+.modal-empty p{margin:.3rem 0}
+.modal-empty strong{color:var(--accent)}
+
+.form-field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.85rem}
+.form-field > span{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--muted);font-weight:700;
+}
+.form-field input,
+.form-field textarea,
+.form-field select{
+  background:var(--btn-bg);border:1px solid var(--border);border-radius:10px;
+  padding:.55rem .75rem;color:var(--ink);font-size:.95rem;
+  width:100%;font-family:inherit;
+}
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus{
+  outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent);
+}
+.form-field textarea{resize:vertical;min-height:70px}
+.form-error{
+  background:var(--msg-error-bg);border:1px solid var(--msg-error-br);
+  color:var(--msg-error-tx);padding:.6rem .8rem;border-radius:10px;
+  font-size:.85rem;margin-bottom:.5rem;
+}
 
 #vocabPopup{
   position:absolute;z-index:200;max-width:300px;
@@ -447,7 +621,6 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
   .app-main{padding:.75rem .65rem 3rem}
   .header-inner{padding:.55rem .7rem}
   .card{padding:.9rem .95rem}
-  .lesson-card{padding:1rem}
   .sentence{font-size:1.4rem;line-height:2.4}
   .header-lesson{max-width:100%;order:5;flex-basis:100%}
   .kana-grid{grid-template-columns:repeat(auto-fill, minmax(64px, 1fr))}
@@ -480,8 +653,9 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 <main class="app-main">
   <section id="libraryView">
     <div class="library-head">
-      <h1>Your Lessons</h1>
+      <h1>Your Courses</h1>
       <div class="actions">
+        <button id="btnCreateCourse" class="btn" type="button">Create Course</button>
         <button id="btnJsonFormat" class="btn" type="button">View JSON Format</button>
         <button id="btnUpload" class="btn primary" type="button">Upload Lesson JSON</button>
         <input type="file" id="fileInput" accept=".json,application/json" hidden>
@@ -489,7 +663,7 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
     </div>
     <div id="importMessages" class="messages" hidden></div>
     <div id="importPreview" class="preview" hidden></div>
-    <div id="lessonList" class="lesson-list"></div>
+    <div id="courseList" class="course-list"></div>
   </section>
   <section id="lessonView" hidden></section>
 </main>
@@ -498,10 +672,13 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 "use strict";
 
 const DB_NAME = "jp-trainer-db";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const LS_SETTINGS = "jt.settings.v1";
 const LS_CURRENT  = "jt.currentLesson.v1";
 const LS_POS      = "jt.positions.v1";
+
+const LESSONS_PER_PAGE = 10;
+const ORPHAN_ID = "__uncategorized__";
 
 const $  = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
@@ -530,6 +707,10 @@ function isKanji(ch){
 function hasKanji(str){
   for(let i = 0; i < str.length; i++) if(isKanji(str[i])) return true;
   return false;
+}
+function uid(prefix){
+  return (prefix || "id") + "-" + Date.now().toString(36) + "-" +
+         Math.random().toString(36).slice(2, 8);
 }
 
 function makeRuby(text, reading){
@@ -588,6 +769,7 @@ const KANA_MAP = {
 
 const state = {
   db: null,
+  courses: [],
   lessons: [],
   lesson: null,
   index: 0,
@@ -602,14 +784,17 @@ const state = {
   progress: null,
   audioURL: null,
   pending: null,
+  pendingCourseId: null,
   reveals: { chunks: false, connected: false },
-  kanaInventory: []
+  kanaInventory: [],
+  /* Currently open course modal, if any */
+  courseModal: null /* { courseId, page, handle } */
 };
 let repeatsLeft = 0;
 let countNextPlay = false;
 
 /* ============================================================
-   JSON template + demo
+   JSON template
    ============================================================ */
 const JSON_TEMPLATE = {
   app: "Japanese Trainer",
@@ -633,26 +818,15 @@ const JSON_TEMPLATE = {
         { text: "ございます", meaning: "Polite expression" }
       ],
       connectedReading: "おはようございます。",
-      tokens: [
-        { text: "おはようございます", vocabularyId: "v001" }
-      ],
+      tokens: [ { text: "おはようございます", vocabularyId: "v001" } ],
       vocabulary: [
-        {
-          id: "v001",
-          text: "おはようございます",
-          reading: "おはようございます",
-          romaji: "ohayou gozaimasu",
-          meaning: "Good morning",
-          partOfSpeech: "expression"
-        }
+        { id: "v001", text: "おはようございます", reading: "おはようございます",
+          romaji: "ohayou gozaimasu", meaning: "Good morning", partOfSpeech: "expression" }
       ],
       grammar: [
-        {
-          id: "g001",
-          title: "ございます",
+        { id: "g001", title: "ございます",
           explanation: "A polite expression used in greetings.",
-          pattern: "おはよう + ございます"
-        }
+          pattern: "おはよう + ございます" }
       ],
       kana: [
         { character: "お", reading: "o", romaji: "o", script: "hiragana" },
@@ -686,12 +860,9 @@ const JSON_TEMPLATE = {
         { id: "v005", text: "ですか", reading: "ですか", romaji: "desu ka", meaning: "is it? (polite question)", partOfSpeech: "expression" }
       ],
       grammar: [
-        {
-          id: "g002",
-          title: "ですが",
+        { id: "g002", title: "ですが",
           explanation: "A polite connective used to soften a statement or introduce contrast.",
-          pattern: "A + ですが + B"
-        }
+          pattern: "A + ですが + B" }
       ],
       kana: [
         { character: "し", reading: "shi", romaji: "shi", script: "hiragana" },
@@ -703,27 +874,21 @@ const JSON_TEMPLATE = {
   ]
 };
 
-/* ---- Small JSON syntax highlighter (only used for display) ---- */
 function highlightJSON(value){
   const json = JSON.stringify(value, null, 2);
   return json
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
     .replace(/("(?:\\u[a-fA-F0-9]{4}|\\[^u]|[^\\"])*")(\s*:)?/g, function(match, str, colon){
-      if(colon){
-        return '<span class="k">' + str + "</span>" + colon.replace(":", '<span class="p">:</span>');
-      }
+      if(colon) return '<span class="k">' + str + "</span>" + colon.replace(":", '<span class="p">:</span>');
       return '<span class="s">' + str + "</span>";
     })
-    .replace(/\b(true|false|null)\b/g, function(match){
-      return '<span class="z">' + match + "</span>";
-    })
-    .replace(/(:\s*)(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g, function(_, pre, num){
-      return pre + '<span class="n">' + num + "</span>";
-    });
+    .replace(/\b(true|false|null)\b/g, m => '<span class="z">' + m + "</span>")
+    .replace(/(:\s*)(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g,
+      (_, pre, num) => pre + '<span class="n">' + num + "</span>");
 }
 
 /* ============================================================
-   Modal
+   Modal helpers
    ============================================================ */
 function openModal(html, opts){
   const host = $("#modalHost");
@@ -737,29 +902,25 @@ function openModal(html, opts){
     document.removeEventListener("keydown", onKey);
     document.body.style.overflow = "";
   }
-  function onKey(e){
-    if(e.key === "Escape") close();
-  }
+  function onKey(e){ if(e.key === "Escape") close(); }
   document.addEventListener("keydown", onKey);
   document.body.style.overflow = "hidden";
 
-  backdrop.addEventListener("click", function(e){
-    if(e.target === backdrop) close();
-  });
+  backdrop.addEventListener("click", e => { if(e.target === backdrop) close(); });
   backdrop.querySelectorAll("[data-modal-close]").forEach(b => {
     b.addEventListener("click", close);
   });
-  return { el: backdrop, close: close };
+  return { el: backdrop, close };
 }
 
+/* ---------------- JSON format modal ---------------- */
 function showJsonFormatModal(){
   const json = JSON_TEMPLATE;
   const highlighted = highlightJSON(json);
-
   const html =
     '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="jsonModalTitle">' +
       '<div class="modal-head">' +
-        '<h2 id="jsonModalTitle">Lesson JSON format</h2>' +
+        '<div class="modal-head-main"><h2 id="jsonModalTitle">Lesson JSON format</h2></div>' +
         '<span class="spacer"></span>' +
         '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
       '</div>' +
@@ -789,44 +950,340 @@ function showJsonFormatModal(){
         '<button class="btn primary" type="button" data-modal-close>Close</button>' +
       '</div>' +
     '</div>';
-
   const modal = openModal(html);
 
   $("#btnCopyJson", modal.el).addEventListener("click", async () => {
     const text = JSON.stringify(json, null, 2);
-    try{
-      await navigator.clipboard.writeText(text);
-      showToast("JSON copied to clipboard.", "ok");
-    }catch(err){
-      /* Fallback: temporary textarea */
+    try{ await navigator.clipboard.writeText(text); showToast("JSON copied to clipboard.", "ok"); }
+    catch(err){
       const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed";
-      ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.select();
-      try{
-        document.execCommand("copy");
-        showToast("JSON copied to clipboard.", "ok");
-      }catch(e2){
-        showToast("Copy failed — select the text manually.", "error");
-      }
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); showToast("JSON copied to clipboard.", "ok"); }
+      catch(e2){ showToast("Copy failed — select the text manually.", "error"); }
       ta.remove();
     }
   });
-
   $("#btnDownloadTemplate", modal.el).addEventListener("click", () => {
     const text = JSON.stringify(json, null, 2);
     const blob = new Blob([text], { type: "application/json;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url;
-    a.download = "lesson-template.json";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    a.href = url; a.download = "lesson-template.json";
+    document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1500);
     showToast("Template downloaded.", "ok");
+  });
+}
+
+/* ---------------- Course create / edit modal ---------------- */
+function showCourseModal(course, onSave){
+  const isEdit = !!course;
+  const c = course || { title: "", description: "", level: "Beginner" };
+  const levels = ["Beginner","Elementary","Intermediate","Upper Intermediate","Advanced"];
+
+  const html =
+    '<div class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="courseModalTitle">' +
+      '<div class="modal-head">' +
+        '<div class="modal-head-main"><h2 id="courseModalTitle">' + (isEdit ? "Edit course" : "Create course") + '</h2></div>' +
+        '<span class="spacer"></span>' +
+        '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="modal-body">' +
+        '<div class="form-error" id="courseError" hidden></div>' +
+        '<label class="form-field"><span>Title</span>' +
+          '<input type="text" id="courseTitle" maxlength="80" placeholder="e.g. JLPT N5 Grammar" value="' + esc(c.title) + '">' +
+        '</label>' +
+        '<label class="form-field"><span>Description (optional)</span>' +
+          '<textarea id="courseDesc" maxlength="240" placeholder="Short summary of what this course covers">' + esc(c.description || "") + '</textarea>' +
+        '</label>' +
+        '<label class="form-field"><span>Level</span>' +
+          '<select id="courseLevel">' +
+            levels.map(l => '<option' + (c.level === l ? ' selected' : '') + '>' + l + '</option>').join("") +
+          '</select>' +
+        '</label>' +
+      '</div>' +
+      '<div class="modal-foot">' +
+        '<span class="spacer"></span>' +
+        '<button class="btn" type="button" data-modal-close>Cancel</button>' +
+        '<button class="btn primary" type="button" id="btnSaveCourse">' + (isEdit ? "Save changes" : "Create course") + '</button>' +
+      '</div>' +
+    '</div>';
+
+  const modal = openModal(html);
+  const titleEl = $("#courseTitle", modal.el);
+  const descEl  = $("#courseDesc",  modal.el);
+  const levelEl = $("#courseLevel", modal.el);
+  const errEl   = $("#courseError", modal.el);
+
+  setTimeout(() => titleEl.focus(), 60);
+
+  function save(){
+    const title = titleEl.value.trim();
+    if(!title){
+      errEl.textContent = "Please enter a course title.";
+      errEl.hidden = false; titleEl.focus();
+      return;
+    }
+    const data = {
+      title: title,
+      description: descEl.value.trim(),
+      level: levelEl.value
+    };
+    modal.close();
+    onSave(data);
+  }
+  $("#btnSaveCourse", modal.el).addEventListener("click", save);
+  modal.el.addEventListener("keydown", e => {
+    if(e.key === "Enter" && e.target.tagName === "INPUT"){
+      e.preventDefault(); save();
+    }
+  });
+}
+
+/* ---------------- Delete course modal ---------------- */
+function showDeleteCourseModal(course, lessonCount){
+  const html =
+    '<div class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="delCourseTitle">' +
+      '<div class="modal-head">' +
+        '<div class="modal-head-main"><h2 id="delCourseTitle">Delete course</h2></div>' +
+        '<span class="spacer"></span>' +
+        '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="modal-body">' +
+        '<p>Delete course <strong>' + esc(course.title) + '</strong>?</p>' +
+        (lessonCount > 0
+          ? '<p class="muted">This course contains <strong>' + lessonCount + ' lesson' +
+              (lessonCount === 1 ? "" : "s") + '</strong>. What should happen to them?</p>' +
+            '<div class="modal-note">' +
+              '<strong>Keep lessons</strong> — they move to the Uncategorized section.<br>' +
+              '<strong>Delete everything</strong> — the lessons, their audio, and their progress are permanently removed.' +
+            '</div>'
+          : '<p class="muted">This course has no lessons.</p>') +
+      '</div>' +
+      '<div class="modal-foot">' +
+        '<button class="btn" type="button" data-modal-close>Cancel</button>' +
+        '<span class="spacer"></span>' +
+        (lessonCount > 0
+          ? '<button class="btn" type="button" id="btnKeepLessons">Keep lessons</button>' +
+            '<button class="btn danger" type="button" id="btnDeleteAll">Delete everything</button>'
+          : '<button class="btn danger" type="button" id="btnDeleteAll">Delete course</button>') +
+      '</div>' +
+    '</div>';
+
+  const modal = openModal(html);
+  if(lessonCount > 0){
+    $("#btnKeepLessons", modal.el).addEventListener("click", () => {
+      modal.close(); deleteCourse(course.id, false);
+    });
+  }
+  $("#btnDeleteAll", modal.el).addEventListener("click", () => {
+    modal.close(); deleteCourse(course.id, true);
+  });
+}
+
+/* ============================================================
+   Course lessons modal — paginated popup
+   ============================================================ */
+function openCourseLessonsModal(courseId, page){
+  const course = getCourseById(courseId);
+  if(!course) return;
+
+  const lessons = getLessonsForCourse(courseId);
+  const totalPages = Math.max(1, Math.ceil(lessons.length / LESSONS_PER_PAGE));
+  page = Math.max(1, Math.min(page || 1, totalPages));
+
+  const html =
+    '<div class="modal modal-medium" role="dialog" aria-modal="true" aria-labelledby="courseLessonsTitle">' +
+      '<div class="modal-head">' +
+        '<div class="modal-head-main">' +
+          '<h2 id="courseLessonsTitle"></h2>' +
+          '<p class="sub" id="courseLessonsSub"></p>' +
+        '</div>' +
+        '<span class="spacer"></span>' +
+        '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="modal-body" id="courseLessonsBody"></div>' +
+      '<div class="modal-pagination" id="courseLessonsPagination"></div>' +
+      '<div class="modal-foot" id="courseLessonsFoot"></div>' +
+    '</div>';
+
+  const modal = openModal(html);
+
+  const cm = {
+    courseId: courseId,
+    page: page,
+    handle: modal
+  };
+  state.courseModal = cm;
+
+  /* Wrap close to clear state */
+  const originalClose = modal.close;
+  modal.close = function(){
+    state.courseModal = null;
+    originalClose();
+  };
+  /* Rebind all close buttons to the wrapped close */
+  modal.el.querySelectorAll("[data-modal-close]").forEach(b => {
+    const clone = b.cloneNode(true);
+    b.parentNode.replaceChild(clone, b);
+    clone.addEventListener("click", () => modal.close());
+  });
+  /* Rebind backdrop */
+  modal.el.addEventListener("click", e => {
+    if(e.target === modal.el) modal.close();
+  });
+  /* Rebind Escape */
+  document.addEventListener("keydown", function esc2(e){
+    if(e.key === "Escape" && state.courseModal === cm){
+      document.removeEventListener("keydown", esc2);
+      modal.close();
+    }
+  });
+
+  renderCourseLessonsModal();
+}
+
+function getCourseById(courseId){
+  if(courseId === ORPHAN_ID){
+    return {
+      id: ORPHAN_ID,
+      title: "Uncategorized",
+      description: "Lessons not assigned to any course.",
+      level: "—",
+      orphan: true
+    };
+  }
+  return state.courses.find(c => c.id === courseId) || null;
+}
+
+function getLessonsForCourse(courseId){
+  if(courseId === ORPHAN_ID){
+    const ids = new Set(state.courses.map(c => c.id));
+    return state.lessons.filter(l => !l.courseId || !ids.has(l.courseId));
+  }
+  return state.lessons.filter(l => l.courseId === courseId);
+}
+
+function renderCourseLessonsModal(){
+  const cm = state.courseModal;
+  if(!cm) return;
+  const course = getCourseById(cm.courseId);
+  if(!course){ cm.handle.close(); return; }
+
+  const lessons = getLessonsForCourse(cm.courseId);
+  const totalSentences = lessons.reduce((sum, l) => sum + lessonSentenceCount(l), 0);
+  const progMap = {};
+  /* Rebuild prog map from cache (we keep progress records in state.progressCache) */
+  (state.progressCache || []).forEach(p => { progMap[p.lessonId] = p; });
+  let doneSentences = 0;
+  lessons.forEach(l => { doneSentences += completedInLesson(progMap[l.id]); });
+  const pct = totalSentences ? Math.round(doneSentences / totalSentences * 100) : 0;
+
+  /* ---- Head ---- */
+  const titleEl = $("#courseLessonsTitle", cm.handle.el);
+  const subEl   = $("#courseLessonsSub",   cm.handle.el);
+  titleEl.textContent = course.title;
+  subEl.innerHTML =
+    '<span>' + esc(course.level || "—") + "</span>" +
+    '<span class="dot">•</span>' +
+    "<span>" + lessons.length + " lesson" + (lessons.length === 1 ? "" : "s") + "</span>" +
+    '<span class="dot">•</span>' +
+    "<span>" + totalSentences + " sentences</span>" +
+    '<span class="dot">•</span>' +
+    "<span>Progress " + doneSentences + " / " + totalSentences + " (" + pct + "%)</span>";
+
+  /* ---- Body ---- */
+  const body = $("#courseLessonsBody", cm.handle.el);
+  if(!lessons.length){
+    body.innerHTML =
+      '<div class="modal-empty">' +
+        "<p><strong>No lessons yet.</strong></p>" +
+        "<p>Use <strong>Import Lesson</strong> below to add one to this course.</p>" +
+      "</div>";
+  }else{
+    const totalPages = Math.max(1, Math.ceil(lessons.length / LESSONS_PER_PAGE));
+    cm.page = Math.max(1, Math.min(cm.page, totalPages));
+    const start = (cm.page - 1) * LESSONS_PER_PAGE;
+    const slice = lessons.slice(start, start + LESSONS_PER_PAGE);
+
+    let html = '<div class="lesson-list-modal">';
+    slice.forEach(l => {
+      const total = lessonSentenceCount(l);
+      const done = completedInLesson(progMap[l.id]);
+      const lessonPct = total ? Math.round(done / total * 100) : 0;
+      html +=
+        '<article class="lesson-card" data-lesson-id="' + esc(l.id) + '">' +
+          '<div class="lesson-card-main">' +
+            "<h4>" + esc(l.title) + "</h4>" +
+            (l.description ? '<p class="desc">' + esc(l.description) + "</p>" : "") +
+            '<p class="meta">' + esc(l.level) + " • " + total + " sentences</p>" +
+            '<div class="bar"><div class="bar-fill" style="width:' + lessonPct + '%"></div></div>' +
+            '<p class="meta">Progress: ' + done + " / " + total + " (" + lessonPct + "%)</p>" +
+          "</div>" +
+          '<div class="lesson-card-actions">' +
+            '<button class="btn small primary" data-action="open-lesson" data-id="' + esc(l.id) + '" type="button">Open</button>' +
+            '<button class="btn small danger" data-action="delete-lesson" data-id="' + esc(l.id) + '" type="button">Delete</button>' +
+          "</div>" +
+        "</article>";
+    });
+    html += "</div>";
+    body.innerHTML = html;
+  }
+
+  /* ---- Pagination ---- */
+  const pag = $("#courseLessonsPagination", cm.handle.el);
+  if(lessons.length <= LESSONS_PER_PAGE){
+    pag.innerHTML = "";
+    pag.hidden = true;
+  }else{
+    pag.hidden = false;
+    const totalPages = Math.ceil(lessons.length / LESSONS_PER_PAGE);
+
+    /* Page numbers, with ellipses when many pages */
+    const pageNums = [];
+    const cur = cm.page;
+    if(totalPages <= 7){
+      for(let i = 1; i <= totalPages; i++) pageNums.push(i);
+    }else{
+      pageNums.push(1);
+      if(cur > 4) pageNums.push("…");
+      for(let i = Math.max(2, cur - 1); i <= Math.min(totalPages - 1, cur + 1); i++) pageNums.push(i);
+      if(cur < totalPages - 3) pageNums.push("…");
+      pageNums.push(totalPages);
+    }
+
+    pag.innerHTML =
+      '<button class="btn small" data-action="page-prev" type="button"' + (cur === 1 ? " disabled" : "") + '>‹ Prev</button>' +
+      '<div class="page-nums">' +
+        pageNums.map(p => {
+          if(p === "…") return '<span class="ellipsis">…</span>';
+          return '<button class="page-num' + (p === cur ? " active" : "") + '" data-action="page-go" data-page="' + p + '" type="button">' + p + '</button>';
+        }).join("") +
+      "</div>" +
+      '<span class="page-info">Page <strong>' + cur + "</strong> / " + totalPages + "</span>" +
+      '<button class="btn small" data-action="page-next" type="button"' + (cur === totalPages ? " disabled" : "") + '>Next ›</button>';
+  }
+
+  /* ---- Foot (actions) ---- */
+  const foot = $("#courseLessonsFoot", cm.handle.el);
+  if(course.orphan){
+    foot.innerHTML =
+      '<span class="muted" style="font-size:.82rem;align-self:center">These lessons have no course yet.</span>' +
+      '<span class="spacer"></span>' +
+      '<button class="btn" type="button" data-modal-close>Close</button>';
+  }else{
+    foot.innerHTML =
+      '<button class="btn primary" data-action="import-to-course" data-course="' + esc(course.id) + '" type="button">Import Lesson</button>' +
+      '<button class="btn" data-action="edit-course" data-course="' + esc(course.id) + '" type="button">Edit course</button>' +
+      '<button class="btn danger" data-action="delete-course" data-course="' + esc(course.id) + '" type="button">Delete course</button>' +
+      '<span class="spacer"></span>' +
+      '<button class="btn" type="button" data-modal-close>Close</button>';
+  }
+
+  /* Rebind the close buttons that were regenerated inside foot */
+  cm.handle.el.querySelectorAll("[data-modal-close]").forEach(b => {
+    b.addEventListener("click", () => cm.handle.close());
   });
 }
 
@@ -838,15 +1295,9 @@ function applyTheme(){
   document.documentElement.setAttribute("data-theme", t);
   const btn = $("#btnTheme");
   if(btn){
-    if(t === "dark"){
-      btn.textContent = "☀️";
-      btn.setAttribute("aria-label", "Switch to light mode");
-      btn.setAttribute("title", "Switch to light mode");
-    }else{
-      btn.textContent = "🌙";
-      btn.setAttribute("aria-label", "Switch to dark mode");
-      btn.setAttribute("title", "Switch to dark mode");
-    }
+    btn.textContent = t === "dark" ? "☀️" : "🌙";
+    btn.setAttribute("aria-label", t === "dark" ? "Switch to light mode" : "Switch to dark mode");
+    btn.setAttribute("title", btn.getAttribute("aria-label"));
   }
 }
 function toggleTheme(){
@@ -867,6 +1318,7 @@ function openDB(){
       if(!db.objectStoreNames.contains("lessons"))  db.createObjectStore("lessons",  { keyPath: "id" });
       if(!db.objectStoreNames.contains("audio"))    db.createObjectStore("audio",    { keyPath: ["lessonId","sentenceId"] });
       if(!db.objectStoreNames.contains("progress")) db.createObjectStore("progress", { keyPath: "lessonId" });
+      if(!db.objectStoreNames.contains("courses"))  db.createObjectStore("courses",  { keyPath: "id" });
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error || new Error("Unable to open database."));
@@ -914,18 +1366,14 @@ function deleteAudioForLesson(lessonId){
 function loadSettings(){
   try{
     const raw = localStorage.getItem(LS_SETTINGS);
-    if(raw){
-      const parsed = JSON.parse(raw);
-      if(parsed && typeof parsed === "object") Object.assign(state.settings, parsed);
-    }
+    if(raw){ const p = JSON.parse(raw); if(p && typeof p === "object") Object.assign(state.settings, p); }
   }catch(e){}
   if(state.settings.furigana && state.settings.romaji) state.settings.romaji = false;
   state.settings.speed  = Number(state.settings.speed) || 1;
   state.settings.repeat = Number(state.settings.repeat) || 0;
   state.settings.volume = (typeof state.settings.volume === "number") ? state.settings.volume : 1;
   state.settings.showVocabPanel   = !!state.settings.showVocabPanel;
-  state.settings.showGrammarPanel = state.settings.showGrammarPanel === undefined
-    ? true : !!state.settings.showGrammarPanel;
+  state.settings.showGrammarPanel = state.settings.showGrammarPanel === undefined ? true : !!state.settings.showGrammarPanel;
   state.settings.showKanaPanel    = !!state.settings.showKanaPanel;
   state.settings.furigana         = !!state.settings.furigana;
   state.settings.romaji           = !!state.settings.romaji;
@@ -950,16 +1398,14 @@ function savePosition(lessonId, i){
 let toastTimer = null;
 function showToast(msg, kind){
   const el = $("#toast");
-  el.textContent = msg;
-  el.className = "toast " + (kind || "");
+  el.textContent = msg; el.className = "toast " + (kind || "");
   el.hidden = false;
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { el.hidden = true; }, 4200);
 }
 function showPopup(anchor, html){
   const pop = $("#vocabPopup");
-  pop.innerHTML = html;
-  pop.hidden = false;
+  pop.innerHTML = html; pop.hidden = false;
   const r = anchor.getBoundingClientRect();
   const pr = pop.getBoundingClientRect();
   const sx = window.scrollX || window.pageXOffset;
@@ -1005,9 +1451,7 @@ function validateLesson(data){
   const seen = new Set();
   data.sentences.forEach((s, i) => {
     const label = "Sentence " + (i + 1);
-    if(!s || typeof s !== "object" || Array.isArray(s)){
-      errors.push(label + ": must be an object."); return;
-    }
+    if(!s || typeof s !== "object" || Array.isArray(s)){ errors.push(label + ": must be an object."); return; }
     if(!s.id) errors.push(label + ": Missing required field: id");
     else if(seen.has(s.id)) errors.push(label + ': Duplicate sentence id "' + s.id + '"');
     else seen.add(s.id);
@@ -1031,6 +1475,7 @@ function clearImportUI(){
   $("#importMessages").hidden = true; $("#importMessages").innerHTML = "";
   $("#importPreview").hidden = true;  $("#importPreview").innerHTML = "";
   state.pending = null;
+  state.pendingCourseId = null;
 }
 function renderImportErrors(errors, warnings){
   const box = $("#importMessages");
@@ -1042,12 +1487,19 @@ function renderImportErrors(errors, warnings){
   }
   box.innerHTML = html; box.hidden = false;
 }
-function renderImportPreview(data, warnings){
+function renderImportPreview(data, warnings, preselectedCourseId){
   const box = $("#importPreview");
   const sentences = data.sentences;
   const first = sentences.slice(0, 4).map(s =>
     "<li><span class='jp'>" + esc(s.expression) + "</span> — " + esc(s.meaning) + "</li>"
   ).join("");
+
+  const preId = preselectedCourseId || "";
+  const courseOptions = state.courses.map(c =>
+    '<option value="' + esc(c.id) + '"' + (c.id === preId ? " selected" : "") + '>' + esc(c.title) + '</option>'
+  ).join("");
+  const noCourseOption = '<option value=""' + (preId ? "" : " selected") + '>— No course (Uncategorized) —</option>';
+
   let html = "<h2>Lesson preview</h2>";
   html += '<div class="msg ok"><strong>' + esc(data.lesson.title) + "</strong><br>" +
     esc(data.lesson.description) + "<br><span class='muted'>" +
@@ -1059,34 +1511,79 @@ function renderImportPreview(data, warnings){
     html += '<div class="msg warn"><strong>Warnings</strong><ul>' +
       warnings.map(w => "<li>" + esc(w) + "</li>").join("") + "</ul></div>";
   }
+  html += '<div class="course-picker">' +
+    '<label><span>Import into course</span>' +
+      '<select id="importCourse">' + noCourseOption + courseOptions + '</select>' +
+    '</label>' +
+    '<button class="btn small" type="button" id="btnNewCourseFromImport">+ New course</button>' +
+  '</div>';
   html += '<div class="preview-actions">' +
     '<button class="btn primary" id="btnConfirmImport" type="button">Confirm Import</button>' +
     '<button class="btn" id="btnCancelImport" type="button">Cancel</button></div>';
+
   box.innerHTML = html; box.hidden = false;
   $("#btnConfirmImport").addEventListener("click", confirmImport);
   $("#btnCancelImport").addEventListener("click", clearImportUI);
+  $("#btnNewCourseFromImport").addEventListener("click", () => {
+    showCourseModal(null, async (courseData) => {
+      const created = await createCourse(courseData, true);
+      if(created){
+        const sel = $("#importCourse");
+        if(sel){
+          const opt = document.createElement("option");
+          opt.value = created.id; opt.textContent = created.title;
+          opt.selected = true;
+          sel.appendChild(opt);
+          sel.value = created.id;
+        }
+      }
+    });
+  });
 }
 async function confirmImport(){
   if(!state.pending) return;
   const data = state.pending;
   const lessonId = data.lesson.id;
+
+  const sel = $("#importCourse");
+  const courseId = sel ? (sel.value || null) : null;
+
   let existing = null;
   try{ existing = await idbGet("lessons", lessonId); }catch(e){}
   if(existing && !window.confirm('A lesson with the id "' + lessonId + '" already exists.\n\nReplace it?')) return;
+
   const record = {
-    id: lessonId, title: data.lesson.title, description: data.lesson.description,
-    level: data.lesson.level, sentenceCount: data.sentences.length,
-    importedAt: Date.now(), data: data
+    id: lessonId,
+    title: data.lesson.title,
+    description: data.lesson.description,
+    level: data.lesson.level,
+    sentenceCount: data.sentences.length,
+    importedAt: Date.now(),
+    courseId: courseId,
+    data: data
   };
   try{ await idbPut("lessons", record); }
   catch(err){ renderImportErrors(["Could not save lesson: " + err.message], []); return; }
-  clearImportUI(); $("#fileInput").value = "";
+
+  clearImportUI();
+  $("#fileInput").value = "";
   await refreshLibrary();
+
+  /* If the course modal is open for this course, refresh it */
+  if(state.courseModal && state.courseModal.courseId === (courseId || ORPHAN_ID)){
+    /* Bump to page 1 so the new lesson is visible */
+    state.courseModal.page = 1;
+    renderCourseLessonsModal();
+  }
+
   showToast('Lesson "' + record.title + '" imported.', "ok");
 }
 function handleFileSelected(file){
   clearImportUI();
   if(!file) return;
+  const preselected = state.pendingCourseId;
+  state.pendingCourseId = null;
+
   const reader = new FileReader();
   reader.onerror = () => renderImportErrors(["The selected file could not be read."], []);
   reader.onload = () => {
@@ -1096,70 +1593,75 @@ function handleFileSelected(file){
     const r = validateLesson(parsed);
     if(r.errors.length){ renderImportErrors(r.errors, r.warnings); return; }
     state.pending = parsed;
-    renderImportPreview(parsed, r.warnings);
+    renderImportPreview(parsed, r.warnings, preselected);
   };
   reader.readAsText(file, "utf-8");
 }
 
 /* ============================================================
-   Library
+   Course CRUD
    ============================================================ */
-async function refreshLibrary(){
-  if(!state.db){
-    $("#lessonList").innerHTML = '<div class="empty">Local storage is unavailable, so lessons cannot be loaded.</div>';
-    return;
+async function createCourse(data, silent){
+  const course = {
+    id: uid("course"),
+    title: data.title,
+    description: data.description || "",
+    level: data.level || "Beginner",
+    createdAt: Date.now()
+  };
+  try{ await idbPut("courses", course); }
+  catch(err){ showToast("Could not create course: " + err.message, "error"); return null; }
+  if(!silent){
+    await refreshLibrary();
+    showToast('Course "' + course.title + '" created.', "ok");
   }
-  let lessons = [], progs = [];
-  try{ lessons = await idbAll("lessons"); progs = await idbAll("progress"); }
-  catch(err){ showToast("Could not read stored lessons: " + err.message, "error"); lessons = []; }
-  lessons.sort((a,b) => (b.importedAt || 0) - (a.importedAt || 0));
-  state.lessons = lessons;
-  const progMap = {};
-  progs.forEach(p => { progMap[p.lessonId] = p; });
-
-  const list = $("#lessonList");
-  list.innerHTML = "";
-  if(!lessons.length){
-    list.innerHTML = '<div class="empty">No lessons yet. Click <strong>Upload Lesson JSON</strong> to import your first lesson, or <strong>View JSON Format</strong> to see the expected structure.</div>';
-    return;
-  }
-  lessons.forEach(l => {
-    const total = l.sentenceCount || (l.data && l.data.sentences ? l.data.sentences.length : 0);
-    const pr = progMap[l.id];
-    let done = 0;
-    if(pr && pr.completed) done = Object.keys(pr.completed).filter(k => pr.completed[k]).length;
-    const pct = total ? Math.round(done / total * 100) : 0;
-    const card = document.createElement("article");
-    card.className = "lesson-card";
-    card.innerHTML =
-      '<div class="lesson-card-main">' +
-        "<h3>" + esc(l.title) + "</h3>" +
-        '<p class="desc">' + esc(l.description) + "</p>" +
-        '<p class="meta">' + esc(l.level) + " • " + total + " sentences</p>" +
-        '<div class="bar"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
-        '<p class="meta">Progress: ' + done + " / " + total + " (" + pct + "%)</p>" +
-      "</div>" +
-      '<div class="lesson-card-actions">' +
-        '<button class="btn primary" data-open="' + esc(l.id) + '" type="button">Open Lesson</button>' +
-        '<button class="btn danger" data-delete="' + esc(l.id) + '" type="button">Delete</button>' +
-      "</div>";
-    list.appendChild(card);
-  });
+  return course;
 }
 
-async function deleteLesson(lessonId){
-  const l = state.lessons.find(x => x.id === lessonId);
-  const title = l ? l.title : lessonId;
-  if(!window.confirm('Delete "' + title + '"?\n\nThis also deletes its uploaded audio and progress.')) return;
-  try{
-    await idbDelete("lessons", lessonId);
-    await idbDelete("progress", lessonId);
-    await deleteAudioForLesson(lessonId);
-  }catch(err){ showToast("Could not delete lesson: " + err.message, "error"); return; }
-  if(localStorage.getItem(LS_CURRENT) === lessonId) localStorage.removeItem(LS_CURRENT);
-  if(state.lesson && state.lesson.id === lessonId) goHome();
+async function updateCourse(id, data){
+  let existing = null;
+  try{ existing = await idbGet("courses", id); }catch(e){}
+  if(!existing){ showToast("Course not found.", "error"); return; }
+  existing.title = data.title;
+  existing.description = data.description || "";
+  existing.level = data.level || "Beginner";
+  existing.updatedAt = Date.now();
+  try{ await idbPut("courses", existing); }
+  catch(err){ showToast("Could not save course: " + err.message, "error"); return; }
   await refreshLibrary();
-  showToast("Lesson deleted.", "ok");
+  if(state.courseModal && state.courseModal.courseId === id){
+    renderCourseLessonsModal();
+  }
+  showToast("Course updated.", "ok");
+}
+
+async function deleteCourse(courseId, deleteLessons){
+  const lessons = getLessonsForCourse(courseId);
+  try{
+    if(deleteLessons){
+      for(const l of lessons){
+        await idbDelete("lessons", l.id);
+        await idbDelete("progress", l.id);
+        await deleteAudioForLesson(l.id);
+        if(localStorage.getItem(LS_CURRENT) === l.id) localStorage.removeItem(LS_CURRENT);
+      }
+    }else{
+      for(const l of lessons){
+        l.courseId = null;
+        await idbPut("lessons", l);
+      }
+    }
+    await idbDelete("courses", courseId);
+  }catch(err){ showToast("Could not delete course: " + err.message, "error"); return; }
+
+  /* Close any open modal referencing this course */
+  if(state.courseModal && state.courseModal.courseId === courseId){
+    state.courseModal.handle.close();
+  }
+
+  if(state.lesson && lessons.some(l => l.id === state.lesson.id)) goHome();
+  await refreshLibrary();
+  showToast("Course deleted.", "ok");
 }
 
 /* ============================================================
@@ -1172,6 +1674,150 @@ async function saveProgress(){
   if(!state.progress || !state.db) return;
   state.progress.updatedAt = Date.now();
   try{ await idbPut("progress", state.progress); }catch(e){}
+}
+
+/* ============================================================
+   Library rendering
+   ============================================================ */
+function lessonSentenceCount(l){
+  return l.sentenceCount || (l.data && l.data.sentences ? l.data.sentences.length : 0);
+}
+function completedInLesson(prog){
+  if(!prog || !prog.completed) return 0;
+  let n = 0;
+  for(const k in prog.completed) if(prog.completed[k]) n++;
+  return n;
+}
+
+function buildCourseCard(course, lessons, progMap){
+  const totalSentences = lessons.reduce((sum, l) => sum + lessonSentenceCount(l), 0);
+  let doneSentences = 0;
+  lessons.forEach(l => { doneSentences += completedInLesson(progMap[l.id]); });
+  const pct = totalSentences ? Math.round(doneSentences / totalSentences * 100) : 0;
+
+  const card = document.createElement("article");
+  card.className = "course-card" + (course.orphan ? " orphan" : "");
+  card.dataset.courseCard = course.id;
+
+  const head = document.createElement("button");
+  head.type = "button";
+  head.className = "course-card-head";
+  head.dataset.action = "open-course";
+  head.dataset.course = course.id;
+  head.setAttribute("aria-label", "Open " + course.title);
+  head.innerHTML =
+    '<div class="course-head-main">' +
+      "<h3>" + esc(course.title) +
+        '<span class="lesson-count-badge">' + lessons.length + "</span>" +
+      "</h3>" +
+      (course.description ? '<p class="desc">' + esc(course.description) + "</p>" : "") +
+      '<p class="meta">' + esc(course.level || "—") + " • " +
+        totalSentences + " sentences</p>" +
+      '<div class="bar"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
+      '<p class="meta">Progress: ' + doneSentences + " / " + totalSentences + " (" + pct + "%)</p>" +
+    "</div>" +
+    '<span class="course-open-hint">' +
+      (lessons.length ? "View lessons" : "Open") + " →" +
+    "</span>";
+  card.appendChild(head);
+
+  const actions = document.createElement("div");
+  actions.className = "course-actions";
+  if(course.orphan){
+    actions.innerHTML =
+      '<span class="muted" style="font-size:.82rem;align-self:center">Lessons not assigned to any course.</span>';
+  }else{
+    actions.innerHTML =
+      '<button class="btn small" data-action="import-to-course" data-course="' + esc(course.id) + '" type="button">Import Lesson</button>' +
+      '<button class="btn small" data-action="edit-course" data-course="' + esc(course.id) + '" type="button">Edit</button>' +
+      '<button class="btn small danger" data-action="delete-course" data-course="' + esc(course.id) + '" type="button">Delete</button>';
+  }
+  card.appendChild(actions);
+  return card;
+}
+
+async function refreshLibrary(){
+  if(!state.db){
+    $("#courseList").innerHTML = '<div class="empty">Local storage is unavailable, so courses cannot be loaded.</div>';
+    return;
+  }
+
+  let courses = [], lessons = [], progs = [];
+  try{
+    courses = await idbAll("courses");
+    lessons = await idbAll("lessons");
+    progs   = await idbAll("progress");
+  }catch(err){
+    showToast("Could not read stored data: " + err.message, "error");
+    return;
+  }
+
+  courses.sort((a,b) => (a.createdAt || 0) - (b.createdAt || 0));
+  lessons.sort((a,b) => (b.importedAt || 0) - (a.importedAt || 0));
+  state.courses = courses;
+  state.lessons = lessons;
+  state.progressCache = progs;
+
+  const progMap = {};
+  progs.forEach(p => { progMap[p.lessonId] = p; });
+
+  const courseIds = new Set(courses.map(c => c.id));
+  const lessonsByCourse = {};
+  const orphans = [];
+  lessons.forEach(l => {
+    if(l.courseId && courseIds.has(l.courseId)){
+      (lessonsByCourse[l.courseId] = lessonsByCourse[l.courseId] || []).push(l);
+    }else{
+      orphans.push(l);
+    }
+  });
+
+  const container = $("#courseList");
+  container.innerHTML = "";
+
+  if(!courses.length && !orphans.length){
+    container.innerHTML =
+      '<div class="empty">' +
+        "No courses yet. Click <strong>Create Course</strong> to get started, " +
+        "then <strong>Import Lesson</strong> inside it. " +
+        "You can also upload a lesson directly — it lands in <em>Uncategorized</em>." +
+      "</div>";
+    return;
+  }
+
+  courses.forEach(c => {
+    container.appendChild(buildCourseCard(c, lessonsByCourse[c.id] || [], progMap));
+  });
+  if(orphans.length){
+    const orphanCourse = {
+      id: ORPHAN_ID,
+      title: "Uncategorized",
+      description: "Lessons not assigned to any course.",
+      level: "—",
+      orphan: true
+    };
+    container.appendChild(buildCourseCard(orphanCourse, orphans, progMap));
+  }
+
+  /* If a course modal is open, re-render it so it stays in sync */
+  if(state.courseModal){
+    renderCourseLessonsModal();
+  }
+}
+
+async function deleteLesson(lessonId){
+  const l = state.lessons.find(x => x.id === lessonId);
+  const title = l ? l.title : lessonId;
+  if(!window.confirm('Delete lesson "' + title + '"?\n\nThis also deletes its uploaded audio and progress.')) return;
+  try{
+    await idbDelete("lessons", lessonId);
+    await idbDelete("progress", lessonId);
+    await deleteAudioForLesson(lessonId);
+  }catch(err){ showToast("Could not delete lesson: " + err.message, "error"); return; }
+  if(localStorage.getItem(LS_CURRENT) === lessonId) localStorage.removeItem(LS_CURRENT);
+  if(state.lesson && state.lesson.id === lessonId) goHome();
+  await refreshLibrary();
+  showToast("Lesson deleted.", "ok");
 }
 
 /* ============================================================
@@ -1206,6 +1852,9 @@ async function openLesson(lessonId){
 
   localStorage.setItem(LS_CURRENT, lessonId);
 
+  /* Close any open course modal */
+  if(state.courseModal){ state.courseModal.handle.close(); }
+
   $("#libraryView").hidden = true;
   $("#lessonView").hidden = false;
   $("#btnCsv").hidden = false;
@@ -1223,6 +1872,7 @@ function goHome(){
   state.kanaInventory = [];
   localStorage.removeItem(LS_CURRENT);
   stopAudio(); releaseAudioURL();
+  if(state.courseModal){ state.courseModal.handle.close(); }
   $("#lessonView").hidden = true;
   $("#libraryView").hidden = false;
   $("#btnCsv").hidden = true;
@@ -1257,9 +1907,7 @@ function goToSentence(newIndex){
    ============================================================ */
 function collectKanaFromText(text){
   const set = new Set();
-  for(const ch of String(text || "")){
-    if(isKana(ch) && ch !== "ー") set.add(ch);
-  }
+  for(const ch of String(text || "")){ if(isKana(ch) && ch !== "ー") set.add(ch); }
   return set;
 }
 
@@ -1283,22 +1931,18 @@ function buildKanaInventory(lessonData){
         return;
       }
       map.set(ch, {
-        char: ch,
-        romaji: k.romaji || romajiOf(ch),
-        script: (k.script ? String(k.script).toUpperCase() : scriptOf(ch)),
+        char: ch, romaji: k.romaji || romajiOf(ch),
+        script: k.script ? String(k.script).toUpperCase() : scriptOf(ch),
         example: k.reading || ""
       });
     });
     (sentence.vocabulary || []).forEach(v => {
       if(!v) return;
-      const text = v.text || "";
-      const reading = v.reading || "";
+      const text = v.text || "", reading = v.reading || "";
       const all = collectKanaFromText(text);
       collectKanaFromText(reading).forEach(ch => all.add(ch));
       all.forEach(ch => {
-        if(!map.has(ch)){
-          map.set(ch, { char: ch, romaji: romajiOf(ch), script: scriptOf(ch), example: "" });
-        }
+        if(!map.has(ch)) map.set(ch, { char: ch, romaji: romajiOf(ch), script: scriptOf(ch), example: "" });
         const entry = map.get(ch);
         if(!entry.example){
           if(text && text.indexOf(ch) !== -1) entry.example = text;
@@ -1308,10 +1952,7 @@ function buildKanaInventory(lessonData){
     });
     collectKanaFromText(sentence.expression).forEach(ch => {
       if(!map.has(ch)){
-        map.set(ch, {
-          char: ch, romaji: romajiOf(ch), script: scriptOf(ch),
-          example: sentence.expression || ""
-        });
+        map.set(ch, { char: ch, romaji: romajiOf(ch), script: scriptOf(ch), example: sentence.expression || "" });
       }
     });
   });
@@ -1433,9 +2074,7 @@ function chunksHTML(sentence){
 function vocabUnitsHTML(sentence){
   const vocab = Array.isArray(sentence.vocabulary) ? sentence.vocabulary : [];
   const grammar = Array.isArray(sentence.grammar) ? sentence.grammar : [];
-  if(!vocab.length && !grammar.length){
-    return '<p class="muted">No vocabulary or grammar data for this sentence.</p>';
-  }
+  if(!vocab.length && !grammar.length) return '<p class="muted">No vocabulary or grammar data for this sentence.</p>';
   let html = "";
   vocab.forEach(v => {
     const sub = [v.reading, v.romaji].filter(Boolean).map(esc).join(" • ");
@@ -1618,10 +2257,7 @@ function setPlayerStatus(msg, isErr){
 function releaseAudioURL(){
   if(state.audioURL){ try{ URL.revokeObjectURL(state.audioURL); }catch(e){} state.audioURL = null; }
 }
-function stopAudio(){
-  try{ audioEl.pause(); }catch(e){}
-  repeatsLeft = 0; countNextPlay = false;
-}
+function stopAudio(){ try{ audioEl.pause(); }catch(e){} repeatsLeft = 0; countNextPlay = false; }
 function updatePlayButton(){
   const btn = document.querySelector('[data-action="play-pause"]');
   if(!btn) return;
@@ -1663,6 +2299,7 @@ async function loadSentenceAudio(){
   if(up) up.textContent = hasUploaded ? "Replace MP3" : "Upload MP3";
   const rm = document.querySelector('[data-action="remove-audio"]');
   if(rm) rm.hidden = !hasUploaded;
+
   audioEl.volume = state.settings.volume;
   audioEl.playbackRate = state.settings.speed;
   updatePlayButton();
@@ -1708,7 +2345,7 @@ audioEl.addEventListener("error", () => {
 });
 
 /* ============================================================
-   Actions
+   Lesson actions
    ============================================================ */
 async function actionPlayPause(){
   if(audioEl.paused){
@@ -1717,9 +2354,7 @@ async function actionPlayPause(){
     repeatsLeft = Number(state.settings.repeat) || 0;
     const p = audioEl.play();
     if(p && p.catch) p.catch(err => setPlayerStatus("Playback failed: " + (err && err.message ? err.message : "unknown error"), true));
-  }else{
-    audioEl.pause();
-  }
+  }else{ audioEl.pause(); }
 }
 function actionToggleComplete(){
   const s = currentSentence();
@@ -1816,22 +2451,104 @@ function wireEvents(){
   $("#btnTheme").addEventListener("click", toggleTheme);
   $("#btnJsonFormat").addEventListener("click", showJsonFormatModal);
 
-  $("#btnUpload").addEventListener("click", () => $("#fileInput").click());
+  $("#btnCreateCourse").addEventListener("click", () => {
+    showCourseModal(null, async (data) => { await createCourse(data, false); });
+  });
+
+  $("#btnUpload").addEventListener("click", () => {
+    state.pendingCourseId = null;
+    $("#fileInput").click();
+  });
   $("#fileInput").addEventListener("change", e => {
     const f = e.target.files && e.target.files[0];
     handleFileSelected(f);
   });
 
-  $("#lessonList").addEventListener("click", e => {
-    const openBtn = e.target.closest("[data-open]");
-    if(openBtn){ openLesson(openBtn.dataset.open); return; }
-    const delBtn = e.target.closest("[data-delete]");
-    if(delBtn){ deleteLesson(delBtn.dataset.delete); }
+  /* Course grid — delegation */
+  $("#courseList").addEventListener("click", e => {
+    const el = e.target.closest("[data-action]");
+    if(!el) return;
+    const a = el.dataset.action;
+    switch(a){
+      case "open-course":
+        openCourseLessonsModal(el.dataset.course, 1); return;
+      case "import-to-course":
+        state.pendingCourseId = el.dataset.course;
+        $("#fileInput").click();
+        return;
+      case "edit-course": {
+        const course = state.courses.find(c => c.id === el.dataset.course);
+        if(!course) return;
+        showCourseModal(course, async (data) => { await updateCourse(course.id, data); });
+        return;
+      }
+      case "delete-course": {
+        const course = state.courses.find(c => c.id === el.dataset.course);
+        if(!course) return;
+        const count = getLessonsForCourse(course.id).length;
+        showDeleteCourseModal(course, count);
+        return;
+      }
+    }
+  });
+
+  /* Delegated clicks inside any open modal (for lesson actions + pagination + course actions) */
+  document.addEventListener("click", e => {
+    const inModal = e.target.closest(".modal-backdrop");
+    if(!inModal) return;
+
+    const el = e.target.closest("[data-action]");
+    if(!el) return;
+    const a = el.dataset.action;
+    switch(a){
+      case "open-lesson":
+        openLesson(el.dataset.id);
+        return;
+      case "delete-lesson":
+        deleteLesson(el.dataset.id);
+        return;
+      case "page-prev":
+        if(state.courseModal && state.courseModal.page > 1){
+          state.courseModal.page--;
+          renderCourseLessonsModal();
+        }
+        return;
+      case "page-next":
+        if(state.courseModal){
+          state.courseModal.page++;
+          renderCourseLessonsModal();
+        }
+        return;
+      case "page-go":
+        if(state.courseModal){
+          state.courseModal.page = Number(el.dataset.page);
+          renderCourseLessonsModal();
+        }
+        return;
+      case "import-to-course":
+        state.pendingCourseId = el.dataset.course;
+        $("#fileInput").click();
+        return;
+      case "edit-course": {
+        const course = state.courses.find(c => c.id === el.dataset.course);
+        if(!course) return;
+        showCourseModal(course, async (data) => { await updateCourse(course.id, data); });
+        return;
+      }
+      case "delete-course": {
+        const course = state.courses.find(c => c.id === el.dataset.course);
+        if(!course) return;
+        const count = getLessonsForCourse(course.id).length;
+        showDeleteCourseModal(course, count);
+        return;
+      }
+    }
   });
 
   $("#btnCsv").addEventListener("click", downloadCSV);
   $("#btnReset").addEventListener("click", resetProgress);
 
+  /* Lesson view */
   $("#lessonView").addEventListener("click", async e => {
     const token = e.target.closest(".jp-unit.token");
     if(token){
