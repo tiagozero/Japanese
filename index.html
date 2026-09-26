@@ -240,19 +240,15 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 
 .display-controls{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:.9rem}
 
-/* ============================================================
-   SPACING FIX: gap between player and meaning
-   ============================================================ */
 .player{
   background:var(--card-alt);border:1px solid var(--border);
   border-radius:var(--radius-sm);padding:.85rem;
-  margin-bottom:1rem;                /* <- space below player */
+  margin-bottom:1rem;
 }
 .meaning-block{
   background:var(--card-alt);border:1px solid var(--border);
   border-radius:var(--radius-sm);padding:.75rem .9rem;
-  margin-top:.4rem;                  /* <- extra breathing room */
-  margin-bottom:1rem;                /* <- space before aids */
+  margin-top:.4rem;margin-bottom:1rem;
 }
 .meaning-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin-bottom:.25rem}
 .meaning{font-size:1rem;color:var(--ink-soft);margin:0}
@@ -334,9 +330,6 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .kana-cell.in-sentence .kc-script{color:var(--accent)}
 .kana-cell.in-sentence .kc-example{color:var(--ink-soft)}
 
-/* ============================================================
-   Modals
-   ============================================================ */
 .modal-backdrop{
   position:fixed;inset:0;z-index:1000;background:var(--overlay-bg);
   display:flex;align-items:center;justify-content:center;
@@ -400,7 +393,6 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 }
 .modal-foot .spacer{margin-left:auto}
 
-/* Settings modal */
 .settings-section{margin-bottom:1.4rem}
 .settings-section:last-child{margin-bottom:0}
 .settings-section h3{
@@ -422,7 +414,6 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .segmented button:hover{background:var(--btn-hover)}
 .segmented button.active{background:var(--accent);color:var(--btn-primary-text)}
 
-/* Keyboard shortcut list */
 .shortcut-table{
   display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;
   font-size:.88rem;align-items:center;
@@ -437,7 +428,6 @@ code,kbd,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberatio
 .shortcut-table .kcell{display:flex;gap:.3rem;flex-wrap:wrap;align-items:center}
 .shortcut-table .dcell{color:var(--ink-soft)}
 
-/* Lesson list inside the course modal */
 .lesson-list-modal{display:flex;flex-direction:column;gap:.6rem}
 .lesson-card{
   background:var(--card-alt);border:1px solid var(--border);
@@ -718,9 +708,6 @@ const state = {
 let repeatsLeft = 0;
 let countNextPlay = false;
 
-/* ============================================================
-   JSON template
-   ============================================================ */
 const JSON_TEMPLATE = {
   app: "Japanese Trainer",
   version: 1,
@@ -838,7 +825,6 @@ function openModal(html, opts){
   return { el: backdrop, close };
 }
 
-/* ---------- JSON format modal ---------- */
 function showJsonFormatModal(){
   const json = JSON_TEMPLATE;
   const highlighted = highlightJSON(json);
@@ -901,7 +887,6 @@ function showJsonFormatModal(){
   });
 }
 
-/* ---------- Settings modal ---------- */
 function showSettingsModal(){
   const shortcuts = [
     { keys: ["Space"],         desc: "Play / Pause audio" },
@@ -938,8 +923,6 @@ function showSettingsModal(){
         '<button class="close-btn" type="button" data-modal-close aria-label="Close">✕</button>' +
       '</div>' +
       '<div class="modal-body">' +
-
-        /* Appearance */
         '<section class="settings-section">' +
           '<h3>Appearance</h3>' +
           '<div class="settings-row">' +
@@ -953,8 +936,6 @@ function showSettingsModal(){
             '</div>' +
           '</div>' +
         '</section>' +
-
-        /* Data */
         '<section class="settings-section">' +
           '<h3>Data</h3>' +
           '<div class="settings-row">' +
@@ -972,8 +953,6 @@ function showSettingsModal(){
             '<p class="hint" id="exportStats" style="flex:1 1 100%;margin-top:.6rem"></p>' +
           '</div>' +
         '</section>' +
-
-        /* Shortcuts */
         '<section class="settings-section">' +
           '<h3>Keyboard shortcuts</h3>' +
           '<p class="hint" style="margin-bottom:.6rem">' +
@@ -981,7 +960,6 @@ function showSettingsModal(){
           '</p>' +
           '<div class="shortcut-table">' + shortcutsHTML + '</div>' +
         '</section>' +
-
       '</div>' +
       '<div class="modal-foot">' +
         '<span class="spacer"></span>' +
@@ -991,7 +969,6 @@ function showSettingsModal(){
 
   const modal = openModal(html);
 
-  /* Theme segmented control */
   function updateThemeSegmented(){
     modal.el.querySelectorAll("[data-theme-choice]").forEach(b => {
       b.classList.toggle("active", b.dataset.themeChoice === state.settings.theme);
@@ -1007,10 +984,7 @@ function showSettingsModal(){
     });
   });
 
-  /* Export */
   $("#btnExportData", modal.el).addEventListener("click", () => exportAllData());
-
-  /* Import */
   $("#btnImportData", modal.el).addEventListener("click", () => {
     const inp = document.createElement("input");
     inp.type = "file"; inp.accept = ".json,application/json";
@@ -1021,7 +995,6 @@ function showSettingsModal(){
     inp.click();
   });
 
-  /* Show live counts / size estimate */
   refreshExportStats($("#exportStats", modal.el));
 }
 
@@ -1070,32 +1043,23 @@ async function exportAllData(){
     const [courses, lessons, progs, audios] = await Promise.all([
       idbAll("courses"), idbAll("lessons"), idbAll("progress"), idbAll("audio")
     ]);
-
-    /* Encode audio blobs to base64 */
     const audioOut = [];
     for(const a of audios){
       if(!a || !a.blob) continue;
       let data = "";
       try{ data = await blobToBase64(a.blob); }catch(e){ continue; }
       audioOut.push({
-        lessonId: a.lessonId,
-        sentenceId: a.sentenceId,
-        filename: a.filename || "",
-        mime: a.mime || a.blob.type || "audio/mpeg",
+        lessonId: a.lessonId, sentenceId: a.sentenceId,
+        filename: a.filename || "", mime: a.mime || a.blob.type || "audio/mpeg",
         data: data
       });
     }
-
     const bundle = {
       app: "Japanese Trainer",
       exportVersion: EXPORT_VERSION,
       exportedAt: Date.now(),
-      courses: courses,
-      lessons: lessons,
-      progress: progs,
-      audio: audioOut
+      courses: courses, lessons: lessons, progress: progs, audio: audioOut
     };
-
     const text = JSON.stringify(bundle);
     const blob = new Blob([text], { type: "application/json;charset=utf-8" });
     const url = URL.createObjectURL(blob);
@@ -1105,7 +1069,6 @@ async function exportAllData(){
     a.download = "japanese-trainer-backup-" + stamp + ".json";
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 2000);
-
     showToast("Export started (" + formatBytes(blob.size) + ").", "ok");
   }catch(err){
     showToast("Export failed: " + err.message, "error");
@@ -1121,7 +1084,6 @@ async function handleImportBundle(file, parentModal){
     showToast("Invalid file — not valid JSON.", "error");
     return;
   }
-
   if(!bundle || bundle.app !== "Japanese Trainer" || bundle.exportVersion === undefined){
     showToast("This file does not look like a Japanese Trainer backup.", "error");
     return;
@@ -1131,14 +1093,12 @@ async function handleImportBundle(file, parentModal){
     showToast("Unsupported export version.", "error");
     return;
   }
-
   const counts = {
     courses: Array.isArray(bundle.courses) ? bundle.courses.length : 0,
     lessons: Array.isArray(bundle.lessons) ? bundle.lessons.length : 0,
     progress: Array.isArray(bundle.progress) ? bundle.progress.length : 0,
     audio: Array.isArray(bundle.audio) ? bundle.audio.length : 0
   };
-
   showImportConfirmModal(bundle, counts, parentModal);
 }
 
@@ -1172,73 +1132,47 @@ function showImportConfirmModal(bundle, counts, parentModal){
       '</div>' +
     '</div>';
   const modal = openModal(html);
-
   $("#btnImportMerge", modal.el).addEventListener("click", async () => {
-    modal.close();
-    await applyImport(bundle, false);
+    modal.close(); await applyImport(bundle, false);
   });
   $("#btnImportReplace", modal.el).addEventListener("click", async () => {
-    modal.close();
-    await applyImport(bundle, true);
+    modal.close(); await applyImport(bundle, true);
   });
 }
 
 async function applyImport(bundle, replaceAll){
   if(!state.db){ showToast("Storage unavailable.", "error"); return; }
-
   try{
-    /* ----- Clear stores if replaceAll ----- */
     if(replaceAll){
       await clearStore("courses");
       await clearStore("lessons");
       await clearStore("progress");
       await clearStore("audio");
     }
-
-    /* ----- Courses ----- */
     if(Array.isArray(bundle.courses)){
-      for(const c of bundle.courses){
-        if(c && c.id) await idbPut("courses", c);
-      }
+      for(const c of bundle.courses){ if(c && c.id) await idbPut("courses", c); }
     }
-
-    /* ----- Lessons ----- */
     if(Array.isArray(bundle.lessons)){
-      for(const l of bundle.lessons){
-        if(l && l.id) await idbPut("lessons", l);
-      }
+      for(const l of bundle.lessons){ if(l && l.id) await idbPut("lessons", l); }
     }
-
-    /* ----- Progress ----- */
     if(Array.isArray(bundle.progress)){
-      for(const p of bundle.progress){
-        if(p && p.lessonId) await idbPut("progress", p);
-      }
+      for(const p of bundle.progress){ if(p && p.lessonId) await idbPut("progress", p); }
     }
-
-    /* ----- Audio (base64 → Blob) ----- */
     if(Array.isArray(bundle.audio)){
       for(const a of bundle.audio){
         if(!a || !a.lessonId || !a.sentenceId || !a.data) continue;
         let blob;
-        try{ blob = base64ToBlob(a.data, a.mime); }
-        catch(e){ continue; }
+        try{ blob = base64ToBlob(a.data, a.mime); }catch(e){ continue; }
         await idbPut("audio", {
-          lessonId: a.lessonId,
-          sentenceId: a.sentenceId,
+          lessonId: a.lessonId, sentenceId: a.sentenceId,
           filename: a.filename || "uploaded.mp3",
           mime: a.mime || "audio/mpeg",
-          blob: blob,
-          updatedAt: Date.now()
+          blob: blob, updatedAt: Date.now()
         });
       }
     }
-
-    /* ----- Refresh UI ----- */
     await refreshLibrary();
-
     if(state.lesson){
-      /* If the currently open lesson still exists, reload its progress */
       let rec = null;
       try{ rec = await idbGet("lessons", state.lesson.id); }catch(e){}
       if(rec && rec.data && rec.data.sentences){
@@ -1257,9 +1191,7 @@ async function applyImport(bundle, replaceAll){
         goHome();
       }
     }
-
     if(state.courseModal) renderCourseLessonsModal();
-
     showToast("Import complete.", "ok");
   }catch(err){
     showToast("Import failed: " + err.message, "error");
@@ -1272,18 +1204,17 @@ function clearStore(storeName){
     let tx;
     try{ tx = state.db.transaction(storeName, "readwrite"); }catch(e){ reject(e); return; }
     const store = tx.objectStore(storeName);
-    const req = store.clear();
+    store.clear();
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error || new Error("Clear failed"));
     tx.onabort = () => reject(tx.error || new Error("Clear aborted"));
   });
 }
 
-/* ---------- Course modal (from previous version) ---------- */
+/* ---------- Course modal ---------- */
 function openCourseLessonsModal(courseId, page){
   const course = getCourseById(courseId);
   if(!course) return;
-
   const lessons = getLessonsForCourse(courseId);
   const totalPages = Math.max(1, Math.ceil(lessons.length / LESSONS_PER_PAGE));
   page = Math.max(1, Math.min(page || 1, totalPages));
@@ -1304,7 +1235,6 @@ function openCourseLessonsModal(courseId, page){
     '</div>';
 
   const modal = openModal(html);
-
   const cm = { courseId: courseId, page: page, handle: modal };
   state.courseModal = cm;
 
@@ -1327,7 +1257,6 @@ function openCourseLessonsModal(courseId, page){
       modal.close();
     }
   });
-
   renderCourseLessonsModal();
 }
 
@@ -1337,7 +1266,6 @@ function getCourseById(courseId){
   }
   return state.courses.find(c => c.id === courseId) || null;
 }
-
 function getLessonsForCourse(courseId){
   if(courseId === ORPHAN_ID){
     const ids = new Set(state.courses.map(c => c.id));
@@ -1384,7 +1312,6 @@ function renderCourseLessonsModal(){
     cm.page = Math.max(1, Math.min(cm.page, totalPages));
     const start = (cm.page - 1) * LESSONS_PER_PAGE;
     const slice = lessons.slice(start, start + LESSONS_PER_PAGE);
-
     let html = '<div class="lesson-list-modal">';
     slice.forEach(l => {
       const total = lessonSentenceCount(l);
@@ -1451,13 +1378,11 @@ function renderCourseLessonsModal(){
       '<span class="spacer"></span>' +
       '<button class="btn" type="button" data-modal-close>Close</button>';
   }
-
   cm.handle.el.querySelectorAll("[data-modal-close]").forEach(b => {
     b.addEventListener("click", () => cm.handle.close());
   });
 }
 
-/* ---------- Course create / edit modal ---------- */
 function showCourseModal(course, onSave){
   const isEdit = !!course;
   const c = course || { title: "", description: "", level: "Beginner" };
@@ -1496,7 +1421,6 @@ function showCourseModal(course, onSave){
   const descEl  = $("#courseDesc",  modal.el);
   const levelEl = $("#courseLevel", modal.el);
   const errEl   = $("#courseError", modal.el);
-
   setTimeout(() => titleEl.focus(), 60);
 
   function save(){
@@ -1815,7 +1739,6 @@ async function confirmImport(){
   if(!state.pending) return;
   const data = state.pending;
   const lessonId = data.lesson.id;
-
   const sel = $("#importCourse");
   const courseId = sel ? (sel.value || null) : null;
 
@@ -1824,14 +1747,10 @@ async function confirmImport(){
   if(existing && !window.confirm('A lesson with the id "' + lessonId + '" already exists.\n\nReplace it?')) return;
 
   const record = {
-    id: lessonId,
-    title: data.lesson.title,
-    description: data.lesson.description,
-    level: data.lesson.level,
-    sentenceCount: data.sentences.length,
-    importedAt: Date.now(),
-    courseId: courseId,
-    data: data
+    id: lessonId, title: data.lesson.title,
+    description: data.lesson.description, level: data.lesson.level,
+    sentenceCount: data.sentences.length, importedAt: Date.now(),
+    courseId: courseId, data: data
   };
   try{ await idbPut("lessons", record); }
   catch(err){ renderImportErrors(["Could not save lesson: " + err.message], []); return; }
@@ -1844,7 +1763,6 @@ async function confirmImport(){
     state.courseModal.page = 1;
     renderCourseLessonsModal();
   }
-
   showToast('Lesson "' + record.title + '" imported.', "ok");
 }
 function handleFileSelected(file){
@@ -1872,10 +1790,8 @@ function handleFileSelected(file){
    ============================================================ */
 async function createCourse(data, silent){
   const course = {
-    id: uid("course"),
-    title: data.title,
-    description: data.description || "",
-    level: data.level || "Beginner",
+    id: uid("course"), title: data.title,
+    description: data.description || "", level: data.level || "Beginner",
     createdAt: Date.now()
   };
   try{ await idbPut("courses", course); }
@@ -1911,10 +1827,7 @@ async function deleteCourse(courseId, deleteLessons){
         if(localStorage.getItem(LS_CURRENT) === l.id) localStorage.removeItem(LS_CURRENT);
       }
     }else{
-      for(const l of lessons){
-        l.courseId = null;
-        await idbPut("lessons", l);
-      }
+      for(const l of lessons){ l.courseId = null; await idbPut("lessons", l); }
     }
     await idbDelete("courses", courseId);
   }catch(err){ showToast("Could not delete course: " + err.message, "error"); return; }
@@ -2094,7 +2007,6 @@ async function openLesson(lessonId){
     : (typeof prog.currentSentence === "number" ? prog.currentSentence : 0);
   start = Math.max(0, Math.min(start, record.data.sentences.length - 1));
   state.index = start;
-
   state.kanaInventory = buildKanaInventory(record.data);
 
   localStorage.setItem(LS_CURRENT, lessonId);
@@ -2677,36 +2589,28 @@ function hasOpenModal(){
   return !!$("#modalHost").firstElementChild;
 }
 function handleShortcut(e){
-  /* Ignore modifier combos (browser/OS) */
   if(e.ctrlKey || e.metaKey || e.altKey) return;
 
-  /* Esc closes popups regardless of where we are */
   if(e.key === "Escape"){
     if(!$("#vocabPopup").hidden){ hidePopup(); return; }
   }
-
-  /* Ignore typing in inputs */
   if(isTypingTarget(e.target)) return;
 
-  /* "?" — open settings/shortcut help */
   if(e.key === "?"){
     e.preventDefault();
     showSettingsModal();
     return;
   }
-  /* "," — settings */
   if(e.key === ","){
     e.preventDefault();
     showSettingsModal();
     return;
   }
-  /* "t" — theme */
   if(e.key === "t" || e.key === "T"){
     e.preventDefault();
     toggleTheme();
     return;
   }
-  /* "h" — home */
   if(e.key === "h" || e.key === "H"){
     if(state.lesson){
       e.preventDefault();
@@ -2715,13 +2619,12 @@ function handleShortcut(e){
     }
   }
 
-  /* Don't fire lesson shortcuts when a modal is open */
   if(hasOpenModal()) return;
-
-  /* Only lesson shortcuts past this point */
   if(!state.lesson || $("#lessonView").hidden) return;
+
+  /* FIX: normalize ALL keys to lowercase so "ArrowLeft" → "arrowleft" etc. */
   const key = e.key;
-  const lower = key.length === 1 ? key.toLowerCase() : key;
+  const lower = key.toLowerCase();
 
   switch(lower){
     case " ":
@@ -2795,7 +2698,6 @@ function wireEvents(){
     handleFileSelected(f);
   });
 
-  /* Course grid delegation */
   $("#courseList").addEventListener("click", e => {
     const el = e.target.closest("[data-action]");
     if(!el) return;
@@ -2823,7 +2725,6 @@ function wireEvents(){
     }
   });
 
-  /* Global delegation for anything inside an open modal */
   document.addEventListener("click", e => {
     const inModal = e.target.closest(".modal-backdrop");
     if(!inModal) return;
@@ -2872,7 +2773,6 @@ function wireEvents(){
   $("#btnCsv").addEventListener("click", downloadCSV);
   $("#btnReset").addEventListener("click", resetProgress);
 
-  /* Lesson view clicks */
   $("#lessonView").addEventListener("click", async e => {
     const token = e.target.closest(".jp-unit.token");
     if(token){
@@ -2979,7 +2879,6 @@ function wireEvents(){
     }
   });
 
-  /* Keyboard token access + shortcuts */
   document.addEventListener("keydown", e => {
     const t = e.target.closest ? e.target.closest(".jp-unit.token") : null;
     if(t && (e.key === "Enter" || e.key === " ")){
@@ -2988,7 +2887,6 @@ function wireEvents(){
     handleShortcut(e);
   });
 
-  /* Click outside popup hides it */
   document.addEventListener("click", e => {
     if($("#vocabPopup").hidden) return;
     if(e.target.closest("#vocabPopup")) return;
